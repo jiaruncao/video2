@@ -28,7 +28,9 @@
     "projects": "My Projects",
     "settings": "Settings",
     "adGenerator": "AI Ad Generator",
-    "videoHook": "Video Hook Generator"
+    "videoHook": "Video Hook Generator",
+    "bloggerMonitor": "Blogger Monitor",
+    "thumbnailGenerator": "Thumbnail Generator"
   },
   "videoEnhancer": {
     "header": {

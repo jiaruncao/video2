@@ -1,33 +1,12 @@
 <template>
-  <div class="ai-video-generator-page">
-    <!-- 侧边栏 -->
-    <aside class="sidebar">
-      <div class="logo">{{ translate('app.brand') }}</div>
-      <nav>
-        <ul class="nav-menu">
-          <li
-            v-for="(item, index) in menuItems"
-            :key="index"
-            :class="['nav-item', { active: item.active }]"
-            @click="handleMenuClick(index)"
-          >
-            <span>{{ item.icon }}</span> {{ translate(item.labelKey) }}
-          </li>
-        </ul>
-      </nav>
-      <div class="user-section">
-        <div class="nav-item user-account">
-          <span>👤</span>
-          <div class="user-info">
-            <div class="user-name">{{ translate('app.user.account') }}</div>
-            <div class="user-plan">{{ translate('app.user.proPlan') }}</div>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- 主内容区域 -->
-    <main class="main-container">
+  <DashboardLayout
+    :locale="locale"
+    :menu-items="menuItems"
+    page-class="ai-video-generator-page"
+    content-class="ai-video-generator-content"
+    :active-key="activeMenu"
+    @navigate="handleMenuClick"
+  >
       <div class="content-wrapper">
         <div class="language-switcher">
           <label for="language-select">{{ translate('language.label') }}</label>
@@ -235,30 +214,26 @@
           </div>
         </div>
       </div>
-    </main>
-  </div>
+  </DashboardLayout>
 </template>
 
 <script>
 import { supportedLocales, translate as translateText } from './i18n'
+import DashboardLayout from './components/DashboardLayout.vue'
+import { createDashboardMenu } from './dashboardConfig'
 
 export default {
   name: 'AIAdVideoGenerator',
+  components: {
+    DashboardLayout
+  },
   data() {
     return {
       availableLocales: supportedLocales,
       locale: 'en-US',
       // 菜单项
-      menuItems: [
-        { icon: '📊', labelKey: 'menu.dashboard', active: false },
-        { icon: '✨', labelKey: 'menu.videoEnhancer', active: false },
-        { icon: '🧹', labelKey: 'menu.watermarkRemover', active: false },
-        { icon: '🎯', labelKey: 'menu.adGenerator', active: true },
-        { icon: '🎨', labelKey: 'menu.styleTransfer', active: false },
-        { icon: '🔊', labelKey: 'menu.audioEnhancement', active: false },
-        { icon: '📁', labelKey: 'menu.projects', active: false },
-        { icon: '⚙️', labelKey: 'menu.settings', active: false }
-      ],
+      menuItems: createDashboardMenu('adGenerator'),
+      activeMenu: 'adGenerator',
 
       // 分类
       categories: [
@@ -445,10 +420,9 @@ export default {
     },
 
     // 处理菜单点击
-    handleMenuClick(index) {
-      this.menuItems.forEach((item, i) => {
-        item.active = i === index
-      })
+    handleMenuClick(key) {
+      this.activeMenu = key
+      this.menuItems = createDashboardMenu(key)
     },
 
     // 筛选模板

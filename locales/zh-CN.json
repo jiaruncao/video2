@@ -28,7 +28,9 @@
     "projects": "我的项目",
     "settings": "设置",
     "adGenerator": "AI 广告生成器",
-    "videoHook": "视频开场钩子生成器"
+    "videoHook": "视频开场钩子生成器",
+    "bloggerMonitor": "博主监控",
+    "thumbnailGenerator": "缩略图生成器"
   },
   "videoEnhancer": {
     "header": {
