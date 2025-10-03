@@ -26,7 +26,9 @@
     "videoDeduplication": "Video Deduplication",
     "noiseReducer": "Noise Reducer",
     "projects": "My Projects",
-    "settings": "Settings"
+    "settings": "Settings",
+    "adGenerator": "AI Ad Generator",
+    "videoHook": "Video Hook Generator"
   },
   "videoEnhancer": {
     "header": {
@@ -490,6 +492,307 @@
       "processingComplete": "Noise reduction completed!",
       "downloadPreview": "Downloading 5s preview video...",
       "downloadFull": "Downloading full video..."
+    }
+  },
+  "adGenerator": {
+    "header": {
+      "title": "AI Ad Video Generator",
+      "subtitle": "Create stunning product advertisement videos using AI. Transform your product images into engaging TikTok, Instagram Reels, or YouTube Shorts in seconds."
+    },
+    "templatesSection": {
+      "title": "Choose Your Video Template",
+      "subtitle": "Select from our professionally designed templates for TikTok, Instagram Reels, or YouTube Shorts"
+    },
+    "categories": {
+      "all": "All Templates",
+      "tiktok": "TikTok (9:16)",
+      "youtube": "YouTube (16:9)",
+      "trending": "🔥 Trending"
+    },
+    "templates": {
+      "unboxing": {
+        "name": "Unboxing Experience",
+        "description": "Perfect for product reveals",
+        "platform": "TikTok",
+        "badge": "HOT"
+      },
+      "productReveal": {
+        "name": "Product Reveal",
+        "description": "Dramatic product showcase",
+        "platform": "TikTok"
+      },
+      "beforeAfter": {
+        "name": "Before & After",
+        "description": "Show transformation results",
+        "platform": "TikTok"
+      },
+      "lifestyle": {
+        "name": "Lifestyle",
+        "description": "Daily life product integration",
+        "platform": "TikTok",
+        "badge": "TRENDING"
+      },
+      "testimonial": {
+        "name": "Customer Testimonial",
+        "description": "Social proof & reviews",
+        "platform": "TikTok"
+      },
+      "flashSale": {
+        "name": "Flash Sale",
+        "description": "Urgency & special offers",
+        "platform": "TikTok",
+        "badge": "NEW"
+      },
+      "youtubeIntro": {
+        "name": "YouTube Intro",
+        "description": "Professional video opening",
+        "platform": "YouTube"
+      },
+      "comparison": {
+        "name": "Product Comparison",
+        "description": "Side-by-side analysis",
+        "platform": "YouTube"
+      },
+      "tutorial": {
+        "name": "How-To Tutorial",
+        "description": "Step-by-step guide",
+        "platform": "YouTube"
+      },
+      "showcase": {
+        "name": "Product Showcase",
+        "description": "Cinematic presentation",
+        "platform": "YouTube",
+        "badge": "HOT"
+      }
+    },
+    "upload": {
+      "title": "Replace A Product Image",
+      "reset": "Reset",
+      "hint": "Upload a JPG or PNG image, within 10MB each.",
+      "placeholder": "Product",
+      "instructions": "Click to upload or drag and drop",
+      "button": "Choose Image",
+      "tipLabel": "Tip:",
+      "tipContent": "Upload product images with a simple or transparent background. Try generating multiple times for the best results.",
+      "samples": {
+        "cosmetic": "Sample cosmetic product",
+        "perfume": "Sample perfume product",
+        "skincare": "Sample skincare product"
+      }
+    },
+    "motion": {
+      "title": "Motion Description",
+      "placeholder": "Describe your ideal motion...",
+      "presets": {
+        "dramatic": "Dramatic Reveal",
+        "smooth": "Smooth Transition",
+        "energetic": "Energetic Pop",
+        "elegant": "Elegant Flow"
+      },
+      "defaults": {
+        "default": "A slow push-in shot, first, this red gift box appears with a gentle bounce animation, then sparkles surround it as the lid opens revealing the product inside...",
+        "dramatic": "A dramatic slow zoom-in, the product emerges from darkness with spotlights, rotating 360 degrees to showcase every angle, finishing with a burst of light effects...",
+        "smooth": "Smooth camera movement gliding across the product, soft focus transitions, elegant text overlays appearing with gentle fade-ins...",
+        "energetic": "Fast-paced cuts, dynamic zooms, vibrant color pulses, product bouncing with energy, explosive particle effects surrounding the item...",
+        "elegant": "Graceful floating motion, soft lighting sweeps across the product, delicate particle effects, minimalist text animations with sophisticated timing..."
+      }
+    },
+    "actions": {
+      "generate": "Generate 🎬",
+      "generating": "Generating...",
+      "download": "Download",
+      "regenerate": "Regenerate"
+    },
+    "status": {
+      "processing": "Generating your ad video..."
+    },
+    "preview": {
+      "title": "Video Preview",
+      "placeholderTitle": "No video generated yet",
+      "placeholderText": "Select a template, upload your product image, and click Generate to create your ad video",
+      "successTitle": "Video Generated Successfully!",
+      "templateLabel": "Template:"
+    },
+    "messages": {
+      "imageType": "Only JPG/PNG images are supported!",
+      "imageSize": "Image size must be less than 10MB!",
+      "uploadRequired": "Please upload a product image first!",
+      "generateSuccess": "Video generated successfully!",
+      "download": "Downloading video..."
+    }
+  },
+  "hookGenerator": {
+    "header": {
+      "title": "AI Video Hook Generator",
+      "subtitle": "Create engaging video hooks that capture attention in the first 3 seconds. Use AI to generate compelling scripts and match them with perfect avatars and effects."
+    },
+    "tabs": {
+      "generate": "Generate Video",
+      "upload": "Upload Video"
+    },
+    "script": {
+      "title": "Hook Script",
+      "placeholder": "Enter your hook script here - English supported\n\nExample: 'Did you know that 90% of viewers decide to keep watching in the first 3 seconds? Here's how to hook them instantly...'",
+      "useSample": "Use Sample Script",
+      "samples": {
+        "first": "Did you know that 90% of viewers decide to keep watching in the first 3 seconds? Here's the secret formula that top creators use...",
+        "second": "Stop scrolling! I'm about to reveal the one trick that changed my entire content strategy forever...",
+        "third": "This simple AI hack helped me get 10 million views in just 30 days. Want to know how?",
+        "fourth": "Warning: What I'm about to show you will completely change how you create content..."
+      }
+    },
+    "voice": {
+      "title": "Voice",
+      "placeholder": "Choose Voice",
+      "modalTitle": "Choose Voice",
+      "options": {
+        "emily": {
+          "name": "Emily",
+          "gender": "Female",
+          "accent": "American"
+        },
+        "james": {
+          "name": "James",
+          "gender": "Male",
+          "accent": "British"
+        },
+        "sophia": {
+          "name": "Sophia",
+          "gender": "Female",
+          "accent": "Australian"
+        },
+        "michael": {
+          "name": "Michael",
+          "gender": "Male",
+          "accent": "American"
+        },
+        "aria": {
+          "name": "Aria",
+          "gender": "Female",
+          "accent": "Canadian"
+        },
+        "aiPro": {
+          "name": "AI Voice Pro",
+          "gender": "Neutral",
+          "accent": "Premium"
+        }
+      }
+    },
+    "avatar": {
+      "title": "Avatar",
+      "placeholder": "Choose Avatar",
+      "custom": "Custom Avatar",
+      "modalTitle": "Choose Avatar",
+      "uploadTitle": "Or Upload Custom Avatar",
+      "uploadCta": "Upload Your Photo",
+      "uploadHint": "JPG, PNG up to 10MB",
+      "customLabel": "Custom Avatar",
+      "backgroundTitle": "Choose Background for",
+      "options": {
+        "proWoman": "Professional Woman",
+        "proMan": "Professional Man",
+        "casualWoman": "Casual Woman",
+        "casualMan": "Casual Man",
+        "creativeWoman": "Creative Woman",
+        "creativeMan": "Creative Man",
+        "techWoman": "Tech Expert Woman",
+        "techMan": "Tech Expert Man",
+        "fitness": "Fitness Coach"
+      },
+      "backgrounds": {
+        "office": "Modern Office",
+        "studio": "Creative Studio",
+        "outdoor": "Outdoor Scene"
+      }
+    },
+    "style": {
+      "title": "Hook Style",
+      "applyTitle": "Apply Hook Style",
+      "modalTitle": "Choose Hook Style",
+      "styles": {
+        "noStyle": "No Style",
+        "thermal": "Thermal",
+        "blazing": "Blazing Red",
+        "pulse": "Pulse",
+        "clean": "Clean Look",
+        "yellow": "YellowLite",
+        "glow": "GlowReel",
+        "hyper": "Hyper Green",
+        "aurum": "Aurum",
+        "coral": "Coral Look",
+        "orange": "Orange Flicker"
+      },
+      "text": {
+        "noStyle": "",
+        "thermal": "AI Template's<br>MAGIC",
+        "blazing": "AI Template's<br>Magic",
+        "pulse": "AI TEMPLATE'S<br>MAGIC",
+        "clean": "AI template's<br>magic",
+        "yellow": "AI TEMPLATES<br>MAGIC",
+        "glow": "AI TEMPLATE'S<br>MAGIC",
+        "hyper": "AI TEMPLATES<br>MAGIC",
+        "aurum": "HOW TO<br>EDIT FASTER",
+        "coral": "AI TEMPLATE'S<br>MAGIC",
+        "orange": "AI EDIT'S<br>MAGIC"
+      }
+    },
+    "effect": {
+      "title": "Effect",
+      "applyTitle": "Apply Effect",
+      "effects": {
+        "none": "No Effect",
+        "fire": "Fire Hands",
+        "claw": "Claw Grab",
+        "earth": "Earth Zoom",
+        "lightning": "Lightning",
+        "sparkle": "Sparkles",
+        "neon": "Neon Glow",
+        "glitch": "Glitch",
+        "smoke": "Smoke",
+        "rainbow": "Rainbow",
+        "freeze": "Freeze",
+        "burst": "Energy Burst"
+      }
+    },
+    "actions": {
+      "generate": "Generate UGC Hook",
+      "generating": "Generating...",
+      "download": "Download Video",
+      "applyStyle": "Apply Hook Style"
+    },
+    "status": {
+      "generating": "Generating your video hook...",
+      "successTitle": "Video Hook Generated Successfully!",
+      "successDetailPrefix": "Your engaging hook with",
+      "successDetailSuffix": "style is ready"
+    },
+    "upload": {
+      "title": "Your Video",
+      "cta": "Upload Your Video",
+      "instructions": "Drop your video file here or click to browse",
+      "hints": "For best results, upload:<br>1. Talking Video<br>2. English-speaking One",
+      "successTitle": "Video Uploaded Successfully",
+      "replace": "Choose Another Video"
+    },
+    "results": {
+      "title": "Your Generated Hooks",
+      "subtitle": "Your AI-powered video hooks will appear here",
+      "placeholder": "Your generated video hooks will appear here.",
+      "hint": "Create your first hook to see the magic!"
+    },
+    "messages": {
+      "avatarTooLarge": "File size exceeds 10MB limit",
+      "avatarUploadPrefix": "Avatar uploaded successfully:",
+      "scriptRequired": "Please enter a hook script first!",
+      "voiceRequired": "Please select a voice!",
+      "styleRequired": "Please select a hook style!",
+      "videoTooLarge": "File size exceeds 500MB limit",
+      "invalidVideo": "Please upload a video file",
+      "videoUploadPrefix": "Video uploaded:",
+      "videoRequired": "Please upload a video first!",
+      "processingVideoPrefix": "Processing video with Style:",
+      "processingVideoWith": "and Effect:",
+      "download": "Downloading your video hook..."
     }
   }
 }

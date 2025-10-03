@@ -2,16 +2,16 @@
   <div class="ai-video-generator-page">
     <!-- 侧边栏 -->
     <aside class="sidebar">
-      <div class="logo">MediaEnhance Pro</div>
+      <div class="logo">{{ translate('app.brand') }}</div>
       <nav>
         <ul class="nav-menu">
-          <li 
-            v-for="(item, index) in menuItems" 
+          <li
+            v-for="(item, index) in menuItems"
             :key="index"
             :class="['nav-item', { active: item.active }]"
             @click="handleMenuClick(index)"
           >
-            <span>{{ item.icon }}</span> {{ item.label }}
+            <span>{{ item.icon }}</span> {{ translate(item.labelKey) }}
           </li>
         </ul>
       </nav>
@@ -19,8 +19,8 @@
         <div class="nav-item user-account">
           <span>👤</span>
           <div class="user-info">
-            <div class="user-name">User Account</div>
-            <div class="user-plan">Pro Plan</div>
+            <div class="user-name">{{ translate('app.user.account') }}</div>
+            <div class="user-plan">{{ translate('app.user.proPlan') }}</div>
           </div>
         </div>
       </div>
@@ -29,29 +29,44 @@
     <!-- 主内容区域 -->
     <main class="main-container">
       <div class="content-wrapper">
+        <div class="language-switcher">
+          <label for="language-select">{{ translate('language.label') }}</label>
+          <el-select
+            id="language-select"
+            v-model="locale"
+            size="mini"
+          >
+            <el-option
+              v-for="code in availableLocales"
+              :key="code"
+              :label="translate(`language.options.${code}`)"
+              :value="code"
+            />
+          </el-select>
+        </div>
         <!-- 标题区域 -->
         <div class="header">
-          <h1>AI Ad Video Generator</h1>
-          <p>Create stunning product advertisement videos using AI. Transform your product images into engaging TikTok, Instagram Reels, or YouTube Shorts in seconds.</p>
+          <h1>{{ translate('adGenerator.header.title') }}</h1>
+          <p>{{ translate('adGenerator.header.subtitle') }}</p>
         </div>
 
         <!-- 模板选择区域 - 占满双栏 -->
         <div class="template-section">
           <div class="section-header">
-            <h2 class="section-title-large">Choose Your Video Template</h2>
-            <p class="section-subtitle">Select from our professionally designed templates for TikTok, Instagram Reels, or YouTube Shorts</p>
+            <h2 class="section-title-large">{{ translate('adGenerator.templatesSection.title') }}</h2>
+            <p class="section-subtitle">{{ translate('adGenerator.templatesSection.subtitle') }}</p>
           </div>
-          
+
           <!-- 分类标签 -->
           <div class="template-categories">
             <div class="category-tabs">
-              <button 
+              <button
                 v-for="category in categories"
                 :key="category.value"
                 :class="['category-tab', { active: currentCategory === category.value }]"
                 @click="filterTemplates(category.value)"
               >
-                {{ category.label }}
+                {{ translate(category.labelKey) }}
               </button>
             </div>
           </div>
@@ -69,17 +84,17 @@
               @click="selectTemplate(template.id)"
             >
               <div class="template-preview-wrapper">
-                <img class="template-preview" :src="template.preview" :alt="template.name">
+                <img class="template-preview" :src="template.preview" :alt="translate(template.nameKey)">
                 <div class="template-overlay">
                   <span class="play-icon">▶</span>
                 </div>
               </div>
               <div class="template-info">
-                <h3 class="template-name">{{ template.name }}</h3>
-                <p class="template-desc">{{ template.description }}</p>
+                <h3 class="template-name">{{ translate(template.nameKey) }}</h3>
+                <p class="template-desc">{{ translate(template.descriptionKey) }}</p>
                 <div class="template-tags">
-                  <span class="tag">{{ template.platform }}</span>
-                  <span v-if="template.badge" :class="['tag', template.badgeType]">{{ template.badge }}</span>
+                  <span class="tag">{{ translate(template.platformKey) }}</span>
+                  <span v-if="template.badgeKey" :class="['tag', template.badgeType]">{{ translate(template.badgeKey) }}</span>
                 </div>
               </div>
             </div>
@@ -93,13 +108,13 @@
             <!-- 产品上传 -->
             <div class="upload-container">
               <div class="upload-header">
-                <span class="section-title">Replace A Product Image</span>
+                <span class="section-title">{{ translate('adGenerator.upload.title') }}</span>
                 <el-button type="text" class="reset-btn" @click="resetUpload">
-                  <i class="el-icon-refresh-left"></i> Reset
+                  <i class="el-icon-refresh-left"></i> {{ translate('adGenerator.upload.reset') }}
                 </el-button>
               </div>
-              <p class="upload-hint">Upload a JPG or PNG image, within 10MB each.</p>
-              
+              <p class="upload-hint">{{ translate('adGenerator.upload.hint') }}</p>
+
               <el-upload
                 class="upload-area"
                 drag
@@ -110,26 +125,26 @@
               >
                 <div v-if="!productImage" class="upload-content">
                   <div class="upload-icon">📤</div>
-                  <div class="upload-title">Product</div>
-                  <div class="upload-subtitle">Click to upload or drag and drop</div>
-                  <el-button class="upload-btn">Choose Image</el-button>
+                  <div class="upload-title">{{ translate('adGenerator.upload.placeholder') }}</div>
+                  <div class="upload-subtitle">{{ translate('adGenerator.upload.instructions') }}</div>
+                  <el-button class="upload-btn">{{ translate('adGenerator.upload.button') }}</el-button>
                 </div>
                 <img v-else :src="productImage" class="uploaded-image">
               </el-upload>
 
               <div class="tip-box">
-                <strong>Tip:</strong> Upload product images with a simple or transparent background. Try generating multiple times for the best results.
+                <strong>{{ translate('adGenerator.upload.tipLabel') }}</strong> {{ translate('adGenerator.upload.tipContent') }}
               </div>
 
               <!-- 示例产品 -->
               <div class="sample-products">
-                <div 
+                <div
                   v-for="sample in sampleProducts"
                   :key="sample.type"
                   class="sample-product"
                   @click="loadSampleProduct(sample.type)"
                 >
-                  <img :src="sample.image" :alt="sample.type">
+                  <img :src="sample.image" :alt="translate(sample.altKey)">
                 </div>
               </div>
             </div>
@@ -139,13 +154,14 @@
           <div class="workspace-right">
             <!-- 运动文案 -->
             <div class="settings-container">
-              <div class="section-title">Motion Description</div>
+              <div class="section-title">{{ translate('adGenerator.motion.title') }}</div>
               <el-input
                 type="textarea"
                 v-model="motionText"
                 :rows="5"
-                placeholder="A slow push-in shot, first, this red gift box appears..."
+                :placeholder="translate('adGenerator.motion.placeholder')"
                 class="motion-input"
+                @input="handleMotionInput"
               ></el-input>
               <div class="motion-preset">
                 <el-button
@@ -155,7 +171,7 @@
                   class="preset-btn"
                   @click="setMotionPreset(preset.type)"
                 >
-                  {{ preset.label }}
+                  {{ translate(preset.labelKey) }}
                 </el-button>
               </div>
             </div>
@@ -169,19 +185,19 @@
                 :loading="isGenerating"
                 @click="generateVideo"
               >
-                <span v-if="!isGenerating">Generate 🎬 <span class="credit-count">1</span></span>
-                <span v-else>Generating...</span>
+                <span v-if="!isGenerating">{{ translate('adGenerator.actions.generate') }} <span class="credit-count">1</span></span>
+                <span v-else>{{ translate('adGenerator.actions.generating') }}</span>
               </el-button>
 
               <!-- 进度信息 -->
               <div v-if="isGenerating" class="process-info">
                 <div class="process-status">
                   <div class="status-icon">⏳</div>
-                  <div class="status-text">Generating your ad video...</div>
+                  <div class="status-text">{{ translate('adGenerator.status.processing') }}</div>
                   <div class="status-percent">{{ processPercent }}%</div>
                 </div>
-                <el-progress 
-                  :percentage="processPercent" 
+                <el-progress
+                  :percentage="processPercent"
                   :stroke-width="8"
                   :show-text="false"
                 ></el-progress>
@@ -193,26 +209,26 @@
         <!-- 预览区域 -->
         <div class="preview-section">
           <div class="preview-header">
-            <h2 class="preview-title">Video Preview</h2>
+            <h2 class="preview-title">{{ translate('adGenerator.preview.title') }}</h2>
           </div>
           <div class="preview-container">
             <div v-if="!generatedVideo" class="preview-placeholder">
               <div class="preview-placeholder-icon">🎥</div>
-              <p class="placeholder-title">No video generated yet</p>
-              <p class="placeholder-text">Select a template, upload your product image, and click Generate to create your ad video</p>
+              <p class="placeholder-title">{{ translate('adGenerator.preview.placeholderTitle') }}</p>
+              <p class="placeholder-text">{{ translate('adGenerator.preview.placeholderText') }}</p>
             </div>
             <div v-else class="generated-content">
               <div class="video-mockup">
                 <div class="mockup-icon">🎬</div>
-                <div>Video Generated Successfully!</div>
-                <div class="mockup-info">Template: {{ selectedTemplate }}</div>
+                <div>{{ translate('adGenerator.preview.successTitle') }}</div>
+                <div class="mockup-info">{{ translate('adGenerator.preview.templateLabel') }} {{ selectedTemplateName }}</div>
               </div>
               <div class="preview-actions">
                 <el-button type="success" @click="downloadVideo">
-                  <i class="el-icon-download"></i> Download
+                  <i class="el-icon-download"></i> {{ translate('adGenerator.actions.download') }}
                 </el-button>
                 <el-button type="primary" @click="regenerateVideo">
-                  <i class="el-icon-refresh"></i> Regenerate
+                  <i class="el-icon-refresh"></i> {{ translate('adGenerator.actions.regenerate') }}
                 </el-button>
               </div>
             </div>
@@ -224,28 +240,32 @@
 </template>
 
 <script>
+import { supportedLocales, translate as translateText } from './i18n'
+
 export default {
   name: 'AIAdVideoGenerator',
   data() {
     return {
+      availableLocales: supportedLocales,
+      locale: 'en-US',
       // 菜单项
       menuItems: [
-        { icon: '📊', label: 'Dashboard', active: false },
-        { icon: '✨', label: 'Video/Image Enhancer', active: false },
-        { icon: '🧹', label: 'Watermark Remover', active: false },
-        { icon: '🎯', label: 'AI Ad Generator', active: true },
-        { icon: '🎨', label: 'Style Transfer', active: false },
-        { icon: '🔊', label: 'Audio Enhancement', active: false },
-        { icon: '📁', label: 'My Projects', active: false },
-        { icon: '⚙️', label: 'Settings', active: false }
+        { icon: '📊', labelKey: 'menu.dashboard', active: false },
+        { icon: '✨', labelKey: 'menu.videoEnhancer', active: false },
+        { icon: '🧹', labelKey: 'menu.watermarkRemover', active: false },
+        { icon: '🎯', labelKey: 'menu.adGenerator', active: true },
+        { icon: '🎨', labelKey: 'menu.styleTransfer', active: false },
+        { icon: '🔊', labelKey: 'menu.audioEnhancement', active: false },
+        { icon: '📁', labelKey: 'menu.projects', active: false },
+        { icon: '⚙️', labelKey: 'menu.settings', active: false }
       ],
 
       // 分类
       categories: [
-        { value: 'all', label: 'All Templates' },
-        { value: 'tiktok', label: 'TikTok (9:16)' },
-        { value: 'youtube', label: 'YouTube (16:9)' },
-        { value: 'trending', label: '🔥 Trending' }
+        { value: 'all', labelKey: 'adGenerator.categories.all' },
+        { value: 'tiktok', labelKey: 'adGenerator.categories.tiktok' },
+        { value: 'youtube', labelKey: 'adGenerator.categories.youtube' },
+        { value: 'trending', labelKey: 'adGenerator.categories.trending' }
       ],
       currentCategory: 'all',
 
@@ -253,98 +273,98 @@ export default {
       templates: [
         {
           id: 'unboxing',
-          name: 'Unboxing Experience',
-          description: 'Perfect for product reveals',
+          nameKey: 'adGenerator.templates.unboxing.name',
+          descriptionKey: 'adGenerator.templates.unboxing.description',
           category: 'tiktok trending',
-          platform: 'TikTok',
-          badge: 'HOT',
+          platformKey: 'adGenerator.templates.unboxing.platform',
+          badgeKey: 'adGenerator.templates.unboxing.badge',
           badgeType: 'hot',
           preview: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 16"%3E%3Crect fill="%23ff69b4" width="9" height="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="white" font-size="2">📦%3C/text%3E%3C/svg%3E',
           horizontal: false
         },
         {
           id: 'product-reveal',
-          name: 'Product Reveal',
-          description: 'Dramatic product showcase',
+          nameKey: 'adGenerator.templates.productReveal.name',
+          descriptionKey: 'adGenerator.templates.productReveal.description',
           category: 'tiktok',
-          platform: 'TikTok',
+          platformKey: 'adGenerator.templates.productReveal.platform',
           preview: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 16"%3E%3Crect fill="%236366f1" width="9" height="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="white" font-size="2">✨%3C/text%3E%3C/svg%3E',
           horizontal: false
         },
         {
           id: 'before-after',
-          name: 'Before & After',
-          description: 'Show transformation results',
+          nameKey: 'adGenerator.templates.beforeAfter.name',
+          descriptionKey: 'adGenerator.templates.beforeAfter.description',
           category: 'tiktok',
-          platform: 'TikTok',
+          platformKey: 'adGenerator.templates.beforeAfter.platform',
           preview: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 16"%3E%3Crect fill="%2310b981" width="9" height="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="white" font-size="2">🔄%3C/text%3E%3C/svg%3E',
           horizontal: false
         },
         {
           id: 'lifestyle',
-          name: 'Lifestyle',
-          description: 'Daily life product integration',
+          nameKey: 'adGenerator.templates.lifestyle.name',
+          descriptionKey: 'adGenerator.templates.lifestyle.description',
           category: 'tiktok trending',
-          platform: 'TikTok',
-          badge: 'TRENDING',
+          platformKey: 'adGenerator.templates.lifestyle.platform',
+          badgeKey: 'adGenerator.templates.lifestyle.badge',
           badgeType: 'trending',
           preview: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 16"%3E%3Crect fill="%23fbbf24" width="9" height="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="white" font-size="2">🌟%3C/text%3E%3C/svg%3E',
           horizontal: false
         },
         {
           id: 'testimonial',
-          name: 'Customer Testimonial',
-          description: 'Social proof & reviews',
+          nameKey: 'adGenerator.templates.testimonial.name',
+          descriptionKey: 'adGenerator.templates.testimonial.description',
           category: 'tiktok',
-          platform: 'TikTok',
+          platformKey: 'adGenerator.templates.testimonial.platform',
           preview: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 16"%3E%3Crect fill="%23a855f7" width="9" height="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="white" font-size="2">💬%3C/text%3E%3C/svg%3E',
           horizontal: false
         },
         {
           id: 'flash-sale',
-          name: 'Flash Sale',
-          description: 'Urgency & special offers',
+          nameKey: 'adGenerator.templates.flashSale.name',
+          descriptionKey: 'adGenerator.templates.flashSale.description',
           category: 'tiktok trending',
-          platform: 'TikTok',
-          badge: 'NEW',
+          platformKey: 'adGenerator.templates.flashSale.platform',
+          badgeKey: 'adGenerator.templates.flashSale.badge',
           badgeType: 'new',
           preview: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 16"%3E%3Crect fill="%23ef4444" width="9" height="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="white" font-size="2">⚡%3C/text%3E%3C/svg%3E',
           horizontal: false
         },
         {
           id: 'youtube-intro',
-          name: 'YouTube Intro',
-          description: 'Professional video opening',
+          nameKey: 'adGenerator.templates.youtubeIntro.name',
+          descriptionKey: 'adGenerator.templates.youtubeIntro.description',
           category: 'youtube',
-          platform: 'YouTube',
+          platformKey: 'adGenerator.templates.youtubeIntro.platform',
           preview: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 9"%3E%3Crect fill="%23dc2626" width="16" height="9"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="white" font-size="2">▶️%3C/text%3E%3C/svg%3E',
           horizontal: true
         },
         {
           id: 'comparison',
-          name: 'Product Comparison',
-          description: 'Side-by-side analysis',
+          nameKey: 'adGenerator.templates.comparison.name',
+          descriptionKey: 'adGenerator.templates.comparison.description',
           category: 'youtube',
-          platform: 'YouTube',
+          platformKey: 'adGenerator.templates.comparison.platform',
           preview: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 9"%3E%3Crect fill="%230891b2" width="16" height="9"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="white" font-size="2">⚖️%3C/text%3E%3C/svg%3E',
           horizontal: true
         },
         {
           id: 'tutorial',
-          name: 'How-To Tutorial',
-          description: 'Step-by-step guide',
+          nameKey: 'adGenerator.templates.tutorial.name',
+          descriptionKey: 'adGenerator.templates.tutorial.description',
           category: 'youtube',
-          platform: 'YouTube',
+          platformKey: 'adGenerator.templates.tutorial.platform',
           preview: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 9"%3E%3Crect fill="%2316a34a" width="16" height="9"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="white" font-size="2">📚%3C/text%3E%3C/svg%3E',
           horizontal: true
         },
         {
           id: 'showcase',
-          name: 'Product Showcase',
-          description: 'Cinematic presentation',
+          nameKey: 'adGenerator.templates.showcase.name',
+          descriptionKey: 'adGenerator.templates.showcase.description',
           category: 'youtube trending',
-          platform: 'YouTube',
-          badge: 'HOT',
+          platformKey: 'adGenerator.templates.showcase.platform',
+          badgeKey: 'adGenerator.templates.showcase.badge',
           badgeType: 'hot',
           preview: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 9"%3E%3Crect fill="%237c3aed" width="16" height="9"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="white" font-size="2">🎬%3C/text%3E%3C/svg%3E',
           horizontal: true
@@ -355,40 +375,47 @@ export default {
       sampleProducts: [
         {
           type: 'cosmetic',
-          image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect fill="%23e0f2fe" width="100" height="100"/%3E%3Ctext x="50" y="55" text-anchor="middle" font-size="40">🧴%3C/text%3E%3C/svg%3E'
+          image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect fill="%23e0f2fe" width="100" height="100"/%3E%3Ctext x="50" y="55" text-anchor="middle" font-size="40">🧴%3C/text%3E%3C/svg%3E',
+          altKey: 'adGenerator.samples.cosmetic'
         },
         {
           type: 'perfume',
-          image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect fill="%23fce7f3" width="100" height="100"/%3E%3Ctext x="50" y="55" text-anchor="middle" font-size="40">🍾%3C/text%3E%3C/svg%3E'
+          image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect fill="%23fce7f3" width="100" height="100"/%3E%3Ctext x="50" y="55" text-anchor="middle" font-size="40">🍾%3C/text%3E%3C/svg%3E',
+          altKey: 'adGenerator.samples.perfume'
         },
         {
           type: 'skincare',
-          image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect fill="%23dcfce7" width="100" height="100"/%3E%3Ctext x="50" y="55" text-anchor="middle" font-size="40">🧪%3C/text%3E%3C/svg%3E'
+          image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect fill="%23dcfce7" width="100" height="100"/%3E%3Ctext x="50" y="55" text-anchor="middle" font-size="40">🧪%3C/text%3E%3C/svg%3E',
+          altKey: 'adGenerator.samples.skincare'
         }
       ],
 
       // 运动预设
       motionPresets: [
-        { type: 'dramatic', label: 'Dramatic Reveal' },
-        { type: 'smooth', label: 'Smooth Transition' },
-        { type: 'energetic', label: 'Energetic Pop' },
-        { type: 'elegant', label: 'Elegant Flow' }
+        { type: 'dramatic', labelKey: 'adGenerator.motion.presets.dramatic' },
+        { type: 'smooth', labelKey: 'adGenerator.motion.presets.smooth' },
+        { type: 'energetic', labelKey: 'adGenerator.motion.presets.energetic' },
+        { type: 'elegant', labelKey: 'adGenerator.motion.presets.elegant' }
       ],
 
-      presetTexts: {
-        dramatic: 'A dramatic slow zoom-in, the product emerges from darkness with spotlights, rotating 360 degrees to showcase every angle, finishing with a burst of light effects...',
-        smooth: 'Smooth camera movement gliding across the product, soft focus transitions, elegant text overlays appearing with gentle fade-ins...',
-        energetic: 'Fast-paced cuts, dynamic zooms, vibrant color pulses, product bouncing with energy, explosive particle effects surrounding the item...',
-        elegant: 'Graceful floating motion, soft lighting sweeps across the product, delicate particle effects, minimalist text animations with sophisticated timing...'
+      presetTextKeys: {
+        default: 'adGenerator.motion.defaults.default',
+        dramatic: 'adGenerator.motion.defaults.dramatic',
+        smooth: 'adGenerator.motion.defaults.smooth',
+        energetic: 'adGenerator.motion.defaults.energetic',
+        elegant: 'adGenerator.motion.defaults.elegant'
       },
 
       // 状态
       selectedTemplate: 'unboxing',
       productImage: '',
-      motionText: 'A slow push-in shot, first, this red gift box appears with a gentle bounce animation, then sparkles surround it as the lid opens revealing the product inside...',
+      motionText: '',
       isGenerating: false,
       processPercent: 0,
-      generatedVideo: false
+      generatedVideo: false,
+      currentMotionPreset: 'default',
+      userEditedMotion: false,
+      settingMotionPreset: false
     }
   },
 
@@ -398,13 +425,25 @@ export default {
       if (this.currentCategory === 'all') {
         return this.templates
       }
-      return this.templates.filter(template => 
+      return this.templates.filter(template =>
         template.category.includes(this.currentCategory)
       )
+    },
+
+    selectedTemplateInfo() {
+      return this.templates.find(template => template.id === this.selectedTemplate) || null
+    },
+
+    selectedTemplateName() {
+      return this.selectedTemplateInfo ? this.translate(this.selectedTemplateInfo.nameKey) : ''
     }
   },
 
   methods: {
+    translate(key) {
+      return translateText(this.locale, key)
+    },
+
     // 处理菜单点击
     handleMenuClick(index) {
       this.menuItems.forEach((item, i) => {
@@ -428,11 +467,11 @@ export default {
       const isLt10M = file.size / 1024 / 1024 < 10
 
       if (!isImage) {
-        this.$message.error('Only JPG/PNG images are supported!')
+        this.$message.error(this.translate('adGenerator.messages.imageType'))
         return false
       }
       if (!isLt10M) {
-        this.$message.error('Image size must be less than 10MB!')
+        this.$message.error(this.translate('adGenerator.messages.imageSize'))
         return false
       }
 
@@ -461,13 +500,22 @@ export default {
 
     // 设置运动预设
     setMotionPreset(type) {
-      this.motionText = this.presetTexts[type] || ''
+      const key = this.presetTextKeys[type]
+      if (key) {
+        this.settingMotionPreset = true
+        this.currentMotionPreset = type
+        this.motionText = this.translate(key)
+        this.userEditedMotion = false
+        this.$nextTick(() => {
+          this.settingMotionPreset = false
+        })
+      }
     },
 
     // 生成视频
     generateVideo() {
       if (!this.productImage) {
-        this.$message.warning('Please upload a product image first!')
+        this.$message.warning(this.translate('adGenerator.messages.uploadRequired'))
         return
       }
 
@@ -480,11 +528,11 @@ export default {
         if (this.processPercent >= 100) {
           this.processPercent = 100
           clearInterval(interval)
-          
+
           setTimeout(() => {
             this.isGenerating = false
             this.generatedVideo = true
-            this.$message.success('Video generated successfully!')
+            this.$message.success(this.translate('adGenerator.messages.generateSuccess'))
           }, 500)
         }
       }, 300)
@@ -492,7 +540,7 @@ export default {
 
     // 下载视频
     downloadVideo() {
-      this.$message.success('Downloading video...')
+      this.$message.success(this.translate('adGenerator.messages.download'))
       // 实际实现下载逻辑
     },
 
@@ -500,6 +548,29 @@ export default {
     regenerateVideo() {
       this.generatedVideo = false
       this.generateVideo()
+    },
+
+    handleMotionInput() {
+      if (this.settingMotionPreset) {
+        return
+      }
+      this.userEditedMotion = true
+      this.currentMotionPreset = null
+    }
+  },
+
+  watch: {
+    locale() {
+      if (this.currentMotionPreset && !this.userEditedMotion) {
+        const key = this.presetTextKeys[this.currentMotionPreset]
+        if (key) {
+          this.settingMotionPreset = true
+          this.motionText = this.translate(key)
+          this.$nextTick(() => {
+            this.settingMotionPreset = false
+          })
+        }
+      }
     }
   },
 
@@ -507,6 +578,15 @@ export default {
     // 默认选中第一个模板
     if (this.templates.length > 0) {
       this.selectedTemplate = this.templates[0].id
+    }
+    const defaultKey = this.presetTextKeys.default
+    if (defaultKey) {
+      this.settingMotionPreset = true
+      this.motionText = this.translate(defaultKey)
+      this.userEditedMotion = false
+      this.$nextTick(() => {
+        this.settingMotionPreset = false
+      })
     }
   }
 }
