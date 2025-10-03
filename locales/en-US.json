@@ -157,6 +157,13 @@
       "processHint": "Click Remove Watermark to begin",
       "reprocessHint": "Click Reprocess to apply new mode"
     },
+    "canvas": {
+      "baseContent": "Sample Image Content",
+      "watermarkLabel": "WATERMARK",
+      "logoLabel": "LOGO",
+      "textOverlay": "www.example.com - Sample Text Overlay",
+      "objectLabel": "Object"
+    },
     "messages": {
       "fileTooLarge": "File size exceeds 100MB limit",
       "uploadRequired": "Please upload a file first",
@@ -795,6 +802,365 @@
       "processingVideoPrefix": "Processing video with Style:",
       "processingVideoWith": "and Effect:",
       "download": "Downloading your video hook..."
+    }
+  },
+  "bloggerMonitor": {
+    "header": {
+      "title": "Blogger Monitor & Video Downloader",
+      "subtitle": "Track your favorite content creators across multiple platforms and download their videos without watermarks. Stay updated with real-time notifications when new content is posted."
+    },
+    "stats": {
+      "bloggers": "Monitored Bloggers",
+      "updates": "New Updates Today",
+      "platforms": "Active Platforms"
+    },
+    "platforms": {
+      "tiktok": {
+        "name": "TikTok",
+        "placeholder": "Enter @username or profile link",
+        "hint": "Example: @charlidamelio or https://www.tiktok.com/@username"
+      },
+      "douyin": {
+        "name": "Douyin",
+        "placeholder": "Enter username or profile link",
+        "hint": "Example: 美食达人 or Douyin profile URL"
+      },
+      "instagram": {
+        "name": "Instagram",
+        "placeholder": "Enter @username or profile link",
+        "hint": "Example: @cristiano or https://www.instagram.com/username",
+        "reels": "Instagram Reels"
+      },
+      "youtube": {
+        "name": "YouTube",
+        "placeholder": "Enter @channel or channel link",
+        "hint": "Example: @MrBeast or https://www.youtube.com/@channel",
+        "shorts": "YouTube Shorts"
+      },
+      "twitter": {
+        "name": "Twitter/X"
+      },
+      "snapchat": {
+        "name": "Snapchat"
+      }
+    },
+    "actions": {
+      "add": "Add",
+      "remove": "Remove"
+    },
+    "status": {
+      "active": "Active",
+      "checking": "Checking"
+    },
+    "filters": {
+      "all": "All"
+    },
+    "logs": {
+      "title": "Recent Updates Log",
+      "messages": {
+        "postedVideo": "posted a new video:",
+        "uploadedVideo": "uploaded:",
+        "sharedReel": "shared a new Reel:",
+        "wentLive": "went live:",
+        "premieredVideo": "premiered:",
+        "addedToMonitor": "has been added to monitoring list"
+      },
+      "links": {
+        "viewVideo": "View Video",
+        "viewReel": "View Reel",
+        "watchRecording": "Watch Recording",
+        "checkProfile": "Check Profile"
+      },
+      "relative": {
+        "yesterday": "Yesterday"
+      },
+      "generic": {
+        "newContent": "New Content",
+        "liveSession": "Live session",
+        "newReel": "New Reel",
+        "newUpload": "New upload"
+      }
+    },
+    "download": {
+      "title": "Video Downloader",
+      "subtitle": "Download videos without watermarks from your favorite platforms",
+      "placeholder": "Paste video URL here (TikTok, Douyin, Instagram, YouTube, etc.)",
+      "action": "Download",
+      "processing": "Processing...",
+      "inProgress": "Processing video... Please wait",
+      "success": "Video downloaded successfully without watermark!"
+    },
+    "messages": {
+      "enterBlogger": "Please enter a blogger ID or link",
+      "added": "Blogger added successfully!",
+      "removed": "Blogger removed",
+      "openingContent": "Opening content for",
+      "enterUrl": "Please enter a video URL",
+      "invalidUrl": "Please enter a valid URL"
+    },
+    "notifications": {
+      "newUpdate": "New Update",
+      "messages": {
+        "postedVideo": "posted a new video",
+        "wentLive": "went live",
+        "sharedReel": "shared a new reel",
+        "uploadedVideo": "uploaded new content"
+      }
+    }
+  },
+  "myAccount": {
+    "header": {
+      "title": "My Account",
+      "subtitle": "Manage your profile, monitor usage statistics, and upgrade your plan to unlock unlimited creative possibilities."
+    },
+    "overview": {
+      "title": "Account Overview",
+      "viewSettings": "View Account Settings"
+    },
+    "settings": {
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "password": "Password",
+      "accountCreated": "Account Created"
+    },
+    "actions": {
+      "edit": "Edit",
+      "changeEmail": "Change Email",
+      "changePassword": "Change Password",
+      "deleteAccount": "Delete Account",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "currentPlan": "Current Plan",
+      "downgrade": "Downgrade",
+      "upgradePro": "Upgrade to Pro",
+      "upgradeEnterprise": "Upgrade to Enterprise",
+      "cancelSubscription": "Cancel Subscription",
+      "confirmCancel": "Yes, Cancel",
+      "keepSubscription": "Keep Subscription",
+      "save": "Save",
+      "sendVerification": "Send Verification",
+      "next": "Next",
+      "delete": "Delete"
+    },
+    "usage": {
+      "title": "Daily Usage Limits",
+      "items": {
+        "video": "Video Enhancement",
+        "watermark": "Watermark Removal",
+        "style": "Style Transfer",
+        "audio": "Audio Enhancement",
+        "storage": "Cloud Storage"
+      },
+      "units": {
+        "usedToday": "used today",
+        "gbUsed": "GB used"
+      },
+      "notice": "Daily limits reset at 12:00 AM UTC • Upgrade to Pro for unlimited usage"
+    },
+    "plans": {
+      "title": "Subscription Plans",
+      "labels": {
+        "free": "Free Plan",
+        "pro": "Pro Plan",
+        "enterprise": "Enterprise Plan"
+      },
+      "priceUnit": {
+        "month": "/month"
+      },
+      "free": {
+        "name": "Free",
+        "description": "Perfect for personal projects and testing",
+        "expiry": "No Expiration",
+        "features": {
+          "videoEnhancements": "5 video enhancements per day",
+          "watermark": "10 watermark removals per day",
+          "style": "3 style transfers per day",
+          "storage": "5 GB cloud storage",
+          "speed": "Standard processing speed"
+        }
+      },
+      "pro": {
+        "badge": "RECOMMENDED",
+        "name": "Pro",
+        "description": "For professionals and content creators",
+        "features": {
+          "video": "Unlimited video enhancements",
+          "watermark": "Unlimited watermark removals",
+          "style": "Unlimited style transfers",
+          "storage": "100 GB cloud storage",
+          "speed": "Priority processing speed",
+          "resolution": "4K resolution support"
+        }
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "description": "For teams and businesses",
+        "features": {
+          "everything": "Everything in Pro",
+          "team": "Unlimited team members",
+          "storage": "1 TB cloud storage",
+          "api": "API access",
+          "support": "Priority support",
+          "integrations": "Custom integrations"
+        }
+      },
+      "expires": "Expires:",
+      "cancelNotice": "Your subscription will remain active until the end of the billing period"
+    },
+    "billing": {
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "save": "Save 20%",
+      "changedTo": "Billing changed to:"
+    },
+    "activity": {
+      "title": "Recent Activity",
+      "items": {
+        "videoEnhanced": "Video Enhanced",
+        "watermarkRemoved": "Watermark Removed",
+        "styleTransfer": "Style Transfer",
+        "audioEnhanced": "Audio Enhanced"
+      },
+      "times": {
+        "twoHoursAgo": "2 hours ago",
+        "fourHoursAgo": "4 hours ago",
+        "yesterdayAfternoon": "Yesterday at 3:45 PM",
+        "yesterdayMorning": "Yesterday at 10:30 AM",
+        "twoDaysAgo": "2 days ago"
+      },
+      "status": {
+        "completed": "Completed"
+      },
+      "download": "Download"
+    },
+    "dialogs": {
+      "upgrade": {
+        "priceLabel": "Price:",
+        "billingLabel": "Billing:",
+        "cancelDetail": "You can cancel anytime.",
+        "titlePrefix": "Upgrade to",
+        "titleSuffix": "Plan?"
+      },
+      "cancel": {
+        "message": "Your subscription will remain active until the end of the current billing period.",
+        "title": "Are you sure you want to cancel your subscription?"
+      },
+      "editProfile": {
+        "message": "Enter your new name:",
+        "title": "Edit Profile"
+      },
+      "changeEmail": {
+        "message": "Enter your new email address:",
+        "title": "Change Email"
+      },
+      "changePassword": {
+        "current": "Enter your current password:",
+        "title": "Change Password",
+        "new": "Enter your new password:",
+        "newTitle": "New Password"
+      },
+      "deleteAccount": {
+        "message": "This action is irreversible and will permanently delete:<br>• All your projects<br>• Processing history<br>• Stored files<br>• Account settings",
+        "title": "Are you sure you want to delete your account?",
+        "confirmPrompt": "Type \"DELETE\" to confirm account deletion:",
+        "confirmTitle": "Confirm Deletion"
+      }
+    },
+    "messages": {
+      "redirectingPayment": "Redirecting to secure payment page...",
+      "upgradeSuccess": "Plan upgraded successfully!",
+      "subscriptionCancelled": "Your subscription has been cancelled.",
+      "profileUpdated": "Profile updated successfully!",
+      "verificationSent": "Verification email sent to",
+      "passwordChanged": "Password changed successfully!",
+      "deletionScheduled": "Account deletion initiated. Your account will be permanently deleted in 30 days.",
+      "downloading": "Downloading:"
+    },
+    "validation": {
+      "nameMin": "Name must be at least 2 characters",
+      "email": "Please enter a valid email address",
+      "password": "Password must be at least 8 characters",
+      "deleteConfirm": "Please type DELETE to confirm"
+    }
+  },
+  "thumbnailGenerator": {
+    "header": {
+      "title": "Thumbnail Generator",
+      "subtitle": "Create eye-catching thumbnails for your videos and images with AI-powered text overlays, perfect ratios, and emotional expressions to maximize engagement."
+    },
+    "upload": {
+      "title": "Upload Media",
+      "dropTitle": "Drop your image or video here",
+      "dropSubtitle": "or click to browse",
+      "chooseFiles": "Choose Files"
+    },
+    "frameSelector": {
+      "title": "Select Video Frame for Thumbnail",
+      "useFrame": "Use This Frame for Thumbnail",
+      "reselectFrame": "Reselect Frame",
+      "confirmed": "Frame successfully selected for thumbnail"
+    },
+    "settings": {
+      "title": "Thumbnail Settings",
+      "ratioLabel": "Select Thumbnail Ratio",
+      "ratios": {
+        "youtube": "YouTube",
+        "shorts": "Shorts",
+        "instagram": "Instagram"
+      },
+      "textLabel": "Enter thumbnail text",
+      "textPlaceholder": "Describe your thumbnail headline",
+      "emotionLabel": "Emotion"
+    },
+    "emotions": {
+      "none": "None",
+      "happy": "Happy",
+      "excited": "Excited",
+      "surprised": "Surprised",
+      "anxious": "Anxious",
+      "curious": "Curious",
+      "angry": "Angry",
+      "sad": "Sad",
+      "cool": "Cool",
+      "love": "Love",
+      "playful": "Playful"
+    },
+    "actions": {
+      "generate": "Generate Thumbnails",
+      "generating": "Generating...",
+      "downloadAllThumbnails": "Download All Thumbnails",
+      "downloadAll": "Download All",
+      "regenerate": "Regenerate New Set",
+      "viewHistory": "View History",
+      "download": "Download",
+      "edit": "Edit"
+    },
+    "status": {
+      "generating": "Generating thumbnails..."
+    },
+    "results": {
+      "title": "Generated Thumbnails",
+      "generatedOn": "Generated on",
+      "expiresIn": "will expire in",
+      "days": "day(s)",
+      "emptyTitle": "No thumbnails yet",
+      "emptyDescription": "Upload media and click \"Generate Thumbnails\" to see results here"
+    },
+    "history": {
+      "title": "Generation History",
+      "empty": "No history yet",
+      "thumbnailAlt": "History thumbnail preview"
+    },
+    "messages": {
+      "fileTooLarge": "File size exceeds 100MB limit",
+      "frameSelected": "Frame selected successfully!",
+      "frameReselect": "You can reselect a frame",
+      "completeFields": "Please complete all required fields",
+      "generated": "Thumbnails generated successfully!",
+      "historyLoaded": "Loaded from history",
+      "downloadingAll": "Downloading all thumbnails...",
+      "editPrefix": "Edit functionality for thumbnail",
+      "editSuffix": "- Coming soon!"
     }
   }
 }
