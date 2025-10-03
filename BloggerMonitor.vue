@@ -1,33 +1,12 @@
 <template>
-  <div class="blogger-monitor-page">
-    <!-- 侧边栏 -->
-    <aside class="sidebar">
-      <div class="logo">MediaEnhance Pro</div>
-      <nav>
-        <ul class="nav-menu">
-          <li 
-            v-for="(item, index) in menuItems" 
-            :key="index"
-            :class="['nav-item', { active: item.active }]"
-            @click="handleMenuClick(index)"
-          >
-            <span>{{ item.icon }}</span> {{ item.label }}
-          </li>
-        </ul>
-      </nav>
-      <div class="user-section">
-        <div class="nav-item user-account">
-          <span>👤</span>
-          <div class="user-info">
-            <div class="user-name">User Account</div>
-            <div class="user-plan">Pro Plan</div>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- 主内容区域 -->
-    <main class="main-container">
+  <DashboardLayout
+    :locale="locale"
+    :menu-items="menuItems"
+    page-class="blogger-monitor-page"
+    content-class="blogger-monitor-content"
+    :active-key="activeMenu"
+    @navigate="handleMenuClick"
+  >
       <div class="content-wrapper">
         <!-- 标题区域 -->
         <div class="header">
@@ -191,26 +170,26 @@
           </transition>
         </div>
       </div>
-    </main>
-  </div>
+  </DashboardLayout>
 </template>
 
 <script>
+import DashboardLayout from './components/DashboardLayout.vue'
+import { createDashboardMenu } from './dashboardConfig'
+
 export default {
   name: 'BloggerMonitor',
-  
+
+  components: {
+    DashboardLayout
+  },
+
   data() {
     return {
+      locale: 'en-US',
       // 菜单项
-      menuItems: [
-        { icon: '📊', label: 'Dashboard', active: false },
-        { icon: '✨', label: 'Video/Image Enhancer', active: false },
-        { icon: '🧹', label: 'Watermark Remover', active: false },
-        { icon: '📡', label: 'Blogger Monitor', active: true },
-        { icon: '🎨', label: 'Style Transfer', active: false },
-        { icon: '📁', label: 'My Projects', active: false },
-        { icon: '⚙️', label: 'Settings', active: false }
-      ],
+      menuItems: createDashboardMenu('bloggerMonitor'),
+      activeMenu: 'bloggerMonitor',
       
       // 统计数据
       statsData: [
@@ -382,10 +361,9 @@ export default {
   
   methods: {
     // 处理菜单点击
-    handleMenuClick(index) {
-      this.menuItems.forEach((item, i) => {
-        item.active = i === index
-      })
+    handleMenuClick(key) {
+      this.activeMenu = key
+      this.menuItems = createDashboardMenu(key)
     },
     
     // 添加博主

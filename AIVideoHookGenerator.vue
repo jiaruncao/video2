@@ -1,30 +1,12 @@
 <template>
-  <div class="app-container">
-    <!-- 侧边栏 -->
-    <aside class="sidebar">
-      <div class="logo">{{ translate('app.brand') }}</div>
-      <nav>
-        <ul class="nav-menu">
-          <li class="nav-item" v-for="(item, index) in navItems" :key="index"
-              :class="{ active: item.active }"
-              @click="handleNavClick(index)">
-            <span v-html="item.icon"></span> {{ translate(item.labelKey) }}
-          </li>
-        </ul>
-      </nav>
-      <div class="user-section">
-        <div class="nav-item user-item">
-          <span>👤</span>
-          <div style="flex: 1;">
-            <div class="user-name">{{ translate('app.user.account') }}</div>
-            <div class="user-plan">{{ translate('app.user.proPlan') }}</div>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- 主内容区域 -->
-    <main class="main-container">
+  <DashboardLayout
+    :locale="locale"
+    :menu-items="menuItems"
+    page-class="ai-video-hook-generator-page"
+    content-class="ai-video-hook-generator-content"
+    :active-key="activeMenu"
+    @navigate="handleMenuClick"
+  >
       <div class="content-wrapper">
         <div class="language-switcher">
           <label for="hook-language">{{ translate('language.label') }}</label>
@@ -394,29 +376,26 @@
         </div>
       </div>
     </el-dialog>
-  </div>
+  </DashboardLayout>
 </template>
 
 <script>
 import { supportedLocales, translate as translateText } from './i18n'
+import DashboardLayout from './components/DashboardLayout.vue'
+import { createDashboardMenu } from './dashboardConfig'
 
 export default {
   name: 'AIVideoHookGenerator',
+  components: {
+    DashboardLayout
+  },
   data() {
     return {
       availableLocales: supportedLocales,
       locale: 'en-US',
       // 导航菜单数据
-      navItems: [
-        { icon: '📊', labelKey: 'menu.dashboard', active: false },
-        { icon: '✨', labelKey: 'menu.videoEnhancer', active: false },
-        { icon: '🧹', labelKey: 'menu.watermarkRemover', active: false },
-        { icon: '🎯', labelKey: 'menu.videoHook', active: true },
-        { icon: '🎨', labelKey: 'menu.styleTransfer', active: false },
-        { icon: '🔊', labelKey: 'menu.audioEnhancement', active: false },
-        { icon: '📁', labelKey: 'menu.projects', active: false },
-        { icon: '⚙️', labelKey: 'menu.settings', active: false }
-      ],
+      menuItems: createDashboardMenu('videoHook'),
+      activeMenu: 'videoHook',
 
       // Tab状态
       currentTab: 'generate',
@@ -591,10 +570,9 @@ export default {
     },
 
     // 导航点击处理
-    handleNavClick(index) {
-      this.navItems.forEach((item, i) => {
-        item.active = i === index
-      })
+    handleMenuClick(key) {
+      this.activeMenu = key
+      this.menuItems = createDashboardMenu(key)
     },
 
     // Tab切换

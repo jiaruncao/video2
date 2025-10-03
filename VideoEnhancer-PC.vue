@@ -1,32 +1,12 @@
 <template>
-  <div class="video-enhancer-page">
-    <!-- 侧边栏 -->
-    <aside class="sidebar">
-      <div class="logo">{{ translate('app.brand') }}</div>
-      <nav class="nav-menu">
-        <div
-          v-for="(item, index) in menuItems"
-          :key="index"
-          :class="['nav-item', { active: item.active }]"
-          @click="handleMenuClick(index)"
-        >
-          <span class="nav-icon">{{ item.icon }}</span>
-          <span>{{ translate(item.labelKey) }}</span>
-        </div>
-      </nav>
-      <div class="user-info">
-        <div class="nav-item user-account">
-          <span class="nav-icon">👤</span>
-          <div class="user-details">
-            <div class="user-name">{{ translate('app.user.account') }}</div>
-            <div class="user-plan">{{ translate('app.user.plan') }}</div>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- 主内容区域 -->
-    <main class="main-container">
+  <DashboardLayout
+    :locale="locale"
+    :menu-items="menuItems"
+    page-class="video-enhancer-page"
+    content-class="video-enhancer-content"
+    :active-key="activeMenu"
+    @navigate="handleMenuClick"
+  >
       <div class="content-wrapper">
         <!-- 标题区域 -->
         <div class="header">
@@ -338,28 +318,26 @@
           </div>
         </div>
       </div>
-    </main>
-  </div>
+  </DashboardLayout>
 </template>
 
 <script>
 import { supportedLocales, translate as translateText } from './i18n'
+import DashboardLayout from './components/DashboardLayout.vue'
+import { createDashboardMenu } from './dashboardConfig'
 
 export default {
   name: 'VideoEnhancer',
+  components: {
+    DashboardLayout
+  },
   data() {
     return {
       availableLocales: supportedLocales,
       locale: 'en-US',
       // 菜单项
-      menuItems: [
-        { icon: '📊', labelKey: 'menu.dashboard', active: false },
-        { icon: '✨', labelKey: 'menu.videoEnhancer', active: true },
-        { icon: '🎨', labelKey: 'menu.styleTransfer', active: false },
-        { icon: '🔊', labelKey: 'menu.audioEnhancement', active: false },
-        { icon: '📁', labelKey: 'menu.projects', active: false },
-        { icon: '⚙️', labelKey: 'menu.settings', active: false }
-      ],
+      menuItems: createDashboardMenu('videoEnhancer'),
+      activeMenu: 'videoEnhancer',
 
       // 示例文件
       samples: [
@@ -454,10 +432,9 @@ export default {
     },
     
     // 菜单点击
-    handleMenuClick(index) {
-      this.menuItems.forEach((item, i) => {
-        item.active = i === index
-      })
+    handleMenuClick(key) {
+      this.activeMenu = key
+      this.menuItems = createDashboardMenu(key)
     },
     
     // 触发文件选择

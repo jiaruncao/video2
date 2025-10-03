@@ -1,34 +1,12 @@
 <template>
-  <div class="my-account-page">
-    <!-- 侧边栏 -->
-    <aside class="sidebar">
-      <div class="logo">MediaEnhance Pro</div>
-      <nav>
-        <ul class="nav-menu">
-          <li 
-            v-for="(item, index) in menuItems" 
-            :key="index"
-            :class="['nav-item', { active: item.active }]"
-            @click="handleMenuClick(index)"
-          >
-            <span>{{ item.icon }}</span>
-            <span>{{ item.label }}</span>
-          </li>
-        </ul>
-      </nav>
-      <div class="user-info-section">
-        <div class="nav-item active user-account-nav">
-          <span>👤</span>
-          <div class="user-nav-info">
-            <div class="user-nav-title">My Account</div>
-            <div class="user-nav-plan">{{ currentPlan }}</div>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- 主内容区域 -->
-    <main class="main-container">
+  <DashboardLayout
+    :locale="locale"
+    :menu-items="menuItems"
+    page-class="my-account-page"
+    content-class="my-account-content"
+    :active-key="activeMenu"
+    @navigate="handleMenuClick"
+  >
       <!-- 右上角用户头像 -->
       <div class="top-user-avatar" @click="scrollToTop">{{ userInitials }}</div>
 
@@ -290,15 +268,21 @@
           </div>
         </el-card>
       </div>
-    </main>
-  </div>
+  </DashboardLayout>
 </template>
 
 <script>
+import DashboardLayout from './components/DashboardLayout.vue'
+import { createDashboardMenu } from './dashboardConfig'
+
 export default {
   name: 'MyAccount',
+  components: {
+    DashboardLayout
+  },
   data() {
     return {
+      locale: 'en-US',
       // 用户数据
       userData: {
         name: 'John Doe',
@@ -320,15 +304,8 @@ export default {
       enterpriseExpiry: '',
       
       // 菜单项
-      menuItems: [
-        { icon: '📊', label: 'Dashboard', active: false },
-        { icon: '✨', label: 'Video/Image Enhancer', active: false },
-        { icon: '🧹', label: 'Watermark Remover', active: false },
-        { icon: '🎨', label: 'Style Transfer', active: false },
-        { icon: '🔊', label: 'Audio Enhancement', active: false },
-        { icon: '📁', label: 'My Projects', active: false },
-        { icon: '⚙️', label: 'Settings', active: false }
-      ],
+      menuItems: createDashboardMenu('settings'),
+      activeMenu: 'settings',
       
       // 使用量数据
       usageData: [
@@ -413,13 +390,11 @@ export default {
     },
     
     // 处理菜单点击
-    handleMenuClick(index) {
-      this.menuItems.forEach((item, i) => {
-        item.active = false
-      })
-      this.menuItems[index].active = true
+    handleMenuClick(key) {
+      this.activeMenu = key
+      this.menuItems = createDashboardMenu(key)
       // 这里可以添加路由跳转
-      // this.$router.push(this.menuItems[index].route)
+      // this.$router.push(this.menuItems.find(item => item.key === key)?.route)
     },
     
     // 处理计费周期切换
