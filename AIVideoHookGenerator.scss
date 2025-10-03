@@ -111,6 +111,23 @@
   .content-wrapper {
     max-width: 1400px;
     margin: 0 auto;
+
+    .language-switcher {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+
+      label {
+        font-size: 14px;
+        color: #475569;
+      }
+
+      .el-select {
+        width: 140px;
+      }
+    }
   }
 }
 
