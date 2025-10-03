@@ -520,20 +520,21 @@ export default {
       // Add content elements
       ctx.fillStyle = '#333333'
       ctx.font = '24px Arial'
-      ctx.fillText('Sample Image Content', 100, 100)
-      
+      ctx.textAlign = 'left'
+      ctx.fillText(this.translate('watermark.canvas.baseContent'), 100, 100)
+
       // Add watermark/text samples
       ctx.fillStyle = 'rgba(0,0,0,0.3)'
       ctx.font = 'bold 48px Arial'
       ctx.textAlign = 'center'
-      
+
       if (type === 'watermark') {
         // Add diagonal watermark
         ctx.save()
         ctx.translate(640, 360)
         ctx.rotate(-30 * Math.PI / 180)
         ctx.fillStyle = 'rgba(128, 128, 128, 0.4)'
-        ctx.fillText('WATERMARK', 0, 0)
+        ctx.fillText(this.translate('watermark.canvas.watermarkLabel'), 0, 0)
         ctx.restore()
       } else if (type === 'logo') {
         // Add logo style
@@ -541,14 +542,14 @@ export default {
         ctx.fillRect(1080, 50, 150, 80)
         ctx.fillStyle = 'white'
         ctx.font = 'bold 36px Arial'
-        ctx.fillText('LOGO', 1155, 100)
+        ctx.fillText(this.translate('watermark.canvas.logoLabel'), 1155, 100)
       } else if (type === 'text') {
         // Add text overlay
         ctx.fillStyle = 'rgba(255, 255, 255, 0.9)'
         ctx.fillRect(0, 650, 1280, 70)
         ctx.fillStyle = '#333'
         ctx.font = '32px Arial'
-        ctx.fillText('www.example.com - Sample Text Overlay', 640, 690)
+        ctx.fillText(this.translate('watermark.canvas.textOverlay'), 640, 690)
       } else if (type === 'object') {
         // Add object
         ctx.fillStyle = 'rgba(200, 50, 50, 0.8)'
@@ -557,7 +558,7 @@ export default {
         ctx.fill()
         ctx.fillStyle = 'white'
         ctx.font = '24px Arial'
-        ctx.fillText('Object', 1100, 610)
+        ctx.fillText(this.translate('watermark.canvas.objectLabel'), 1100, 610)
       }
       
       return canvas.toDataURL()

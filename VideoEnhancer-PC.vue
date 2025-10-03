@@ -630,7 +630,12 @@ export default {
       ctx.fillStyle = '#333'
       ctx.font = '32px Arial'
       ctx.textAlign = 'center'
-      ctx.fillText(`${type.charAt(0).toUpperCase() + type.slice(1)} Sample`, 360, 640)
+
+      const sampleConfig = this.samples.find(sample => sample.type === type)
+      const sampleLabelKey = sampleConfig ? sampleConfig.titleKey : 'videoEnhancer.samples.title'
+      const sampleLabel = this.translate(sampleLabelKey)
+
+      ctx.fillText(sampleLabel, 360, 640)
       
       // 转换为Blob
       canvas.toBlob((blob) => {

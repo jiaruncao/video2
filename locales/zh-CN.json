@@ -157,6 +157,13 @@
       "processHint": "点击开始去除",
       "reprocessHint": "点击重新处理以应用新模式"
     },
+    "canvas": {
+      "baseContent": "示例图像内容",
+      "watermarkLabel": "水印",
+      "logoLabel": "标志",
+      "textOverlay": "www.example.com - 示例文字遮罩",
+      "objectLabel": "物体"
+    },
     "messages": {
       "fileTooLarge": "文件大小超过 100MB 限制",
       "uploadRequired": "请先上传文件",
@@ -795,6 +802,365 @@
       "processingVideoPrefix": "正在处理，应用风格：",
       "processingVideoWith": "特效：",
       "download": "正在下载生成的视频钩子..."
+    }
+  },
+  "bloggerMonitor": {
+    "header": {
+      "title": "博主监控与视频下载器",
+      "subtitle": "跨平台追踪你喜爱的内容创作者并下载无水印视频，实时获取新内容发布通知。"
+    },
+    "stats": {
+      "bloggers": "已监控博主数",
+      "updates": "今日新动态",
+      "platforms": "活跃平台数"
+    },
+    "platforms": {
+      "tiktok": {
+        "name": "TikTok",
+        "placeholder": "输入@用户名或主页链接",
+        "hint": "示例：@charlidamelio 或 https://www.tiktok.com/@username"
+      },
+      "douyin": {
+        "name": "抖音",
+        "placeholder": "输入用户名或主页链接",
+        "hint": "示例：美食达人 或抖音个人页链接"
+      },
+      "instagram": {
+        "name": "Instagram",
+        "placeholder": "输入@用户名或主页链接",
+        "hint": "示例：@cristiano 或 https://www.instagram.com/username",
+        "reels": "Instagram Reels"
+      },
+      "youtube": {
+        "name": "YouTube",
+        "placeholder": "输入@频道或频道链接",
+        "hint": "示例：@MrBeast 或 https://www.youtube.com/@channel",
+        "shorts": "YouTube Shorts"
+      },
+      "twitter": {
+        "name": "Twitter/X"
+      },
+      "snapchat": {
+        "name": "Snapchat"
+      }
+    },
+    "actions": {
+      "add": "添加",
+      "remove": "移除"
+    },
+    "status": {
+      "active": "活跃",
+      "checking": "检测中"
+    },
+    "filters": {
+      "all": "全部"
+    },
+    "logs": {
+      "title": "最新动态日志",
+      "messages": {
+        "postedVideo": "发布了新视频：",
+        "uploadedVideo": "上传了：",
+        "sharedReel": "分享了新短片：",
+        "wentLive": "正在直播：",
+        "premieredVideo": "首播：",
+        "addedToMonitor": "已加入监控列表"
+      },
+      "links": {
+        "viewVideo": "查看视频",
+        "viewReel": "查看短片",
+        "watchRecording": "观看回放",
+        "checkProfile": "查看主页"
+      },
+      "relative": {
+        "yesterday": "昨天"
+      },
+      "generic": {
+        "newContent": "最新内容",
+        "liveSession": "直播活动",
+        "newReel": "最新短片",
+        "newUpload": "最新上传"
+      }
+    },
+    "download": {
+      "title": "视频下载器",
+      "subtitle": "从你喜欢的平台下载无水印视频",
+      "placeholder": "在此粘贴视频链接（TikTok、抖音、Instagram、YouTube 等）",
+      "action": "下载",
+      "processing": "处理中...",
+      "inProgress": "视频处理中...请稍候",
+      "success": "已成功下载无水印视频！"
+    },
+    "messages": {
+      "enterBlogger": "请输入博主 ID 或链接",
+      "added": "已成功添加博主！",
+      "removed": "已移除博主",
+      "openingContent": "正在打开",
+      "enterUrl": "请输入视频链接",
+      "invalidUrl": "请输入有效链接"
+    },
+    "notifications": {
+      "newUpdate": "最新通知",
+      "messages": {
+        "postedVideo": "发布了新视频",
+        "wentLive": "开始直播",
+        "sharedReel": "分享了新短片",
+        "uploadedVideo": "上传了新内容"
+      }
+    }
+  },
+  "myAccount": {
+    "header": {
+      "title": "我的账户",
+      "subtitle": "管理个人资料、查看使用统计并升级计划，释放无限创作潜能。"
+    },
+    "overview": {
+      "title": "账户概览",
+      "viewSettings": "查看账户设置"
+    },
+    "settings": {
+      "fullName": "姓名",
+      "email": "邮箱地址",
+      "password": "密码",
+      "accountCreated": "创建时间"
+    },
+    "actions": {
+      "edit": "编辑",
+      "changeEmail": "更改邮箱",
+      "changePassword": "修改密码",
+      "deleteAccount": "删除账户",
+      "confirm": "确定",
+      "cancel": "取消",
+      "currentPlan": "当前套餐",
+      "downgrade": "降级",
+      "upgradePro": "升级至 Pro",
+      "upgradeEnterprise": "升级至企业版",
+      "cancelSubscription": "取消订阅",
+      "confirmCancel": "确认取消",
+      "keepSubscription": "保留订阅",
+      "save": "保存",
+      "sendVerification": "发送验证邮件",
+      "next": "下一步",
+      "delete": "删除"
+    },
+    "usage": {
+      "title": "每日使用限制",
+      "items": {
+        "video": "视频增强",
+        "watermark": "水印去除",
+        "style": "风格迁移",
+        "audio": "音频增强",
+        "storage": "云存储"
+      },
+      "units": {
+        "usedToday": "次/今日",
+        "gbUsed": "GB 已用"
+      },
+      "notice": "每日配额将在 UTC 时间凌晨 0 点重置 • 升级 Pro 即享无限使用"
+    },
+    "plans": {
+      "title": "订阅计划",
+      "labels": {
+        "free": "免费计划",
+        "pro": "Pro 计划",
+        "enterprise": "企业计划"
+      },
+      "priceUnit": {
+        "month": "/月"
+      },
+      "free": {
+        "name": "免费版",
+        "description": "适合个人项目与测试",
+        "expiry": "永久有效",
+        "features": {
+          "videoEnhancements": "每天 5 次视频增强",
+          "watermark": "每天 10 次水印去除",
+          "style": "每天 3 次风格迁移",
+          "storage": "5 GB 云存储",
+          "speed": "标准处理速度"
+        }
+      },
+      "pro": {
+        "badge": "推荐",
+        "name": "Pro 版",
+        "description": "面向专业用户与内容创作者",
+        "features": {
+          "video": "无限次视频增强",
+          "watermark": "无限次水印去除",
+          "style": "无限次风格迁移",
+          "storage": "100 GB 云存储",
+          "speed": "优先处理速度",
+          "resolution": "支持 4K 分辨率"
+        }
+      },
+      "enterprise": {
+        "name": "企业版",
+        "description": "适合团队与企业",
+        "features": {
+          "everything": "包含 Pro 版全部功能",
+          "team": "不限团队成员数量",
+          "storage": "1 TB 云存储",
+          "api": "开放 API 接口",
+          "support": "优先技术支持",
+          "integrations": "自定义系统集成"
+        }
+      },
+      "expires": "到期：",
+      "cancelNotice": "您的订阅将在当前计费周期结束前保持有效"
+    },
+    "billing": {
+      "monthly": "按月",
+      "yearly": "按年",
+      "save": "节省 20%",
+      "changedTo": "计费方式已切换为："
+    },
+    "activity": {
+      "title": "最近活动",
+      "items": {
+        "videoEnhanced": "视频增强",
+        "watermarkRemoved": "水印去除",
+        "styleTransfer": "风格迁移",
+        "audioEnhanced": "音频增强"
+      },
+      "times": {
+        "twoHoursAgo": "2 小时前",
+        "fourHoursAgo": "4 小时前",
+        "yesterdayAfternoon": "昨天 15:45",
+        "yesterdayMorning": "昨天 10:30",
+        "twoDaysAgo": "2 天前"
+      },
+      "status": {
+        "completed": "已完成"
+      },
+      "download": "下载"
+    },
+    "dialogs": {
+      "upgrade": {
+        "priceLabel": "价格：",
+        "billingLabel": "计费：",
+        "cancelDetail": "可随时取消。",
+        "titlePrefix": "升级至",
+        "titleSuffix": "套餐？"
+      },
+      "cancel": {
+        "message": "您的订阅将在当前计费周期结束前持续有效。",
+        "title": "确定要取消订阅吗？"
+      },
+      "editProfile": {
+        "message": "请输入新的姓名：",
+        "title": "编辑资料"
+      },
+      "changeEmail": {
+        "message": "请输入新的邮箱地址：",
+        "title": "更改邮箱"
+      },
+      "changePassword": {
+        "current": "请输入当前密码：",
+        "title": "修改密码",
+        "new": "请输入新的密码：",
+        "newTitle": "新密码"
+      },
+      "deleteAccount": {
+        "message": "此操作不可撤销，将永久删除：<br>• 所有项目<br>• 处理历史<br>• 存储文件<br>• 账户设置",
+        "title": "确定要删除账户吗？",
+        "confirmPrompt": "请输入 \"DELETE\" 以确认删除：",
+        "confirmTitle": "确认删除"
+      }
+    },
+    "messages": {
+      "redirectingPayment": "正在跳转至安全支付页面...",
+      "upgradeSuccess": "套餐升级成功！",
+      "subscriptionCancelled": "您的订阅已取消。",
+      "profileUpdated": "个人资料更新成功！",
+      "verificationSent": "验证邮件已发送至",
+      "passwordChanged": "密码修改成功！",
+      "deletionScheduled": "已提交账户删除申请，30 天后将永久删除。",
+      "downloading": "正在下载："
+    },
+    "validation": {
+      "nameMin": "姓名至少需要 2 个字符",
+      "email": "请输入有效的邮箱地址",
+      "password": "密码长度至少为 8 个字符",
+      "deleteConfirm": "请输入 DELETE 以确认"
+    }
+  },
+  "thumbnailGenerator": {
+    "header": {
+      "title": "缩略图生成器",
+      "subtitle": "使用 AI 文案、完美比例和情绪表达，为视频或图片快速生成吸睛缩略图。"
+    },
+    "upload": {
+      "title": "上传素材",
+      "dropTitle": "将图片或视频拖拽到此处",
+      "dropSubtitle": "或点击选择文件",
+      "chooseFiles": "选择文件"
+    },
+    "frameSelector": {
+      "title": "选择用于缩略图的视频帧",
+      "useFrame": "使用此帧生成缩略图",
+      "reselectFrame": "重新选择帧",
+      "confirmed": "已成功锁定缩略图帧"
+    },
+    "settings": {
+      "title": "缩略图设置",
+      "ratioLabel": "选择缩略图比例",
+      "ratios": {
+        "youtube": "YouTube",
+        "shorts": "Shorts",
+        "instagram": "Instagram"
+      },
+      "textLabel": "输入缩略图文案",
+      "textPlaceholder": "描述你的缩略图标题",
+      "emotionLabel": "情绪"
+    },
+    "emotions": {
+      "none": "无",
+      "happy": "开心",
+      "excited": "兴奋",
+      "surprised": "惊喜",
+      "anxious": "紧张",
+      "curious": "好奇",
+      "angry": "愤怒",
+      "sad": "难过",
+      "cool": "酷炫",
+      "love": "喜爱",
+      "playful": "俏皮"
+    },
+    "actions": {
+      "generate": "生成缩略图",
+      "generating": "生成中...",
+      "downloadAllThumbnails": "下载全部缩略图",
+      "downloadAll": "全部下载",
+      "regenerate": "重新生成一组",
+      "viewHistory": "查看历史记录",
+      "download": "下载",
+      "edit": "编辑"
+    },
+    "status": {
+      "generating": "正在生成缩略图..."
+    },
+    "results": {
+      "title": "生成结果",
+      "generatedOn": "生成时间",
+      "expiresIn": "将在",
+      "days": "天后失效",
+      "emptyTitle": "尚未生成缩略图",
+      "emptyDescription": "上传素材并点击“生成缩略图”即可在此查看结果"
+    },
+    "history": {
+      "title": "生成历史",
+      "empty": "暂无历史记录",
+      "thumbnailAlt": "历史缩略图预览"
+    },
+    "messages": {
+      "fileTooLarge": "文件大小超过 100MB 限制",
+      "frameSelected": "已成功选取缩略图帧！",
+      "frameReselect": "可以重新选择帧",
+      "completeFields": "请先完成必要信息",
+      "generated": "缩略图生成成功！",
+      "historyLoaded": "已从历史记录中加载",
+      "downloadingAll": "正在下载全部缩略图...",
+      "editPrefix": "缩略图",
+      "editSuffix": "编辑功能即将上线！"
     }
   }
 }
