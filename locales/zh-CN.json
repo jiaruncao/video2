@@ -911,82 +911,87 @@
   "myAccount": {
     "header": {
       "title": "我的账户",
-      "subtitle": "管理个人资料、查看使用统计并升级计划，释放无限创作潜能。"
+      "subtitle": "管理个人资料，监控使用统计，并升级套餐以解锁无限创作可能。"
     },
-    "overview": {
-      "title": "账户概览",
-      "viewSettings": "查看账户设置"
+    "sections": {
+      "accountOverview": "账户概览",
+      "dailyUsage": "每日使用限制",
+      "subscriptionPlans": "订阅套餐",
+      "recentActivity": "最近活动"
     },
-    "settings": {
+    "account": {
+      "viewSettings": "查看账户设置",
       "fullName": "姓名",
-      "email": "邮箱地址",
-      "password": "密码",
-      "accountCreated": "创建时间"
-    },
-    "actions": {
       "edit": "编辑",
+      "email": "邮箱地址",
       "changeEmail": "更改邮箱",
-      "changePassword": "修改密码",
-      "deleteAccount": "删除账户",
-      "confirm": "确定",
-      "cancel": "取消",
-      "currentPlan": "当前套餐",
-      "downgrade": "降级",
-      "upgradePro": "升级至 Pro",
-      "upgradeEnterprise": "升级至企业版",
-      "cancelSubscription": "取消订阅",
-      "confirmCancel": "确认取消",
-      "keepSubscription": "保留订阅",
-      "save": "保存",
-      "sendVerification": "发送验证邮件",
-      "next": "下一步",
-      "delete": "删除"
+      "password": "密码",
+      "changePassword": "更改密码",
+      "accountCreated": "账户创建时间",
+      "deleteAccount": "删除账户"
     },
     "usage": {
-      "title": "每日使用限制",
+      "notice": "每日限额将在世界标准时间凌晨0点重置 • 升级至专业版即可无限使用",
       "items": {
-        "video": "视频增强",
-        "watermark": "水印去除",
-        "style": "风格迁移",
-        "audio": "音频增强",
-        "storage": "云存储"
-      },
-      "units": {
-        "usedToday": "次/今日",
-        "gbUsed": "GB 已用"
-      },
-      "notice": "每日配额将在 UTC 时间凌晨 0 点重置 • 升级 Pro 即享无限使用"
+        "video": {
+          "title": "视频增强",
+          "unit": "今日已用"
+        },
+        "watermark": {
+          "title": "水印移除",
+          "unit": "今日已用"
+        },
+        "style": {
+          "title": "风格迁移",
+          "unit": "今日已用"
+        },
+        "audio": {
+          "title": "音频增强",
+          "unit": "今日已用"
+        },
+        "storage": {
+          "title": "云存储",
+          "unit": "已用 GB"
+        }
+      }
+    },
+    "billing": {
+      "monthly": "按月",
+      "yearly": "按年",
+      "save": "立省20%"
     },
     "plans": {
-      "title": "订阅计划",
-      "labels": {
-        "free": "免费计划",
-        "pro": "Pro 计划",
-        "enterprise": "企业计划"
-      },
-      "priceUnit": {
-        "month": "/月"
+      "pricePerMonth": "{price} /月",
+      "originalPrice": "{price}",
+      "expires": "到期时间：{date}",
+      "cancel": "取消订阅",
+      "cancelNotice": "您的订阅将在当前计费周期结束前保持有效",
+      "buttons": {
+        "current": "当前套餐",
+        "downgrade": "降级",
+        "upgradePro": "升级至专业版",
+        "upgradeEnterprise": "升级至企业版"
       },
       "free": {
         "name": "免费版",
-        "description": "适合个人项目与测试",
+        "desc": "适合个人项目与测试",
         "expiry": "永久有效",
         "features": {
-          "videoEnhancements": "每天 5 次视频增强",
-          "watermark": "每天 10 次水印去除",
-          "style": "每天 3 次风格迁移",
+          "enhancements": "每天可增强 5 个视频",
+          "watermark": "每天可移除 10 个水印",
+          "style": "每天可风格迁移 3 次",
           "storage": "5 GB 云存储",
           "speed": "标准处理速度"
         }
       },
       "pro": {
         "badge": "推荐",
-        "name": "Pro 版",
-        "description": "面向专业用户与内容创作者",
+        "name": "专业版",
+        "desc": "面向专业创作者与内容团队",
         "features": {
-          "video": "无限次视频增强",
-          "watermark": "无限次水印去除",
-          "style": "无限次风格迁移",
+          "enhancements": "视频增强不限量",
+          "watermark": "水印移除不限量",
+          "style": "风格迁移不限量",
           "storage": "100 GB 云存储",
           "speed": "优先处理速度",
           "resolution": "支持 4K 分辨率"
@@ -994,93 +999,91 @@
       },
       "enterprise": {
         "name": "企业版",
-        "description": "适合团队与企业",
+        "desc": "面向团队及企业",
         "features": {
-          "everything": "包含 Pro 版全部功能",
-          "team": "不限团队成员数量",
+          "everything": "包含专业版全部功能",
+          "team": "不限团队成员数",
           "storage": "1 TB 云存储",
-          "api": "开放 API 接口",
-          "support": "优先技术支持",
+          "api": "API 接入",
+          "support": "优先客服支持",
           "integrations": "自定义系统集成"
         }
-      },
-      "expires": "到期：",
-      "cancelNotice": "您的订阅将在当前计费周期结束前保持有效"
+      }
     },
-    "billing": {
-      "monthly": "按月",
-      "yearly": "按年",
-      "save": "节省 20%",
-      "changedTo": "计费方式已切换为："
-    },
-    "activity": {
-      "title": "最近活动",
-      "items": {
-        "videoEnhanced": "视频增强",
-        "watermarkRemoved": "水印去除",
-        "styleTransfer": "风格迁移",
-        "audioEnhanced": "音频增强"
+    "activities": {
+      "download": "下载",
+      "titles": {
+        "videoEnhanced": "视频增强完成 - {filename}",
+        "watermarkRemoved": "水印移除完成 - {filename}",
+        "styleTransfer": "风格迁移完成 - {filename}",
+        "audioEnhanced": "音频增强完成 - {filename}"
       },
       "times": {
-        "twoHoursAgo": "2 小时前",
-        "fourHoursAgo": "4 小时前",
-        "yesterdayAfternoon": "昨天 15:45",
-        "yesterdayMorning": "昨天 10:30",
-        "twoDaysAgo": "2 天前"
+        "hoursAgo": "{count} 小时前",
+        "yesterdayAt": "昨日 {time}",
+        "daysAgo": "{count} 天前"
       },
       "status": {
         "completed": "已完成"
-      },
-      "download": "下载"
+      }
     },
     "dialogs": {
       "upgrade": {
-        "priceLabel": "价格：",
-        "billingLabel": "计费：",
-        "cancelDetail": "可随时取消。",
-        "titlePrefix": "升级至",
-        "titleSuffix": "套餐？"
+        "message": "价格：{price}<br>计费方式：{billing}<br>可随时取消。",
+        "title": "升级至 {plan} 套餐？",
+        "confirm": "确认",
+        "cancel": "取消"
       },
-      "cancel": {
-        "message": "您的订阅将在当前计费周期结束前持续有效。",
-        "title": "确定要取消订阅吗？"
+      "cancelSubscription": {
+        "message": "当前计费周期结束前，您的订阅仍然有效。",
+        "title": "确定要取消订阅吗？",
+        "confirm": "确认取消",
+        "cancel": "保留订阅"
       },
       "editProfile": {
-        "message": "请输入新的姓名：",
-        "title": "编辑资料"
+        "prompt": "请输入新的姓名：",
+        "title": "编辑资料",
+        "confirm": "保存",
+        "cancel": "取消",
+        "validation": "姓名至少需要 2 个字符"
       },
       "changeEmail": {
-        "message": "请输入新的邮箱地址：",
-        "title": "更改邮箱"
+        "prompt": "请输入新的邮箱地址：",
+        "title": "更改邮箱",
+        "confirm": "发送验证",
+        "cancel": "取消",
+        "validation": "请输入有效的邮箱地址"
       },
       "changePassword": {
-        "current": "请输入当前密码：",
-        "title": "修改密码",
-        "new": "请输入新的密码：",
-        "newTitle": "新密码"
+        "currentPrompt": "请输入当前密码：",
+        "title": "更改密码",
+        "next": "下一步",
+        "cancel": "取消",
+        "newPrompt": "请输入新密码：",
+        "newTitle": "新密码",
+        "confirm": "确认更改",
+        "validation": "密码至少需要 8 个字符"
       },
       "deleteAccount": {
-        "message": "此操作不可撤销，将永久删除：<br>• 所有项目<br>• 处理历史<br>• 存储文件<br>• 账户设置",
+        "message": "该操作无法撤销，将永久删除：<br>• 所有项目<br>• 处理记录<br>• 存储文件<br>• 账户设置",
         "title": "确定要删除账户吗？",
-        "confirmPrompt": "请输入 \"DELETE\" 以确认删除：",
-        "confirmTitle": "确认删除"
+        "confirm": "删除账户",
+        "cancel": "取消",
+        "prompt": "请输入 \"DELETE\" 以确认删除：",
+        "promptTitle": "删除确认",
+        "promptConfirm": "删除",
+        "promptValidation": "请输入 DELETE 以确认"
       }
     },
     "messages": {
-      "redirectingPayment": "正在跳转至安全支付页面...",
-      "upgradeSuccess": "套餐升级成功！",
+      "redirecting": "正在跳转至安全支付页面...",
+      "upgradeSuccess": "已成功升级至 {plan} 套餐！",
       "subscriptionCancelled": "您的订阅已取消。",
-      "profileUpdated": "个人资料更新成功！",
-      "verificationSent": "验证邮件已发送至",
+      "profileUpdated": "资料更新成功！",
+      "emailVerification": "验证邮件已发送至 {email}",
       "passwordChanged": "密码修改成功！",
-      "deletionScheduled": "已提交账户删除申请，30 天后将永久删除。",
-      "downloading": "正在下载："
-    },
-    "validation": {
-      "nameMin": "姓名至少需要 2 个字符",
-      "email": "请输入有效的邮箱地址",
-      "password": "密码长度至少为 8 个字符",
-      "deleteConfirm": "请输入 DELETE 以确认"
+      "accountDeletionInitiated": "已提交账户删除申请，您的账户将在 30 天后被永久删除。",
+      "download": "正在下载：{filename}"
     }
   },
   "thumbnailGenerator": {

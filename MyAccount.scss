@@ -140,6 +140,36 @@
   .content-wrapper {
     max-width: 1400px;
     margin: 0 auto;
+
+    .language-switcher {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+
+      .language-label {
+        font-size: 14px;
+        color: #475569;
+      }
+
+      .language-select {
+        width: 140px;
+        padding: 6px 12px;
+        border-radius: 8px;
+        border: 1px solid #cbd5f5;
+        background: #ffffff;
+        color: #1e293b;
+        font-size: 14px;
+        transition: border-color 0.2s ease;
+
+        &:focus {
+          outline: none;
+          border-color: #6366f1;
+          box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+      }
+    }
   }
 }
 

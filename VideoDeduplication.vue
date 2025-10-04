@@ -83,7 +83,7 @@
             <div class="actions-container">
               <el-button
                 type="primary"
-                class="action-btn btn-process"
+                class="action-btn btn-process align-right"
                 :disabled="uploadedFiles.length === 0 || processing"
                 @click="startProcessing"
               >
