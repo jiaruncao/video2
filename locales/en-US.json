@@ -913,66 +913,71 @@
       "title": "My Account",
       "subtitle": "Manage your profile, monitor usage statistics, and upgrade your plan to unlock unlimited creative possibilities."
     },
-    "overview": {
-      "title": "Account Overview",
-      "viewSettings": "View Account Settings"
+    "sections": {
+      "accountOverview": "Account Overview",
+      "dailyUsage": "Daily Usage Limits",
+      "subscriptionPlans": "Subscription Plans",
+      "recentActivity": "Recent Activity"
     },
-    "settings": {
+    "account": {
+      "viewSettings": "View Account Settings",
       "fullName": "Full Name",
-      "email": "Email Address",
-      "password": "Password",
-      "accountCreated": "Account Created"
-    },
-    "actions": {
       "edit": "Edit",
+      "email": "Email Address",
       "changeEmail": "Change Email",
+      "password": "Password",
       "changePassword": "Change Password",
-      "deleteAccount": "Delete Account",
-      "confirm": "Confirm",
-      "cancel": "Cancel",
-      "currentPlan": "Current Plan",
-      "downgrade": "Downgrade",
-      "upgradePro": "Upgrade to Pro",
-      "upgradeEnterprise": "Upgrade to Enterprise",
-      "cancelSubscription": "Cancel Subscription",
-      "confirmCancel": "Yes, Cancel",
-      "keepSubscription": "Keep Subscription",
-      "save": "Save",
-      "sendVerification": "Send Verification",
-      "next": "Next",
-      "delete": "Delete"
+      "accountCreated": "Account Created",
+      "deleteAccount": "Delete Account"
     },
     "usage": {
-      "title": "Daily Usage Limits",
+      "notice": "Daily limits reset at 12:00 AM UTC • Upgrade to Pro for unlimited usage",
       "items": {
-        "video": "Video Enhancement",
-        "watermark": "Watermark Removal",
-        "style": "Style Transfer",
-        "audio": "Audio Enhancement",
-        "storage": "Cloud Storage"
-      },
-      "units": {
-        "usedToday": "used today",
-        "gbUsed": "GB used"
-      },
-      "notice": "Daily limits reset at 12:00 AM UTC • Upgrade to Pro for unlimited usage"
+        "video": {
+          "title": "Video Enhancement",
+          "unit": "used today"
+        },
+        "watermark": {
+          "title": "Watermark Removal",
+          "unit": "used today"
+        },
+        "style": {
+          "title": "Style Transfer",
+          "unit": "used today"
+        },
+        "audio": {
+          "title": "Audio Enhancement",
+          "unit": "used today"
+        },
+        "storage": {
+          "title": "Cloud Storage",
+          "unit": "GB used"
+        }
+      }
+    },
+    "billing": {
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "save": "Save 20%"
     },
     "plans": {
-      "title": "Subscription Plans",
-      "labels": {
-        "free": "Free Plan",
-        "pro": "Pro Plan",
-        "enterprise": "Enterprise Plan"
-      },
-      "priceUnit": {
-        "month": "/month"
+      "pricePerMonth": "{price} /month",
+      "originalPrice": "{price}",
+      "expires": "Expires: {date}",
+      "cancel": "Cancel Subscription",
+      "cancelNotice": "Your subscription will remain active until the end of the billing period",
+      "buttons": {
+        "current": "Current Plan",
+        "downgrade": "Downgrade",
+        "upgradePro": "Upgrade to Pro",
+        "upgradeEnterprise": "Upgrade to Enterprise"
       },
       "free": {
         "name": "Free",
-        "description": "Perfect for personal projects and testing",
+        "desc": "Perfect for personal projects and testing",
         "expiry": "No Expiration",
         "features": {
-          "videoEnhancements": "5 video enhancements per day",
+          "enhancements": "5 video enhancements per day",
           "watermark": "10 watermark removals per day",
           "style": "3 style transfers per day",
           "storage": "5 GB cloud storage",
@@ -982,9 +987,9 @@
       "pro": {
         "badge": "RECOMMENDED",
         "name": "Pro",
-        "description": "For professionals and content creators",
+        "desc": "For professionals and content creators",
         "features": {
-          "video": "Unlimited video enhancements",
+          "enhancements": "Unlimited video enhancements",
           "watermark": "Unlimited watermark removals",
           "style": "Unlimited style transfers",
           "storage": "100 GB cloud storage",
@@ -994,7 +999,7 @@
       },
       "enterprise": {
         "name": "Enterprise",
-        "description": "For teams and businesses",
+        "desc": "For teams and businesses",
         "features": {
           "everything": "Everything in Pro",
           "team": "Unlimited team members",
@@ -1003,84 +1008,82 @@
           "support": "Priority support",
           "integrations": "Custom integrations"
         }
-      },
-      "expires": "Expires:",
-      "cancelNotice": "Your subscription will remain active until the end of the billing period"
+      }
     },
-    "billing": {
-      "monthly": "Monthly",
-      "yearly": "Yearly",
-      "save": "Save 20%",
-      "changedTo": "Billing changed to:"
-    },
-    "activity": {
-      "title": "Recent Activity",
-      "items": {
-        "videoEnhanced": "Video Enhanced",
-        "watermarkRemoved": "Watermark Removed",
-        "styleTransfer": "Style Transfer",
-        "audioEnhanced": "Audio Enhanced"
+    "activities": {
+      "download": "Download",
+      "titles": {
+        "videoEnhanced": "Video Enhanced - {filename}",
+        "watermarkRemoved": "Watermark Removed - {filename}",
+        "styleTransfer": "Style Transfer - {filename}",
+        "audioEnhanced": "Audio Enhanced - {filename}"
       },
       "times": {
-        "twoHoursAgo": "2 hours ago",
-        "fourHoursAgo": "4 hours ago",
-        "yesterdayAfternoon": "Yesterday at 3:45 PM",
-        "yesterdayMorning": "Yesterday at 10:30 AM",
-        "twoDaysAgo": "2 days ago"
+        "hoursAgo": "{count} hours ago",
+        "yesterdayAt": "Yesterday at {time}",
+        "daysAgo": "{count} days ago"
       },
       "status": {
         "completed": "Completed"
-      },
-      "download": "Download"
+      }
     },
     "dialogs": {
       "upgrade": {
-        "priceLabel": "Price:",
-        "billingLabel": "Billing:",
-        "cancelDetail": "You can cancel anytime.",
-        "titlePrefix": "Upgrade to",
-        "titleSuffix": "Plan?"
+        "message": "Price: {price}<br>Billing: {billing}<br>You can cancel anytime.",
+        "title": "Upgrade to {plan} Plan?",
+        "confirm": "Confirm",
+        "cancel": "Cancel"
       },
-      "cancel": {
+      "cancelSubscription": {
         "message": "Your subscription will remain active until the end of the current billing period.",
-        "title": "Are you sure you want to cancel your subscription?"
+        "title": "Are you sure you want to cancel your subscription?",
+        "confirm": "Yes, Cancel",
+        "cancel": "Keep Subscription"
       },
       "editProfile": {
-        "message": "Enter your new name:",
-        "title": "Edit Profile"
+        "prompt": "Enter your new name:",
+        "title": "Edit Profile",
+        "confirm": "Save",
+        "cancel": "Cancel",
+        "validation": "Name must be at least 2 characters"
       },
       "changeEmail": {
-        "message": "Enter your new email address:",
-        "title": "Change Email"
+        "prompt": "Enter your new email address:",
+        "title": "Change Email",
+        "confirm": "Send Verification",
+        "cancel": "Cancel",
+        "validation": "Please enter a valid email address"
       },
       "changePassword": {
-        "current": "Enter your current password:",
+        "currentPrompt": "Enter your current password:",
         "title": "Change Password",
-        "new": "Enter your new password:",
-        "newTitle": "New Password"
+        "next": "Next",
+        "cancel": "Cancel",
+        "newPrompt": "Enter your new password:",
+        "newTitle": "New Password",
+        "confirm": "Change Password",
+        "validation": "Password must be at least 8 characters"
       },
       "deleteAccount": {
         "message": "This action is irreversible and will permanently delete:<br>• All your projects<br>• Processing history<br>• Stored files<br>• Account settings",
         "title": "Are you sure you want to delete your account?",
-        "confirmPrompt": "Type \"DELETE\" to confirm account deletion:",
-        "confirmTitle": "Confirm Deletion"
+        "confirm": "Delete Account",
+        "cancel": "Cancel",
+        "prompt": "Type \"DELETE\" to confirm account deletion:",
+        "promptTitle": "Confirm Deletion",
+        "promptConfirm": "Delete",
+        "promptValidation": "Please type DELETE to confirm"
       }
     },
     "messages": {
-      "redirectingPayment": "Redirecting to secure payment page...",
-      "upgradeSuccess": "Plan upgraded successfully!",
+      "redirecting": "Redirecting to secure payment page...",
+      "upgradeSuccess": "Successfully upgraded to {plan} Plan!",
       "subscriptionCancelled": "Your subscription has been cancelled.",
       "profileUpdated": "Profile updated successfully!",
-      "verificationSent": "Verification email sent to",
+      "emailVerification": "Verification email sent to {email}",
       "passwordChanged": "Password changed successfully!",
-      "deletionScheduled": "Account deletion initiated. Your account will be permanently deleted in 30 days.",
-      "downloading": "Downloading:"
-    },
-    "validation": {
-      "nameMin": "Name must be at least 2 characters",
-      "email": "Please enter a valid email address",
-      "password": "Password must be at least 8 characters",
-      "deleteConfirm": "Please type DELETE to confirm"
+      "accountDeletionInitiated": "Account deletion initiated. Your account will be permanently deleted in 30 days.",
+      "download": "Downloading: {filename}"
     }
   },
   "thumbnailGenerator": {
