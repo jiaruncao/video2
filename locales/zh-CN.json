@@ -828,21 +828,19 @@
       "instagram": {
         "name": "Instagram",
         "placeholder": "输入@用户名或主页链接",
-        "hint": "示例：@cristiano 或 https://www.instagram.com/username",
-        "reels": "Instagram Reels"
+        "hint": "示例：@cristiano 或 https://www.instagram.com/username"
       },
       "youtube": {
         "name": "YouTube",
         "placeholder": "输入@频道或频道链接",
-        "hint": "示例：@MrBeast 或 https://www.youtube.com/@channel",
-        "shorts": "YouTube Shorts"
-      },
-      "twitter": {
-        "name": "Twitter/X"
-      },
-      "snapchat": {
-        "name": "Snapchat"
+        "hint": "示例：@MrBeast 或 https://www.youtube.com/@channel"
       }
+    },
+    "supportedPlatforms": {
+      "instagramReels": "Instagram Reels",
+      "youtubeShorts": "YouTube Shorts",
+      "twitter": "Twitter/X",
+      "snapchat": "Snapchat"
     },
     "actions": {
       "add": "添加",
@@ -852,60 +850,64 @@
       "active": "活跃",
       "checking": "检测中"
     },
-    "filters": {
-      "all": "全部"
-    },
     "logs": {
-      "title": "最新动态日志",
-      "messages": {
-        "postedVideo": "发布了新视频：",
-        "uploadedVideo": "上传了：",
-        "sharedReel": "分享了新短片：",
-        "wentLive": "正在直播：",
-        "premieredVideo": "首播：",
-        "addedToMonitor": "已加入监控列表"
+      "title": "📝 最新动态日志",
+      "filters": {
+        "all": "全部",
+        "tiktok": "TikTok",
+        "douyin": "抖音",
+        "instagram": "Instagram",
+        "youtube": "YouTube"
       },
-      "links": {
+      "times": {
+        "tenThirtyTwo": "上午10:32",
+        "nineFortyFive": "上午09:45",
+        "nineTwenty": "上午09:20",
+        "eightFiftyFive": "上午08:55",
+        "eightThirty": "上午08:30",
+        "yesterday": "昨天"
+      },
+      "messages": {
+        "postedVideo": "发布了新视频：“{title}”",
+        "uploadedVideo": "上传了：“{title}”",
+        "sharedReel": "分享了新 Reels：“{title}”",
+        "wentLive": "开启直播：“{title}”",
+        "premieredVideo": "首播：“{title}”",
+        "uploadedContent": "上传了新内容：“{title}”",
+        "addedToMonitoring": "已加入监控列表",
+        "genericTitle": "最新内容"
+      },
+      "linkTexts": {
         "viewVideo": "查看视频",
         "viewReel": "查看短片",
         "watchRecording": "观看回放",
+        "viewContent": "查看内容",
         "checkProfile": "查看主页"
-      },
-      "relative": {
-        "yesterday": "昨天"
-      },
-      "generic": {
-        "newContent": "最新内容",
-        "liveSession": "直播活动",
-        "newReel": "最新短片",
-        "newUpload": "最新上传"
       }
     },
     "download": {
       "title": "视频下载器",
       "subtitle": "从你喜欢的平台下载无水印视频",
       "placeholder": "在此粘贴视频链接（TikTok、抖音、Instagram、YouTube 等）",
-      "action": "下载",
+      "button": "⬇️ 下载",
       "processing": "处理中...",
-      "inProgress": "视频处理中...请稍候",
+      "status": "视频处理中...请稍候",
       "success": "已成功下载无水印视频！"
     },
     "messages": {
       "enterBlogger": "请输入博主 ID 或链接",
-      "added": "已成功添加博主！",
-      "removed": "已移除博主",
-      "openingContent": "正在打开",
-      "enterUrl": "请输入视频链接",
+      "addSuccess": "已成功添加博主！",
+      "removeSuccess": "已移除博主",
+      "openingContent": "正在打开 {blogger} 的内容...",
+      "enterVideoUrl": "请输入视频链接",
       "invalidUrl": "请输入有效链接"
     },
     "notifications": {
-      "newUpdate": "最新通知",
-      "messages": {
-        "postedVideo": "发布了新视频",
-        "wentLive": "开始直播",
-        "sharedReel": "分享了新短片",
-        "uploadedVideo": "上传了新内容"
-      }
+      "title": "最新通知",
+      "postedVideo": "{blogger} 发布了新视频",
+      "wentLive": "{blogger} 开始直播",
+      "sharedReel": "{blogger} 分享了新短片",
+      "uploadedContent": "{blogger} 上传了新内容"
     }
   },
   "myAccount": {
@@ -1093,27 +1095,30 @@
     },
     "upload": {
       "title": "上传素材",
-      "dropTitle": "将图片或视频拖拽到此处",
-      "dropSubtitle": "或点击选择文件",
-      "chooseFiles": "选择文件"
+      "drop": "将图片或视频拖拽到此处",
+      "browse": "或点击选择文件",
+      "button": "选择文件",
+      "supported": "支持格式：.mp4、.mov、.m4v、.avi、.jpg、.jpeg、.png（最大 100MB）"
     },
     "frameSelector": {
-      "title": "选择用于缩略图的视频帧",
-      "useFrame": "使用此帧生成缩略图",
-      "reselectFrame": "重新选择帧",
-      "confirmed": "已成功锁定缩略图帧"
+      "label": "选择用于缩略图的视频帧",
+      "selectedBadge": "✓ 已选中帧",
+      "confirmation": "✓ 已成功锁定缩略图帧",
+      "useButton": "✓ 使用此帧作为缩略图",
+      "reselectButton": "🔄 重新选择帧"
     },
     "settings": {
       "title": "缩略图设置",
       "ratioLabel": "选择缩略图比例",
-      "ratios": {
+      "ratioOptions": {
         "youtube": "YouTube",
         "shorts": "Shorts",
+        "classic": "4:3",
         "instagram": "Instagram"
       },
       "textLabel": "输入缩略图文案",
-      "textPlaceholder": "描述你的缩略图标题",
-      "emotionLabel": "情绪"
+      "textPlaceholder": "让你保持健康又有型!!",
+      "emotion": "情绪"
     },
     "emotions": {
       "none": "无",
@@ -1131,23 +1136,20 @@
     "actions": {
       "generate": "生成缩略图",
       "generating": "生成中...",
-      "downloadAllThumbnails": "下载全部缩略图",
+      "downloadAll": "下载全部缩略图",
+      "processingStatus": "正在生成缩略图..."
+    },
+    "result": {
+      "title": "生成结果",
+      "subtitle": "生成时间 {date}，将在 {days} 天后过期",
+      "emptyTitle": "尚未生成缩略图",
+      "emptySubtitle": "上传素材并点击“生成缩略图”即可在此查看结果",
+      "downloadAction": "下载",
+      "editAction": "编辑",
       "downloadAll": "全部下载",
       "regenerate": "重新生成一组",
       "viewHistory": "查看历史记录",
-      "download": "下载",
-      "edit": "编辑"
-    },
-    "status": {
-      "generating": "正在生成缩略图..."
-    },
-    "results": {
-      "title": "生成结果",
-      "generatedOn": "生成时间",
-      "expiresIn": "将在",
-      "days": "天后失效",
-      "emptyTitle": "尚未生成缩略图",
-      "emptyDescription": "上传素材并点击“生成缩略图”即可在此查看结果"
+      "thumbnailAlt": "缩略图 {index}"
     },
     "history": {
       "title": "生成历史",
@@ -1157,13 +1159,12 @@
     "messages": {
       "fileTooLarge": "文件大小超过 100MB 限制",
       "frameSelected": "已成功选取缩略图帧！",
-      "frameReselect": "可以重新选择帧",
-      "completeFields": "请先完成必要信息",
-      "generated": "缩略图生成成功！",
-      "historyLoaded": "已从历史记录中加载",
+      "reselectFrame": "可以重新选择帧",
+      "fieldsRequired": "请先完成必要信息",
+      "generateSuccess": "缩略图生成成功！",
+      "loadedFromHistory": "已从历史记录中加载",
       "downloadingAll": "正在下载全部缩略图...",
-      "editPrefix": "缩略图",
-      "editSuffix": "编辑功能即将上线！"
+      "editPlaceholder": "缩略图 {index} 的编辑功能即将上线！"
     }
   }
 }
