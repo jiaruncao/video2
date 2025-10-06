@@ -828,21 +828,19 @@
       "instagram": {
         "name": "Instagram",
         "placeholder": "Enter @username or profile link",
-        "hint": "Example: @cristiano or https://www.instagram.com/username",
-        "reels": "Instagram Reels"
+        "hint": "Example: @cristiano or https://www.instagram.com/username"
       },
       "youtube": {
         "name": "YouTube",
         "placeholder": "Enter @channel or channel link",
-        "hint": "Example: @MrBeast or https://www.youtube.com/@channel",
-        "shorts": "YouTube Shorts"
-      },
-      "twitter": {
-        "name": "Twitter/X"
-      },
-      "snapchat": {
-        "name": "Snapchat"
+        "hint": "Example: @MrBeast or https://www.youtube.com/@channel"
       }
+    },
+    "supportedPlatforms": {
+      "instagramReels": "Instagram Reels",
+      "youtubeShorts": "YouTube Shorts",
+      "twitter": "Twitter/X",
+      "snapchat": "Snapchat"
     },
     "actions": {
       "add": "Add",
@@ -852,60 +850,64 @@
       "active": "Active",
       "checking": "Checking"
     },
-    "filters": {
-      "all": "All"
-    },
     "logs": {
-      "title": "Recent Updates Log",
-      "messages": {
-        "postedVideo": "posted a new video:",
-        "uploadedVideo": "uploaded:",
-        "sharedReel": "shared a new Reel:",
-        "wentLive": "went live:",
-        "premieredVideo": "premiered:",
-        "addedToMonitor": "has been added to monitoring list"
+      "title": "📝 Recent Updates Log",
+      "filters": {
+        "all": "All",
+        "tiktok": "TikTok",
+        "douyin": "Douyin",
+        "instagram": "Instagram",
+        "youtube": "YouTube"
       },
-      "links": {
+      "times": {
+        "tenThirtyTwo": "10:32 AM",
+        "nineFortyFive": "09:45 AM",
+        "nineTwenty": "09:20 AM",
+        "eightFiftyFive": "08:55 AM",
+        "eightThirty": "08:30 AM",
+        "yesterday": "Yesterday"
+      },
+      "messages": {
+        "postedVideo": "posted a new video: \"{title}\"",
+        "uploadedVideo": "uploaded: \"{title}\"",
+        "sharedReel": "shared a new Reel: \"{title}\"",
+        "wentLive": "went live: \"{title}\"",
+        "premieredVideo": "premiered: \"{title}\"",
+        "uploadedContent": "uploaded new content: \"{title}\"",
+        "addedToMonitoring": "has been added to monitoring list",
+        "genericTitle": "New Content"
+      },
+      "linkTexts": {
         "viewVideo": "View Video",
         "viewReel": "View Reel",
         "watchRecording": "Watch Recording",
+        "viewContent": "View Content",
         "checkProfile": "Check Profile"
-      },
-      "relative": {
-        "yesterday": "Yesterday"
-      },
-      "generic": {
-        "newContent": "New Content",
-        "liveSession": "Live session",
-        "newReel": "New Reel",
-        "newUpload": "New upload"
       }
     },
     "download": {
       "title": "Video Downloader",
       "subtitle": "Download videos without watermarks from your favorite platforms",
       "placeholder": "Paste video URL here (TikTok, Douyin, Instagram, YouTube, etc.)",
-      "action": "Download",
+      "button": "⬇️ Download",
       "processing": "Processing...",
-      "inProgress": "Processing video... Please wait",
+      "status": "Processing video... Please wait",
       "success": "Video downloaded successfully without watermark!"
     },
     "messages": {
       "enterBlogger": "Please enter a blogger ID or link",
-      "added": "Blogger added successfully!",
-      "removed": "Blogger removed",
-      "openingContent": "Opening content for",
-      "enterUrl": "Please enter a video URL",
+      "addSuccess": "Blogger added successfully!",
+      "removeSuccess": "Blogger removed",
+      "openingContent": "Opening {blogger}'s content...",
+      "enterVideoUrl": "Please enter a video URL",
       "invalidUrl": "Please enter a valid URL"
     },
     "notifications": {
-      "newUpdate": "New Update",
-      "messages": {
-        "postedVideo": "posted a new video",
-        "wentLive": "went live",
-        "sharedReel": "shared a new reel",
-        "uploadedVideo": "uploaded new content"
-      }
+      "title": "New Update",
+      "postedVideo": "{blogger} posted a new video",
+      "wentLive": "{blogger} went live",
+      "sharedReel": "{blogger} shared a new reel",
+      "uploadedContent": "{blogger} uploaded new content"
     }
   },
   "myAccount": {
@@ -1093,27 +1095,30 @@
     },
     "upload": {
       "title": "Upload Media",
-      "dropTitle": "Drop your image or video here",
-      "dropSubtitle": "or click to browse",
-      "chooseFiles": "Choose Files"
+      "drop": "Drop your image or video here",
+      "browse": "or click to browse",
+      "button": "Choose Files",
+      "supported": "Supported: .mp4, .mov, .m4v, .avi, .jpg, .jpeg, .png (Max 100MB)"
     },
     "frameSelector": {
-      "title": "Select Video Frame for Thumbnail",
-      "useFrame": "Use This Frame for Thumbnail",
-      "reselectFrame": "Reselect Frame",
-      "confirmed": "Frame successfully selected for thumbnail"
+      "label": "Select Video Frame for Thumbnail",
+      "selectedBadge": "✓ Frame Selected",
+      "confirmation": "✓ Frame successfully selected for thumbnail",
+      "useButton": "✓ Use This Frame for Thumbnail",
+      "reselectButton": "🔄 Reselect Frame"
     },
     "settings": {
       "title": "Thumbnail Settings",
       "ratioLabel": "Select Thumbnail Ratio",
-      "ratios": {
+      "ratioOptions": {
         "youtube": "YouTube",
         "shorts": "Shorts",
+        "classic": "4:3",
         "instagram": "Instagram"
       },
       "textLabel": "Enter thumbnail text",
-      "textPlaceholder": "Describe your thumbnail headline",
-      "emotionLabel": "Emotion"
+      "textPlaceholder": "Make you fit and healthy!!",
+      "emotion": "Emotion"
     },
     "emotions": {
       "none": "None",
@@ -1131,23 +1136,20 @@
     "actions": {
       "generate": "Generate Thumbnails",
       "generating": "Generating...",
-      "downloadAllThumbnails": "Download All Thumbnails",
+      "downloadAll": "Download All Thumbnails",
+      "processingStatus": "Generating thumbnails..."
+    },
+    "result": {
+      "title": "Generated Thumbnails",
+      "subtitle": "Generated on {date}, will expire in {days} day(s)",
+      "emptyTitle": "No thumbnails yet",
+      "emptySubtitle": "Upload media and click \"Generate Thumbnails\" to see results here",
+      "downloadAction": "Download",
+      "editAction": "Edit",
       "downloadAll": "Download All",
       "regenerate": "Regenerate New Set",
       "viewHistory": "View History",
-      "download": "Download",
-      "edit": "Edit"
-    },
-    "status": {
-      "generating": "Generating thumbnails..."
-    },
-    "results": {
-      "title": "Generated Thumbnails",
-      "generatedOn": "Generated on",
-      "expiresIn": "will expire in",
-      "days": "day(s)",
-      "emptyTitle": "No thumbnails yet",
-      "emptyDescription": "Upload media and click \"Generate Thumbnails\" to see results here"
+      "thumbnailAlt": "Thumbnail {index}"
     },
     "history": {
       "title": "Generation History",
@@ -1157,13 +1159,12 @@
     "messages": {
       "fileTooLarge": "File size exceeds 100MB limit",
       "frameSelected": "Frame selected successfully!",
-      "frameReselect": "You can reselect a frame",
-      "completeFields": "Please complete all required fields",
-      "generated": "Thumbnails generated successfully!",
-      "historyLoaded": "Loaded from history",
+      "reselectFrame": "You can reselect a frame",
+      "fieldsRequired": "Please complete all required fields",
+      "generateSuccess": "Thumbnails generated successfully!",
+      "loadedFromHistory": "Loaded from history",
       "downloadingAll": "Downloading all thumbnails...",
-      "editPrefix": "Edit functionality for thumbnail",
-      "editSuffix": "- Coming soon!"
+      "editPlaceholder": "Edit functionality for thumbnail {index} - Coming soon!"
     }
   }
 }

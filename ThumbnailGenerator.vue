@@ -11,8 +11,18 @@
       <div class="content-wrapper">
         <!-- 标题区域 -->
         <div class="header">
-          <h1>Thumbnail Generator</h1>
-          <p>Create eye-catching thumbnails for your videos and images with AI-powered text overlays, perfect ratios, and emotional expressions to maximize engagement.</p>
+          <div class="language-switcher">
+            <label :for="`${$options.name}-locale`" class="language-label">
+              {{ translate('language.label') }}
+            </label>
+            <select :id="`${$options.name}-locale`" v-model="locale" class="language-select">
+              <option v-for="code in availableLocales" :key="code" :value="code">
+                {{ translate(`language.options.${code}`) }}
+              </option>
+            </select>
+          </div>
+          <h1>{{ translate('thumbnailGenerator.header.title') }}</h1>
+          <p>{{ translate('thumbnailGenerator.header.subtitle') }}</p>
         </div>
 
         <!-- 主要工作区 -->
@@ -21,7 +31,7 @@
           <div class="workspace-left">
             <!-- 上传区域 -->
             <div class="upload-container">
-              <div class="section-title">Upload Media</div>
+              <div class="section-title">{{ translate('thumbnailGenerator.upload.title') }}</div>
               <div 
                 :class="['upload-area', { 
                   'has-file': hasFile, 
@@ -36,8 +46,8 @@
                 <!-- 上传内容 -->
                 <div v-if="!filePreview" class="upload-content">
                   <div class="upload-icon">⬆️</div>
-                  <div class="upload-title">Drop your image or video here</div>
-                  <div class="upload-subtitle">or click to browse</div>
+                  <div class="upload-title">{{ translate('thumbnailGenerator.upload.drop') }}</div>
+                  <div class="upload-subtitle">{{ translate('thumbnailGenerator.upload.browse') }}</div>
                   <el-upload
                     ref="upload"
                     class="upload-demo"
@@ -47,7 +57,7 @@
                     :on-change="handleFileChange"
                     accept=".mp4,.mov,.m4v,.avi,.jpg,.jpeg,.png"
                   >
-                    <el-button class="upload-btn-small">Choose Files</el-button>
+                    <el-button class="upload-btn-small">{{ translate('thumbnailGenerator.upload.button') }}</el-button>
                   </el-upload>
                 </div>
 
@@ -58,7 +68,7 @@
                       v-if="fileType === 'image'" 
                       :src="previewUrl" 
                       class="preview-image"
-                      alt="Preview"
+                      :alt="translate('thumbnailGenerator.upload.previewAlt')"
                     >
                     <video 
                       v-else-if="fileType === 'video'"
@@ -79,7 +89,7 @@
                 </div>
               </div>
               <div class="supported-formats">
-                Supported: .mp4, .mov, .m4v, .avi, .jpg, .jpeg, .png (Max 100MB)
+                {{ translate('thumbnailGenerator.upload.supported') }}
               </div>
               
               <!-- 视频帧选择器 -->
@@ -90,12 +100,12 @@
                 }]"
               >
                 <div class="frame-label">
-                  <span>Select Video Frame for Thumbnail</span>
+                  <span>{{ translate('thumbnailGenerator.frameSelector.label') }}</span>
                   <span 
                     v-if="frameConfirmed" 
                     class="frame-selected-badge"
                   >
-                    ✓ Frame Selected
+                    {{ translate('thumbnailGenerator.frameSelector.selectedBadge') }}
                   </span>
                 </div>
                 
@@ -155,13 +165,13 @@
                   class="select-frame-btn"
                   @click="confirmFrameSelection"
                 >
-                  <span v-if="!frameConfirmed">✓ Use This Frame for Thumbnail</span>
-                  <span v-else>🔄 Reselect Frame</span>
+                  <span v-if="!frameConfirmed">{{ translate('thumbnailGenerator.frameSelector.useButton') }}</span>
+                  <span v-else>{{ translate('thumbnailGenerator.frameSelector.reselectButton') }}</span>
                 </el-button>
                 
                 <!-- 确认提示 -->
                 <div v-if="frameConfirmed" class="frame-confirmation">
-                  ✓ Frame successfully selected for thumbnail
+                  {{ translate('thumbnailGenerator.frameSelector.confirmation') }}
                 </div>
               </div>
             </div>
@@ -171,11 +181,11 @@
           <div class="workspace-right">
             <!-- 缩略图设置 -->
             <div class="settings-container">
-              <div class="section-title">Thumbnail Settings</div>
+              <div class="section-title">{{ translate('thumbnailGenerator.settings.title') }}</div>
               
               <!-- 比例选择 -->
               <div class="setting-group">
-                <div class="setting-label">Select Thumbnail Ratio</div>
+                <div class="setting-label">{{ translate('thumbnailGenerator.settings.ratioLabel') }}</div>
                 <el-radio-group 
                   v-model="thumbnailRatio" 
                   @change="handleRatioChange"
@@ -184,25 +194,25 @@
                   <el-radio label="16:9" class="ratio-option">
                     <div class="ratio-content">
                       <div class="ratio-preview ratio-16-9">16:9</div>
-                      <span class="ratio-label">YouTube</span>
+                      <span class="ratio-label">{{ translate('thumbnailGenerator.settings.ratioOptions.youtube') }}</span>
                     </div>
                   </el-radio>
                   <el-radio label="9:16" class="ratio-option">
                     <div class="ratio-content">
                       <div class="ratio-preview ratio-9-16">9:16</div>
-                      <span class="ratio-label">Shorts</span>
+                      <span class="ratio-label">{{ translate('thumbnailGenerator.settings.ratioOptions.shorts') }}</span>
                     </div>
                   </el-radio>
                   <el-radio label="4:3" class="ratio-option">
                     <div class="ratio-content">
                       <div class="ratio-preview ratio-4-3">4:3</div>
-                      <span class="ratio-label">4:3</span>
+                      <span class="ratio-label">{{ translate('thumbnailGenerator.settings.ratioOptions.classic') }}</span>
                     </div>
                   </el-radio>
                   <el-radio label="3:4" class="ratio-option">
                     <div class="ratio-content">
                       <div class="ratio-preview ratio-3-4">3:4</div>
-                      <span class="ratio-label">Instagram</span>
+                      <span class="ratio-label">{{ translate('thumbnailGenerator.settings.ratioOptions.instagram') }}</span>
                     </div>
                   </el-radio>
                 </el-radio-group>
@@ -210,12 +220,12 @@
 
               <!-- 文字输入 -->
               <div class="text-input-container">
-                <div class="setting-label">Enter thumbnail text</div>
+                <div class="setting-label">{{ translate('thumbnailGenerator.settings.textLabel') }}</div>
                 <el-input
                   v-model="thumbnailText"
                   type="textarea"
                   :rows="4"
-                  placeholder="Make you fit and healthy!!"
+                  :placeholder="translate('thumbnailGenerator.settings.textPlaceholder')"
                   :maxlength="150"
                   show-word-limit
                   class="text-input"
@@ -224,7 +234,7 @@
 
               <!-- 情感选择 -->
               <div class="emotion-selector">
-                <div class="setting-label">Emotion</div>
+                <div class="setting-label">{{ translate('thumbnailGenerator.settings.emotion') }}</div>
                 <el-radio-group 
                   v-model="selectedEmotion"
                   @change="handleEmotionChange"
@@ -243,7 +253,7 @@
                       >
                         <span>{{ emotion.emoji }}</span>
                       </div>
-                      <span class="emotion-label">{{ emotion.label }}</span>
+                      <span class="emotion-label">{{ translate(emotion.labelKey) }}</span>
                     </div>
                   </el-radio>
                 </el-radio-group>
@@ -262,7 +272,7 @@
                 @click="startGenerating"
               >
                 <i class="el-icon-brush"></i>
-                {{ processing ? 'Generating...' : 'Generate Thumbnails' }}
+                {{ translate(processing ? 'thumbnailGenerator.actions.generating' : 'thumbnailGenerator.actions.generate') }}
               </el-button>
               
               <el-button
@@ -273,14 +283,14 @@
                 @click="downloadAllThumbnails"
               >
                 <i class="el-icon-download"></i>
-                Download All Thumbnails
+                {{ translate('thumbnailGenerator.actions.downloadAll') }}
               </el-button>
 
               <!-- 处理进度 -->
               <div v-if="processing" class="process-info">
                 <div class="process-status">
                   <div class="status-icon">⏳</div>
-                  <div class="status-text">Generating thumbnails...</div>
+                  <div class="status-text">{{ translate('thumbnailGenerator.actions.processingStatus') }}</div>
                   <div class="status-percent">{{ processPercent }}%</div>
                 </div>
                 <el-progress 
@@ -295,10 +305,9 @@
         <!-- 结果展示区域 -->
         <div class="result-section">
           <div class="result-header">
-            <h2 class="result-title">Generated Thumbnails</h2>
+            <h2 class="result-title">{{ translate('thumbnailGenerator.result.title') }}</h2>
             <p class="result-subtitle">
-              Generated on <span>{{ generatedDate }}</span>, 
-              will expire in <span>{{ expireDays }}</span> day(s)
+              {{ translateWithParams('thumbnailGenerator.result.subtitle', { date: generatedDate, days: expireDays }) }}
             </p>
           </div>
           
@@ -314,10 +323,10 @@
               <div v-if="thumbnails.length === 0" class="empty-state">
                 <div style="font-size: 48px; margin-bottom: 15px;">🎨</div>
                 <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">
-                  No thumbnails yet
+                  {{ translate('thumbnailGenerator.result.emptyTitle') }}
                 </div>
                 <div style="color: #64748b;">
-                  Upload media and click "Generate Thumbnails" to see results here
+                  {{ translate('thumbnailGenerator.result.emptySubtitle') }}
                 </div>
               </div>
               
@@ -331,19 +340,19 @@
                 <img 
                   :src="thumbnail.url" 
                   class="thumbnail-image"
-                  :alt="`Thumbnail ${index + 1}`"
+                  :alt="translateWithParams('thumbnailGenerator.result.thumbnailAlt', { index: index + 1 })"
                 >
                 <div class="thumbnail-overlay"></div>
                 <div class="thumbnail-actions">
                   <el-button 
                     size="mini" 
                     @click="downloadSingle(index)"
-                    title="Download"
+                    :title="translate('thumbnailGenerator.result.downloadAction')"
                   >⬇️</el-button>
                   <el-button 
                     size="mini"
                     @click="editThumbnail(index)"
-                    title="Edit"
+                    :title="translate('thumbnailGenerator.result.editAction')"
                   >✏️</el-button>
                 </div>
               </div>
@@ -356,32 +365,32 @@
               type="success"
               @click="downloadAllThumbnails"
             >
-              <i class="el-icon-folder"></i> Download All
+              <i class="el-icon-folder"></i> {{ translate('thumbnailGenerator.result.downloadAll') }}
             </el-button>
             <el-button
               @click="regenerateThumbnails"
             >
-              <i class="el-icon-refresh"></i> Regenerate New Set
+              <i class="el-icon-refresh"></i> {{ translate('thumbnailGenerator.result.regenerate') }}
             </el-button>
             <el-button
               type="warning"
               @click="showHistory = true"
             >
-              <i class="el-icon-time"></i> View History
+              <i class="el-icon-time"></i> {{ translate('thumbnailGenerator.result.viewHistory') }}
             </el-button>
           </div>
         </div>
         
         <!-- 历史记录对话框 -->
         <el-dialog
-          title="Generation History"
+          :title="translate('thumbnailGenerator.history.title')"
           :visible.sync="showHistory"
           width="70%"
           class="history-modal"
         >
           <div class="history-list">
             <div v-if="generationHistory.length === 0" class="empty-history">
-              No history yet
+              {{ translate('thumbnailGenerator.history.empty') }}
             </div>
             <div 
               v-for="(group, date) in groupedHistory"
@@ -396,7 +405,7 @@
                   class="history-thumb"
                   @click="loadFromHistory(item)"
                 >
-                  <img :src="item.thumbnails[0]?.url" alt="History">
+                  <img :src="item.thumbnails[0]?.url" :alt="translate('thumbnailGenerator.history.thumbnailAlt')">
                 </div>
               </div>
             </div>
@@ -407,6 +416,7 @@
 </template>
 
 <script>
+import { supportedLocales, translate as translateText } from './i18n'
 import DashboardLayout from './components/DashboardLayout.vue'
 import { createDashboardMenu } from './dashboardConfig'
 
@@ -417,6 +427,7 @@ export default {
   },
   data() {
     return {
+      availableLocales: supportedLocales,
       locale: 'en-US',
       // 菜单项
       menuItems: createDashboardMenu('thumbnailGenerator'),
@@ -451,17 +462,17 @@ export default {
       
       // 情感选项
       emotions: [
-        { value: 'none', label: 'None', emoji: '😐', color: '#f0f0f0' },
-        { value: 'happy', label: 'Happy', emoji: '😊', color: '#ffe766' },
-        { value: 'excited', label: 'Excited', emoji: '🤩', color: '#ff6b6b' },
-        { value: 'surprised', label: 'Surprised', emoji: '😲', color: '#a8e6cf' },
-        { value: 'anxious', label: 'Anxious', emoji: '😰', color: '#b8d4f0' },
-        { value: 'curious', label: 'Curious', emoji: '🤔', color: '#dda8ff' },
-        { value: 'angry', label: 'Angry', emoji: '😠', color: '#ff9999' },
-        { value: 'sad', label: 'Sad', emoji: '😢', color: '#99ccff' },
-        { value: 'cool', label: 'Cool', emoji: '😎', color: '#66d9ef' },
-        { value: 'love', label: 'Love', emoji: '😍', color: '#ffb3d9' },
-        { value: 'mischievous', label: 'Playful', emoji: '😏', color: '#ffb366' }
+        { value: 'none', labelKey: 'thumbnailGenerator.emotions.none', emoji: '😐', color: '#f0f0f0' },
+        { value: 'happy', labelKey: 'thumbnailGenerator.emotions.happy', emoji: '😊', color: '#ffe766' },
+        { value: 'excited', labelKey: 'thumbnailGenerator.emotions.excited', emoji: '🤩', color: '#ff6b6b' },
+        { value: 'surprised', labelKey: 'thumbnailGenerator.emotions.surprised', emoji: '😲', color: '#a8e6cf' },
+        { value: 'anxious', labelKey: 'thumbnailGenerator.emotions.anxious', emoji: '😰', color: '#b8d4f0' },
+        { value: 'curious', labelKey: 'thumbnailGenerator.emotions.curious', emoji: '🤔', color: '#dda8ff' },
+        { value: 'angry', labelKey: 'thumbnailGenerator.emotions.angry', emoji: '😠', color: '#ff9999' },
+        { value: 'sad', labelKey: 'thumbnailGenerator.emotions.sad', emoji: '😢', color: '#99ccff' },
+        { value: 'cool', labelKey: 'thumbnailGenerator.emotions.cool', emoji: '😎', color: '#66d9ef' },
+        { value: 'love', labelKey: 'thumbnailGenerator.emotions.love', emoji: '😍', color: '#ffb3d9' },
+        { value: 'mischievous', labelKey: 'thumbnailGenerator.emotions.playful', emoji: '😏', color: '#ffb366' }
       ],
       
       // 处理状态
@@ -543,7 +554,7 @@ export default {
     handleFiles(file) {
       // 检查文件大小
       if (file.size > 100 * 1024 * 1024) {
-        this.$message.error('File size exceeds 100MB limit')
+        this.$message.error(this.translate('thumbnailGenerator.messages.fileTooLarge'))
         return
       }
       
@@ -736,10 +747,10 @@ export default {
     confirmFrameSelection() {
       if (!this.frameConfirmed) {
         this.frameConfirmed = true
-        this.$message.success('Frame selected successfully!')
+        this.$message.success(this.translate('thumbnailGenerator.messages.frameSelected'))
       } else {
         this.frameConfirmed = false
-        this.$message.info('You can reselect a frame')
+        this.$message.info(this.translate('thumbnailGenerator.messages.reselectFrame'))
       }
     },
     
@@ -808,7 +819,7 @@ export default {
     // 开始生成缩略图
     startGenerating() {
       if (!this.canGenerate) {
-        this.$message.warning('Please complete all required fields')
+        this.$message.warning(this.translate('thumbnailGenerator.messages.fieldsRequired'))
         return
       }
       
@@ -859,7 +870,7 @@ export default {
       // 保存到历史记录
       this.saveToHistory()
       
-      this.$message.success('Thumbnails generated successfully!')
+      this.$message.success(this.translate('thumbnailGenerator.messages.generateSuccess'))
     },
     
     // 创建缩略图
@@ -1007,7 +1018,7 @@ export default {
       this.thumbnailText = item.settings.text
       this.selectedEmotion = item.settings.emotion
       this.showHistory = false
-      this.$message.success('Loaded from history')
+      this.$message.success(this.translate('thumbnailGenerator.messages.loadedFromHistory'))
     },
     
     // 下载单个缩略图
@@ -1031,18 +1042,31 @@ export default {
           link.click()
         }, index * 200)
       })
-      this.$message.success('Downloading all thumbnails...')
+      this.$message.success(this.translate('thumbnailGenerator.messages.downloadingAll'))
     },
     
     // 编辑缩略图
     editThumbnail(index) {
-      this.$message.info(`Edit functionality for thumbnail ${index + 1} - Coming soon!`)
+      this.$message.info(this.translateWithParams('thumbnailGenerator.messages.editPlaceholder', { index: index + 1 }))
     },
     
     // 重新生成缩略图
     regenerateThumbnails() {
       this.resetProcessingState()
       this.startGenerating()
+    },
+
+    // 翻译辅助
+    translate(key) {
+      return translateText(this.locale, key)
+    },
+
+    translateWithParams(key, params = {}) {
+      let text = this.translate(key)
+      Object.keys(params || {}).forEach(param => {
+        text = text.replace(new RegExp(`{${param}}`, 'g'), params[param])
+      })
+      return text
     }
   }
 }
@@ -1050,4 +1074,33 @@ export default {
 
 <style lang="scss" scoped>
 @import './ThumbnailGenerator.scss';
+
+.language-switcher {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  color: #475569;
+
+  .language-label {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .language-select {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5f5;
+    background: #f8fafc;
+    color: #334155;
+    font-size: 14px;
+
+    &:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+  }
+}
 </style>
