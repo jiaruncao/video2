@@ -2,7 +2,7 @@
   <div class="noise-reducer-page">
     <!-- 侧边栏 -->
     <aside class="sidebar">
-      <div class="logo">MediaEnhance Pro</div>
+      <div class="logo">{{ translate('app.brand') }}</div>
       <nav class="nav-menu">
         <div
           v-for="(item, index) in menuItems"
@@ -11,15 +11,15 @@
           @click="handleMenuClick(index)"
         >
           <span class="nav-icon">{{ item.icon }}</span>
-          <span>{{ item.label }}</span>
+          <span>{{ translate(item.labelKey) }}</span>
         </div>
       </nav>
       <div class="user-info">
         <div class="nav-item user-account">
           <span class="nav-icon">👤</span>
           <div class="user-details">
-            <div class="user-name">User Account</div>
-            <div class="user-plan">Pro Member</div>
+            <div class="user-name">{{ translate('app.user.account') }}</div>
+            <div class="user-plan">{{ translate('app.user.proMember') }}</div>
           </div>
         </div>
       </div>
@@ -30,9 +30,19 @@
       <div class="content-wrapper">
         <!-- 标题区域 -->
         <div class="header">
-          <h1 class="header-title">Audio Noise Reducer</h1>
+          <div class="language-switcher">
+            <label :for="`${$options.name}-locale`" class="language-label">
+              {{ translate('language.label') }}
+            </label>
+            <select :id="`${$options.name}-locale`" v-model="locale" class="language-select">
+              <option v-for="code in availableLocales" :key="code" :value="code">
+                {{ translate(`language.options.${code}`) }}
+              </option>
+            </select>
+          </div>
+          <h1 class="header-title">{{ translate('noiseReducer.header.title') }}</h1>
           <p class="header-subtitle">
-            Remove background noise, hum, and unwanted sounds from your videos using advanced AI-powered audio processing technology.
+            {{ translate('noiseReducer.header.subtitle') }}
           </p>
         </div>
 
@@ -42,7 +52,7 @@
           <div class="workspace-left">
             <!-- 上传区域 -->
             <div class="upload-container">
-              <h3 class="section-title">Upload Video</h3>
+              <h3 class="section-title">{{ translate('noiseReducer.upload.title') }}</h3>
               <div
                 :class="['upload-area', { 'has-file': hasFile, 'dragover': isDragover }]"
                 @drop.prevent="handleDrop"
@@ -55,10 +65,10 @@
                 <!-- 上传内容 -->
                 <div v-if="!filePreview" class="upload-content">
                   <div class="upload-icon">⬆️</div>
-                  <div class="upload-title">Drop your video here</div>
-                  <div class="upload-subtitle">or click to browse</div>
+                  <div class="upload-title">{{ translate('noiseReducer.upload.drop') }}</div>
+                  <div class="upload-subtitle">{{ translate('noiseReducer.upload.browse') }}</div>
                   <el-button type="primary" size="small" class="upload-btn-small" @click.stop="triggerFileInput">
-                    Choose Files
+                    {{ translate('noiseReducer.upload.button') }}
                   </el-button>
                   <input
                     ref="fileInput"
@@ -87,23 +97,23 @@
                 </div>
               </div>
               <div class="supported-formats">
-                Supported: .mp4, .mov, .m4v, .3gp, .avi (Max 8 files, 2GB each)
+                {{ translate('noiseReducer.upload.supported') }}
               </div>
             </div>
 
             <!-- 示例文件 -->
             <div class="samples-container">
-              <h3 class="section-title">Quick Samples</h3>
+              <h3 class="section-title">{{ translate('noiseReducer.samples.title') }}</h3>
               <div class="sample-grid">
                 <div
                   v-for="sample in samples"
                   :key="sample.type"
                   class="sample-item"
                   @click="loadSample(sample.type)"
-                  :title="sample.title"
+                  :title="translate(sample.titleKey)"
                 >
                   <span class="sample-icon">{{ sample.icon }}</span>
-                  <span class="sample-label">{{ sample.label }}</span>
+                  <span class="sample-label">{{ translate(sample.labelKey) }}</span>
                 </div>
               </div>
             </div>
@@ -122,7 +132,7 @@
                 :loading="processing"
               >
                 <span v-if="!processing" class="btn-icon">🔇</span>
-                {{ processing ? 'Processing...' : buttonText }}
+                {{ translate(processing ? 'noiseReducer.actions.processing' : buttonTextKey) }}
               </el-button>
 
               <!-- 下载按钮 -->
@@ -133,8 +143,8 @@
                 >
                   <span class="btn-icon">👁️</span>
                   <span class="btn-label">
-                    Preview (5s)
-                    <small>Quick preview with noise reduction</small>
+                    {{ translate('noiseReducer.actions.previewTitle') }}
+                    <small>{{ translate('noiseReducer.actions.previewSubtitle') }}</small>
                   </span>
                 </el-button>
 
@@ -145,8 +155,8 @@
                 >
                   <span class="btn-icon">⬇️</span>
                   <span class="btn-label">
-                    Download Full Video
-                    <small>Complete noise-reduced video</small>
+                    {{ translate('noiseReducer.actions.downloadFull') }}
+                    <small>{{ translate('noiseReducer.actions.downloadFullSubtitle') }}</small>
                   </span>
                 </el-button>
               </template>
@@ -155,7 +165,7 @@
               <div v-if="processing" class="process-info">
                 <div class="process-status">
                   <span class="status-icon">⏳</span>
-                  <span class="status-text">Processing your video...</span>
+                  <span class="status-text">{{ translate('noiseReducer.processing.status') }}</span>
                   <span class="status-percent">{{ processPercent }}%</span>
                 </div>
                 <el-progress
@@ -165,15 +175,15 @@
                   color="#6366f1"
                 />
                 <div class="process-details">
-                  <small>Analyzing audio • Removing noise • Optimizing quality</small>
+                  <small>{{ translate('noiseReducer.processing.details') }}</small>
                 </div>
               </div>
 
               <!-- 完成状态 -->
               <div v-if="processingComplete && !processing" class="process-complete">
                 <div class="complete-icon">✅</div>
-                <div class="complete-text">Noise Reduction Complete!</div>
-                <div class="complete-subtitle">Your video is ready for download</div>
+                <div class="complete-text">{{ translate('noiseReducer.processing.completeTitle') }}</div>
+                <div class="complete-subtitle">{{ translate('noiseReducer.processing.completeSubtitle') }}</div>
               </div>
             </div>
           </div>
@@ -182,7 +192,7 @@
         <!-- 对比区域 -->
         <div class="comparison-section">
           <div class="comparison-header">
-            <h2 class="comparison-title">Audio Comparison</h2>
+            <h2 class="comparison-title">{{ translate('noiseReducer.comparison.title') }}</h2>
             <div v-show="showVideoControls" class="comparison-controls">
               <el-button
                 class="control-btn"
@@ -191,7 +201,7 @@
                 round
               >
                 <span class="control-icon">{{ isPlaying ? '⏸️' : '▶️' }}</span>
-                {{ isPlaying ? 'Pause' : 'Play' }}
+                {{ translate(isPlaying ? 'noiseReducer.controls.pause' : 'noiseReducer.controls.play') }}
               </el-button>
               <el-button
                 class="control-btn"
@@ -200,7 +210,7 @@
                 round
               >
                 <span class="control-icon">🔄</span>
-                Restart
+                {{ translate('noiseReducer.controls.restart') }}
               </el-button>
               <el-button
                 class="control-btn"
@@ -209,7 +219,7 @@
                 round
               >
                 <span class="control-icon">{{ isMuted ? '🔇' : '🔊' }}</span>
-                {{ isMuted ? 'Muted' : 'Sound' }}
+                {{ translate(isMuted ? 'noiseReducer.controls.muted' : 'noiseReducer.controls.sound') }}
               </el-button>
               <el-slider
                 v-model="videoProgress"
@@ -224,8 +234,8 @@
             <!-- 原始视频 -->
             <div class="comparison-item">
               <div class="comparison-label">
-                <span class="label-badge original">Original</span>
-                <span class="label-info">With Background Noise</span>
+                <span class="label-badge original">{{ translate('noiseReducer.comparison.original') }}</span>
+                <span class="label-info">{{ translate('noiseReducer.comparison.originalInfo') }}</span>
               </div>
               <div class="video-wrapper" @click="toggleVideoPlayPause('original')">
                 <video
@@ -243,8 +253,8 @@
                 <div v-if="!fileUploaded" class="upload-placeholder">
                   <div class="placeholder-info">
                     <span class="placeholder-icon">📁</span>
-                    <p class="placeholder-text">To be uploaded</p>
-                    <small class="placeholder-hint">Upload a video to begin</small>
+                    <p class="placeholder-text">{{ translate('noiseReducer.placeholders.uploadTitle') }}</p>
+                    <small class="placeholder-hint">{{ translate('noiseReducer.placeholders.uploadHint') }}</small>
                   </div>
                 </div>
               </div>
@@ -252,17 +262,17 @@
 
             <!-- VS 分隔符 -->
             <div class="comparison-divider">
-              <div class="divider-icon">VS</div>
+              <div class="divider-icon">{{ translate('noiseReducer.comparison.vs') }}</div>
             </div>
 
             <!-- 处理后的视频 -->
             <div class="comparison-item">
               <div class="comparison-label">
-                <span class="label-badge processed">Processed</span>
-                <span class="label-info">Noise Reduced</span>
+                <span class="label-badge processed">{{ translate('noiseReducer.comparison.processed') }}</span>
+                <span class="label-info">{{ translate('noiseReducer.comparison.processedInfo') }}</span>
               </div>
               <div class="video-wrapper" @click="toggleVideoPlayPause('processed')">
-                <div v-if="processingComplete" class="preview-badge">Preview</div>
+                <div v-if="processingComplete" class="preview-badge">{{ translate('noiseReducer.processing.previewBadge') }}</div>
                 <video
                   v-show="showProcessedVideo"
                   ref="processedVideo"
@@ -276,8 +286,8 @@
                 <div v-if="!processingComplete || !fileUploaded" class="process-placeholder">
                   <div class="placeholder-info">
                     <span class="placeholder-icon">{{ placeholderIcon }}</span>
-                    <p class="placeholder-text">{{ placeholderText }}</p>
-                    <small class="placeholder-hint">{{ placeholderHint }}</small>
+                    <p class="placeholder-text">{{ translate(placeholderTextKey) }}</p>
+                    <small class="placeholder-hint">{{ translate(placeholderHintKey) }}</small>
                   </div>
                 </div>
               </div>
@@ -299,26 +309,30 @@
 </template>
 
 <script>
+import { supportedLocales, translate as translateText } from './i18n'
+
 export default {
   name: 'NoiseReducer',
   data() {
     return {
+      availableLocales: supportedLocales,
+      locale: 'en-US',
       // 菜单项
       menuItems: [
-        { icon: '📊', label: 'Dashboard', active: false },
-        { icon: '🔇', label: 'Noise Reducer', active: true },
-        { icon: '✨', label: 'Video Enhancer', active: false },
-        { icon: '📝', label: 'Speech to Text', active: false },
-        { icon: '📁', label: 'My Projects', active: false },
-        { icon: '⚙️', label: 'Settings', active: false }
+        { icon: '📊', labelKey: 'menu.dashboard', active: false },
+        { icon: '🔇', labelKey: 'menu.noiseReducer', active: true },
+        { icon: '✨', labelKey: 'menu.videoEnhancer', active: false },
+        { icon: '📝', labelKey: 'menu.audioToText', active: false },
+        { icon: '📁', labelKey: 'menu.projects', active: false },
+        { icon: '⚙️', labelKey: 'menu.settings', active: false }
       ],
-      
+
       // 示例文件
       samples: [
-        { type: 'podcast', icon: '🎙️', label: 'Podcast', title: 'Podcast Recording' },
-        { type: 'meeting', icon: '👥', label: 'Meeting', title: 'Video Conference' },
-        { type: 'outdoor', icon: '🌳', label: 'Outdoor', title: 'Outdoor Recording' },
-        { type: 'traffic', icon: '🚗', label: 'Traffic', title: 'Street Recording' }
+        { type: 'podcast', icon: '🎙️', labelKey: 'noiseReducer.samples.podcast.label', titleKey: 'noiseReducer.samples.podcast.title', messageKey: 'noiseReducer.messages.sampleLoaded.podcast', canvasLabelKey: 'noiseReducer.samples.podcast.canvas' },
+        { type: 'meeting', icon: '👥', labelKey: 'noiseReducer.samples.meeting.label', titleKey: 'noiseReducer.samples.meeting.title', messageKey: 'noiseReducer.messages.sampleLoaded.meeting', canvasLabelKey: 'noiseReducer.samples.meeting.canvas' },
+        { type: 'outdoor', icon: '🌳', labelKey: 'noiseReducer.samples.outdoor.label', titleKey: 'noiseReducer.samples.outdoor.title', messageKey: 'noiseReducer.messages.sampleLoaded.outdoor', canvasLabelKey: 'noiseReducer.samples.outdoor.canvas' },
+        { type: 'traffic', icon: '🚗', labelKey: 'noiseReducer.samples.traffic.label', titleKey: 'noiseReducer.samples.traffic.title', messageKey: 'noiseReducer.messages.sampleLoaded.traffic', canvasLabelKey: 'noiseReducer.samples.traffic.canvas' }
       ],
       
       // 上传状态
@@ -336,8 +350,8 @@ export default {
       processing: false,
       processingComplete: false,
       processPercent: 0,
-      buttonText: 'Reduce Noise',
-      
+      buttonTextKey: 'noiseReducer.actions.reduce',
+
       // 视频控制
       isPlaying: false,
       isMuted: false, // 音频降噪默认不静音
@@ -351,11 +365,11 @@ export default {
       showProcessedVideo: false,
       originalVideoSrc: '',
       processedVideoSrc: '',
-      
+
       // 占位符状态
       placeholderIcon: '⏳',
-      placeholderText: 'To be processed',
-      placeholderHint: 'Click Reduce Noise to begin'
+      placeholderTextKey: 'noiseReducer.placeholders.pendingTitle',
+      placeholderHintKey: 'noiseReducer.placeholders.startHint'
     }
   },
   
@@ -370,6 +384,10 @@ export default {
   },
   
   methods: {
+    translate(key) {
+      return translateText(this.locale, key)
+    },
+
     // 初始化组件
     initializeComponent() {
       console.log('Noise Reducer component initialized')
@@ -428,7 +446,7 @@ export default {
     // 处理文件
     handleFiles(files) {
       if (files.length > 8) {
-        this.$message.warning('Maximum 8 files allowed at once')
+        this.$message.warning(this.translate('noiseReducer.messages.exceedLimit'))
         return
       }
       
@@ -438,14 +456,14 @@ export default {
       const fileType = file.type || 'video/mp4'
       
       if (!validTypes.some(type => fileType.includes(type.split('/')[1]))) {
-        this.$message.error('Please upload a valid video file')
+        this.$message.error(this.translate('noiseReducer.messages.invalidFile'))
         return
       }
-      
+
       // 检查文件大小 (2GB限制)
       const maxSize = 2 * 1024 * 1024 * 1024
       if (file.size > maxSize) {
-        this.$message.error('File size exceeds 2GB limit')
+        this.$message.error(this.translate('noiseReducer.messages.sizeLimit'))
         return
       }
       
@@ -470,7 +488,7 @@ export default {
           this.hasFile = true
           this.fileUploaded = true
           this.showComparisonWithFile()
-          this.$message.success('Video uploaded successfully')
+          this.$message.success(this.translate('noiseReducer.messages.uploadSuccess'))
         }, 500)
       }
       reader.readAsDataURL(file)
@@ -480,9 +498,9 @@ export default {
     showComparisonWithFile() {
       // 更新占位符提示
       this.placeholderIcon = '⏳'
-      this.placeholderText = 'Ready to process'
-      this.placeholderHint = 'Click Reduce Noise to begin'
-      
+      this.placeholderTextKey = 'noiseReducer.placeholders.ready'
+      this.placeholderHintKey = 'noiseReducer.placeholders.startHint'
+
       // 设置原始视频
       this.setupOriginalVideo()
     },
@@ -521,8 +539,8 @@ export default {
       if (this.$refs.fileInput) {
         this.$refs.fileInput.value = ''
       }
-      
-      this.$message.info('File removed')
+
+      this.$message.info(this.translate('noiseReducer.messages.fileRemoved'))
     },
     
     // 重置对比区域到初始状态
@@ -541,21 +559,21 @@ export default {
       
       this.originalVideoSrc = ''
       this.processedVideoSrc = ''
-      
+
       // 重置占位符
       this.placeholderIcon = '⏳'
-      this.placeholderText = 'To be processed'
-      this.placeholderHint = 'Upload a video first'
+      this.placeholderTextKey = 'noiseReducer.placeholders.pendingTitle'
+      this.placeholderHintKey = 'noiseReducer.placeholders.uploadFirst'
     },
-    
+
     // 重置处理状态
     resetProcessingState() {
       this.processing = false
       this.processingComplete = false
       this.processPercent = 0
-      this.buttonText = 'Reduce Noise'
+      this.buttonTextKey = 'noiseReducer.actions.reduce'
     },
-    
+
     // 加载示例
     loadSample(type) {
       // 创建示例视频（使用Canvas生成）
@@ -577,7 +595,10 @@ export default {
       ctx.fillStyle = '#333'
       ctx.font = '48px Arial'
       ctx.textAlign = 'center'
-      ctx.fillText(`${type.charAt(0).toUpperCase() + type.slice(1)} Sample`, 640, 360)
+      const sampleConfig = this.samples.find(sample => sample.type === type)
+      const canvasLabel = sampleConfig ? this.translate(sampleConfig.canvasLabelKey || sampleConfig.labelKey) :
+        `${type.charAt(0).toUpperCase() + type.slice(1)} Sample`
+      ctx.fillText(canvasLabel, 640, 360)
       
       // 转换为Blob
       canvas.toBlob((blob) => {
@@ -594,7 +615,11 @@ export default {
           this.hasFile = true
           this.fileUploaded = true
           this.showComparisonWithFile()
-          this.$message.success(`${type.charAt(0).toUpperCase() + type.slice(1)} sample loaded`)
+          if (sampleConfig && sampleConfig.messageKey) {
+            this.$message.success(this.translate(sampleConfig.messageKey))
+          } else {
+            this.$message.success(this.translate('noiseReducer.messages.sampleLoaded.generic'))
+          }
         }, 500)
       })
     },
@@ -602,13 +627,15 @@ export default {
     // 开始处理
     startProcessing() {
       if (!this.fileUploaded && !this.filePreview) {
-        this.$message.warning('Please upload a video first')
+        this.$message.warning(this.translate('noiseReducer.messages.uploadRequired'))
         return
       }
       
       this.processing = true
       this.processPercent = 0
-      
+      this.placeholderTextKey = 'noiseReducer.placeholders.processingTitle'
+      this.placeholderHintKey = 'noiseReducer.placeholders.waitHint'
+
       // 模拟处理进度
       const interval = setInterval(() => {
         this.processPercent += Math.random() * 15
@@ -631,7 +658,7 @@ export default {
       this.processedVideoSrc = this.originalVideoSrc
       this.showProcessedVideo = true
       
-      this.$message.success('Noise reduction completed!')
+      this.$message.success(this.translate('noiseReducer.messages.processingComplete'))
     },
     
     // 视频控制
@@ -724,10 +751,10 @@ export default {
     
     // 下载预览
     downloadPreview() {
-      this.$message.info('Downloading 5-second preview...')
+      this.$message.info(this.translate('noiseReducer.messages.downloadPreview'))
       // 实际实现下载逻辑
     },
-    
+
     // 下载完整视频
     downloadFull() {
       const link = document.createElement('a')
@@ -735,7 +762,7 @@ export default {
       link.download = `noise_reduced_${this.fileName}`
       link.click()
       
-      this.$message.success('Download started')
+      this.$message.success(this.translate('noiseReducer.messages.downloadStarted'))
     }
   }
 }
@@ -793,5 +820,26 @@ export default {
   font-size: 12px;
   margin-top: 4px;
   display: block;
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.language-label {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.language-select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  font-size: 12px;
+  color: #1e293b;
 }
 </style>
