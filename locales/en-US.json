@@ -306,6 +306,12 @@
     "processing": {
       "inProgress": "Transcribing your media...",
       "details": "Processing audio • Recognizing speech • Generating text",
+      "detailsGenerate": "Analyzing audio • Recognizing speech • Generating text",
+      "detailsTranslate": "Analyzing audio • Recognizing speech • Translating text",
+      "statusAnalyzing": "Analyzing audio...",
+      "statusRecognizing": "Recognizing speech...",
+      "statusTranslating": "Translating text...",
+      "statusGenerating": "Generating text...",
       "translatePrefix": "Translating to ",
       "completeTitle": "Transcription Complete!",
       "completeSubtitle": "Your transcript is ready for download"
@@ -314,9 +320,26 @@
       "totalSizeLimit": "Total file size exceeds 2GB limit",
       "languageConflict": "Source language and translation language cannot be the same",
       "uploadRequired": "Please upload a file or select a sample first",
+      "maxFiles": "Maximum 8 files allowed at once",
+      "uploadSuccess": "File uploaded successfully",
+      "fileRemoved": "File removed",
+      "sampleLoaded": "Sample loaded successfully",
+      "processingComplete": "Transcription completed successfully!",
+      "copySuccess": "Text copied to clipboard",
+      "copyFailed": "Failed to copy text",
+      "downloadStarted": "Download started",
       "downloading": "Downloading"
     },
+    "result": {
+      "title": "Transcription Result",
+      "copy": "Copy Text",
+      "saveAs": "Save as {format}",
+      "words": "Words: {count}",
+      "characters": "Characters: {count}",
+      "language": "Language: {language}"
+    },
     "languageNames": {
+      "auto": "English (Auto-detected)",
       "en": "English",
       "zh": "Chinese (Simplified)",
       "zhTw": "Chinese (Traditional)",
@@ -432,75 +455,97 @@
   },
   "noiseReducer": {
     "header": {
-      "title": "Noise Reducer",
-      "subtitle": "Remove background noise from videos with AI for clear, crisp sound. Ideal for podcasts, narration, and voiceovers."
+      "title": "Audio Noise Reducer",
+      "subtitle": "Remove background noise, hum, and unwanted sounds from your videos using advanced AI-powered audio processing technology."
     },
     "upload": {
-      "title": "Upload Media",
-      "instructions": "Click, drop, or paste files to upload",
-      "hint": "Up to 8 files can be uploaded at a time",
+      "title": "Upload Video",
+      "drop": "Drop your video here",
+      "browse": "or click to browse",
       "button": "Choose Files",
-      "supported": "Support format: .mp4, .mov, .m4v, .3gp, .avi",
-      "noFile": "No file selected"
+      "supported": "Supported: .mp4, .mov, .m4v, .3gp, .avi (Max 8 files, 2GB each)"
     },
     "samples": {
       "title": "Quick Samples",
       "podcast": {
         "label": "Podcast",
-        "title": "Podcast Sample"
+        "title": "Podcast Sample",
+        "canvas": "Podcast Sample"
       },
       "meeting": {
         "label": "Meeting",
-        "title": "Meeting Sample"
+        "title": "Meeting Sample",
+        "canvas": "Meeting Sample"
       },
       "outdoor": {
         "label": "Outdoor",
-        "title": "Outdoor Sample"
+        "title": "Outdoor Sample",
+        "canvas": "Outdoor Sample"
       },
       "traffic": {
         "label": "Traffic",
-        "title": "Traffic Sample"
+        "title": "Traffic Sample",
+        "canvas": "Traffic Sample"
       }
     },
     "actions": {
       "reduce": "Reduce Noise",
       "processing": "Processing...",
-      "preview": "Download 5s Preview Video",
-      "previewSubtitle": "Free!",
+      "previewTitle": "Preview (5s)",
+      "previewSubtitle": "Quick preview with noise reduction",
       "downloadFull": "Download Full Video",
-      "downloadFullSubtitle": "You are Pro member"
+      "downloadFullSubtitle": "Complete noise-reduced video"
     },
     "processing": {
-      "inProgress": "Processing audio...",
-      "details": "Analyzing frequencies • Removing noise • Enhancing clarity",
+      "status": "Processing your video...",
+      "inProgress": "Processing your video...",
+      "details": "Analyzing audio • Removing noise • Optimizing quality",
       "completeTitle": "Noise Reduction Complete!",
-      "completeSubtitle": "Your clean audio is ready",
-      "previewBadge": "5s Preview",
-      "placeholderProcessing": "Processing...",
-      "placeholderPending": "To be processed",
-      "placeholderWaitHint": "Please wait",
-      "placeholderStartHint": "Click Reduce Noise to begin"
+      "completeSubtitle": "Your video is ready for download",
+      "previewBadge": "Preview"
+    },
+    "controls": {
+      "play": "Play",
+      "pause": "Pause",
+      "restart": "Restart",
+      "muted": "Muted",
+      "sound": "Sound"
     },
     "comparison": {
       "title": "Audio Comparison",
       "original": "Original",
-      "processed": "After",
-      "defaultFileName": "test_video copy 2.mp4",
-      "ready": "Ready to process"
+      "originalInfo": "With Background Noise",
+      "processed": "Processed",
+      "processedInfo": "Noise Reduced",
+      "vs": "VS"
+    },
+    "placeholders": {
+      "pendingTitle": "To be processed",
+      "startHint": "Click Reduce Noise to begin",
+      "ready": "Ready to process",
+      "uploadTitle": "To be uploaded",
+      "uploadHint": "Upload a video to begin",
+      "uploadFirst": "Upload a video first",
+      "processingTitle": "Processing...",
+      "waitHint": "Please wait"
     },
     "messages": {
-      "invalidFile": "Please upload video files only!",
+      "invalidFile": "Please upload a valid video file",
       "exceedLimit": "Maximum 8 files allowed at once",
+      "sizeLimit": "File size exceeds the 2GB limit",
+      "uploadSuccess": "Video uploaded successfully",
+      "fileRemoved": "File removed",
       "sampleLoaded": {
         "podcast": "Loaded podcast sample",
         "meeting": "Loaded meeting sample",
         "outdoor": "Loaded outdoor sample",
-        "traffic": "Loaded traffic sample"
+        "traffic": "Loaded traffic sample",
+        "generic": "Sample loaded successfully"
       },
       "uploadRequired": "Please upload a file first",
       "processingComplete": "Noise reduction completed!",
-      "downloadPreview": "Downloading 5s preview video...",
-      "downloadFull": "Downloading full video..."
+      "downloadPreview": "Downloading 5-second preview...",
+      "downloadStarted": "Download started"
     }
   },
   "adGenerator": {

@@ -2,7 +2,7 @@
   <div class="video-audio-to-text-page">
     <!-- 侧边栏 -->
     <aside class="sidebar">
-      <div class="logo">MediaEnhance Pro</div>
+      <div class="logo">{{ translate('app.brand') }}</div>
       <nav class="nav-menu">
         <div
           v-for="(item, index) in menuItems"
@@ -11,15 +11,15 @@
           @click="handleMenuClick(index)"
         >
           <span class="nav-icon">{{ item.icon }}</span>
-          <span>{{ item.label }}</span>
+          <span>{{ translate(item.labelKey) }}</span>
         </div>
       </nav>
       <div class="user-info">
         <div class="nav-item user-account">
           <span class="nav-icon">👤</span>
           <div class="user-details">
-            <div class="user-name">User Account</div>
-            <div class="user-plan">Pro Member</div>
+            <div class="user-name">{{ translate('app.user.account') }}</div>
+            <div class="user-plan">{{ translate('app.user.proMember') }}</div>
           </div>
         </div>
       </div>
@@ -30,9 +30,19 @@
       <div class="content-wrapper">
         <!-- 标题区域 -->
         <div class="header">
-          <h1 class="header-title">Video & Audio to Text</h1>
+          <div class="language-switcher">
+            <label :for="`${$options.name}-locale`" class="language-label">
+              {{ translate('language.label') }}
+            </label>
+            <select :id="`${$options.name}-locale`" v-model="locale" class="language-select">
+              <option v-for="code in availableLocales" :key="code" :value="code">
+                {{ translate(`language.options.${code}`) }}
+              </option>
+            </select>
+          </div>
+          <h1 class="header-title">{{ translate('audioToText.header.title') }}</h1>
           <p class="header-subtitle">
-            Convert your video and audio files into accurate text transcriptions using advanced AI speech recognition technology. Support for multiple languages and export formats.
+            {{ translate('audioToText.header.subtitle') }}
           </p>
         </div>
 
@@ -42,7 +52,7 @@
           <div class="workspace-left">
             <!-- 上传区域 -->
             <div class="upload-container">
-              <h3 class="section-title">Upload Media</h3>
+              <h3 class="section-title">{{ translate('audioToText.upload.title') }}</h3>
               <div
                 :class="['upload-area', { 'has-file': hasFile, 'dragover': isDragover }]"
                 @drop.prevent="handleDrop"
@@ -55,10 +65,10 @@
                 <!-- 上传内容 -->
                 <div v-if="!filePreview" class="upload-content">
                   <div class="upload-icon">⬆️</div>
-                  <div class="upload-title">Drop your media files here</div>
-                  <div class="upload-subtitle">or click to browse</div>
+                  <div class="upload-title">{{ translate('audioToText.upload.instructions') }}</div>
+                  <div class="upload-subtitle">{{ translate('audioToText.upload.hint') }}</div>
                   <el-button type="primary" size="small" class="upload-btn-small" @click.stop="triggerFileInput">
-                    Choose Files
+                    {{ translate('audioToText.upload.button') }}
                   </el-button>
                   <input
                     ref="fileInput"
@@ -84,7 +94,7 @@
                         <div class="media-icon">{{ mediaIcon }}</div>
                         <div class="media-info">
                           <div class="media-name">{{ fileName }}</div>
-                          <div class="media-duration">Duration: {{ mediaDuration }}</div>
+                          <div class="media-duration">{{ translate('audioToText.preview.durationLabel') }} {{ mediaDuration }}</div>
                         </div>
                         <div v-if="showWaveform" class="audio-waveform">
                           <div v-for="n in 20" :key="n" class="wave-bar" :style="{ height: Math.random() * 100 + '%' }"></div>
@@ -99,20 +109,20 @@
                 </div>
               </div>
               <div class="supported-formats">
-                Supported: .mp4, .mov, .m4v, .mp3, .wav, .m4a, .aac (Max 8 files, 2GB total)
+                {{ translate('audioToText.upload.supported') }}
               </div>
             </div>
 
             <!-- 示例文件 -->
             <div class="samples-container">
-              <h3 class="section-title">Quick Samples</h3>
+              <h3 class="section-title">{{ translate('audioToText.samples.title') }}</h3>
               <div class="sample-grid">
                 <div
                   v-for="sample in samples"
                   :key="sample.type"
                   class="sample-item"
                   @click="loadSample(sample.type)"
-                  :title="sample.title"
+                  :title="translate(sample.titleKey)"
                 >
                   <span class="sample-icon">{{ sample.icon }}</span>
                 </div>
@@ -124,34 +134,29 @@
           <div class="workspace-right">
             <!-- 转录设置 -->
             <div class="settings-container">
-              <h3 class="section-title">Transcription Settings</h3>
-              
+              <h3 class="section-title">{{ translate('audioToText.settings.title') }}</h3>
+
               <!-- 语言选择 -->
               <div class="setting-group">
-                <div class="setting-label">Language Detection</div>
+                <div class="setting-label">{{ translate('audioToText.settings.languageDetection') }}</div>
                 <el-select
                   v-model="languageSelect"
-                  placeholder="Select language"
+                  :placeholder="translate('audioToText.settings.languagePlaceholder')"
                   class="language-select-element"
                   @change="handleLanguageChange"
                 >
-                  <el-option label="Auto-detect Language" value="auto"></el-option>
-                  <el-option label="English" value="en"></el-option>
-                  <el-option label="Spanish" value="es"></el-option>
-                  <el-option label="French" value="fr"></el-option>
-                  <el-option label="German" value="de"></el-option>
-                  <el-option label="Chinese (Mandarin)" value="zh"></el-option>
-                  <el-option label="Japanese" value="ja"></el-option>
-                  <el-option label="Korean" value="ko"></el-option>
-                  <el-option label="Arabic" value="ar"></el-option>
-                  <el-option label="Russian" value="ru"></el-option>
-                  <el-option label="Portuguese" value="pt"></el-option>
+                  <el-option
+                    v-for="(label, code) in languageOptions"
+                    :key="code"
+                    :label="label"
+                    :value="code"
+                  />
                 </el-select>
               </div>
 
               <!-- 翻译选项 -->
               <div class="setting-group">
-                <div class="setting-label">Translation Options</div>
+                <div class="setting-label">{{ translate('audioToText.settings.translationTitle') }}</div>
                 <div class="translation-toggle">
                   <el-switch
                     v-model="enableTranslation"
@@ -159,32 +164,23 @@
                     @change="handleTranslationToggle"
                   >
                   </el-switch>
-                  <span class="toggle-label">Enable Translation</span>
+                  <span class="toggle-label">{{ translate('audioToText.settings.enableTranslation') }}</span>
                 </div>
                 <transition name="slide">
                   <div v-if="enableTranslation" class="translation-language-wrapper">
-                    <div class="setting-sublabel">Translate to:</div>
+                    <div class="setting-sublabel">{{ translate('audioToText.settings.translateTo') }}</div>
                     <el-select
                       v-model="translationLanguage"
-                      placeholder="Select translation language"
+                      :placeholder="translate('audioToText.settings.translationPlaceholder')"
                       class="language-select-element"
                       @change="handleTranslationLanguageChange"
                     >
-                      <el-option label="English" value="en"></el-option>
-                      <el-option label="Chinese (Simplified)" value="zh"></el-option>
-                      <el-option label="Chinese (Traditional)" value="zh-tw"></el-option>
-                      <el-option label="Spanish" value="es"></el-option>
-                      <el-option label="French" value="fr"></el-option>
-                      <el-option label="German" value="de"></el-option>
-                      <el-option label="Japanese" value="ja"></el-option>
-                      <el-option label="Korean" value="ko"></el-option>
-                      <el-option label="Arabic" value="ar"></el-option>
-                      <el-option label="Russian" value="ru"></el-option>
-                      <el-option label="Portuguese" value="pt"></el-option>
-                      <el-option label="Italian" value="it"></el-option>
-                      <el-option label="Dutch" value="nl"></el-option>
-                      <el-option label="Hindi" value="hi"></el-option>
-                      <el-option label="Thai" value="th"></el-option>
+                      <el-option
+                        v-for="(label, code) in translationOptions"
+                        :key="code"
+                        :label="label"
+                        :value="code"
+                      />
                     </el-select>
                   </div>
                 </transition>
@@ -192,14 +188,14 @@
 
               <!-- 输出格式 -->
               <div class="setting-group">
-                <div class="setting-label">Output Format</div>
+                <div class="setting-label">{{ translate('audioToText.settings.outputFormat') }}</div>
                 <el-radio-group v-model="outputFormat" @change="handleFormatChange">
                   <div class="format-options">
                     <label class="format-option">
                       <el-radio label="txt">
                         <div class="format-content">
                           <span class="format-icon">📄</span>
-                          <span class="format-title">TXT</span>
+                          <span class="format-title">{{ translate('audioToText.settings.formats.txt') }}</span>
                         </div>
                       </el-radio>
                     </label>
@@ -207,7 +203,7 @@
                       <el-radio label="srt">
                         <div class="format-content">
                           <span class="format-icon">📺</span>
-                          <span class="format-title">SRT</span>
+                          <span class="format-title">{{ translate('audioToText.settings.formats.srt') }}</span>
                         </div>
                       </el-radio>
                     </label>
@@ -227,7 +223,7 @@
                 :loading="processing"
               >
                 <span v-if="!processing" class="btn-icon">🎯</span>
-                {{ buttonText }}
+                {{ translate(buttonTextKey) }}
               </el-button>
               
               <el-button
@@ -237,14 +233,14 @@
                 @click="downloadTranscription"
               >
                 <span class="btn-icon">⬇️</span>
-                Download Transcription
+                {{ translate('audioToText.actions.download') }}
               </el-button>
 
               <!-- 处理进度 -->
               <div v-if="processing" class="process-info">
                 <div class="process-status">
                   <span class="status-icon">⏳</span>
-                  <span class="status-text">{{ processStatusText }}</span>
+                  <span class="status-text">{{ translate(processStatusKey) }}</span>
                   <span class="status-percent">{{ processPercent }}%</span>
                 </div>
                 <el-progress
@@ -254,15 +250,15 @@
                   color="#6366f1"
                 />
                 <div class="process-details">
-                  <small>{{ processDetailsText }}</small>
+                  <small>{{ translate(processDetailsKey) }}</small>
                 </div>
               </div>
 
               <!-- 完成状态 -->
               <div v-if="processingComplete && !processing" class="process-complete">
                 <div class="complete-icon">✅</div>
-                <div class="complete-text">Transcription Complete!</div>
-                <div class="complete-subtitle">Your text is ready for download</div>
+                <div class="complete-text">{{ translate('audioToText.processing.completeTitle') }}</div>
+                <div class="complete-subtitle">{{ translate('audioToText.processing.completeSubtitle') }}</div>
               </div>
             </div>
           </div>
@@ -271,7 +267,7 @@
         <!-- 转录结果区域 -->
         <div v-if="transcriptionText" class="transcription-section">
           <div class="transcription-header">
-            <h2 class="transcription-title">Transcription Result</h2>
+            <h2 class="transcription-title">{{ translate('audioToText.result.title') }}</h2>
             <div class="transcription-controls">
               <el-button
                 size="small"
@@ -279,7 +275,7 @@
                 @click="copyToClipboard"
               >
                 <span class="control-icon">📋</span>
-                Copy Text
+                {{ translate('audioToText.result.copy') }}
               </el-button>
               <el-button
                 size="small"
@@ -287,7 +283,7 @@
                 @click="downloadTranscription"
               >
                 <span class="control-icon">💾</span>
-                Save as {{ outputFormat.toUpperCase() }}
+                {{ formatMessage('audioToText.result.saveAs', { format: outputFormat.toUpperCase() }) }}
               </el-button>
             </div>
           </div>
@@ -296,9 +292,9 @@
           </div>
           <div class="transcription-footer">
             <div class="transcription-stats">
-              <span>Words: {{ wordCount }}</span>
-              <span>Characters: {{ charCount }}</span>
-              <span>Language: {{ detectedLanguage }}</span>
+              <span>{{ formatMessage('audioToText.result.words', { count: wordCount }) }}</span>
+              <span>{{ formatMessage('audioToText.result.characters', { count: charCount }) }}</span>
+              <span>{{ formatMessage('audioToText.result.language', { language: detectedLanguageLabel }) }}</span>
             </div>
           </div>
         </div>
@@ -308,26 +304,33 @@
 </template>
 
 <script>
+import { supportedLocales, translate as translateText } from './i18n'
+
 export default {
   name: 'VideoAudioToText',
   data() {
     return {
+      availableLocales: supportedLocales,
+      locale: 'en-US',
       // 菜单项
       menuItems: [
-        { icon: '📊', label: 'Dashboard', active: false },
-        { icon: '📝', label: 'Speech to Text', active: true },
-        { icon: '🎨', label: 'Style Transfer', active: false },
-        { icon: '🔊', label: 'Audio Enhancement', active: false },
-        { icon: '📁', label: 'My Projects', active: false },
-        { icon: '⚙️', label: 'Settings', active: false }
+        { icon: '📊', labelKey: 'menu.dashboard', active: false },
+        { icon: '📝', labelKey: 'menu.audioToText', active: true },
+        { icon: '🎨', labelKey: 'menu.styleTransfer', active: false },
+        { icon: '🔊', labelKey: 'menu.audioEnhancement', active: false },
+        { icon: '📁', labelKey: 'menu.projects', active: false },
+        { icon: '⚙️', labelKey: 'menu.settings', active: false }
       ],
-      
+
+      languageOptionCodes: ['auto', 'en', 'es', 'fr', 'de', 'zh', 'ja', 'ko', 'ar', 'ru', 'pt'],
+      translationOptionCodes: ['en', 'zh', 'zhTw', 'es', 'fr', 'de', 'ja', 'ko', 'ar', 'ru', 'pt', 'it', 'nl', 'hi', 'th'],
+
       // 示例文件
       samples: [
-        { type: 'interview', icon: '🎙️', title: 'Interview Sample' },
-        { type: 'podcast', icon: '🎧', title: 'Podcast Sample' },
-        { type: 'meeting', icon: '💼', title: 'Meeting Sample' },
-        { type: 'lecture', icon: '🎓', title: 'Lecture Sample' }
+        { type: 'interview', icon: '🎙️', titleKey: 'audioToText.samples.interview' },
+        { type: 'podcast', icon: '🎧', titleKey: 'audioToText.samples.podcast' },
+        { type: 'meeting', icon: '💼', titleKey: 'audioToText.samples.meeting' },
+        { type: 'lecture', icon: '🎓', titleKey: 'audioToText.samples.lecture' }
       ],
       
       // 上传状态
@@ -345,26 +348,45 @@ export default {
       mediaIcon: '🎵',
       mediaDuration: '00:00',
       showWaveform: false,
-      
+
       // 设置选项
       languageSelect: 'auto',
       enableTranslation: false,
       translationLanguage: 'en',
       outputFormat: 'txt',
-      
+
       // 处理状态
       processing: false,
       processingComplete: false,
       processPercent: 0,
-      buttonText: 'Start Transcription',
-      processStatusText: 'Processing your media...',
-      processDetailsText: 'Analyzing audio • Recognizing speech • Generating text',
-      
+      buttonTextKey: 'audioToText.actions.start',
+      processStatusKey: 'audioToText.processing.inProgress',
+      processDetailsKey: 'audioToText.processing.detailsGenerate',
+
       // 转录结果
       transcriptionText: '',
-      detectedLanguage: 'English',
+      detectedLanguageCode: 'en',
       wordCount: 0,
       charCount: 0
+    }
+  },
+
+  computed: {
+    languageOptions() {
+      return this.languageOptionCodes.reduce((options, code) => {
+        options[code] = this.translate(`audioToText.settings.languages.${code}`)
+        return options
+      }, {})
+    },
+    translationOptions() {
+      return this.translationOptionCodes.reduce((options, code) => {
+        const key = code === 'zhTw' ? 'audioToText.settings.translation.zhTw' : `audioToText.settings.translation.${code}`
+        options[code] = this.translate(key)
+        return options
+      }, {})
+    },
+    detectedLanguageLabel() {
+      return this.getLanguageName(this.detectedLanguageCode)
     }
   },
   
@@ -379,6 +401,24 @@ export default {
   },
   
   methods: {
+    translate(key) {
+      return translateText(this.locale, key)
+    },
+    formatMessage(key, params = {}) {
+      let message = this.translate(key)
+      Object.entries(params || {}).forEach(([paramKey, value]) => {
+        message = message.replace(new RegExp(`{${paramKey}}`, 'g'), value)
+      })
+      return message
+    },
+    getLanguageName(code) {
+      if (!code) {
+        return ''
+      }
+      const normalized = code === 'zh-tw' ? 'zhTw' : code
+      return this.translate(`audioToText.languageNames.${normalized}`)
+    },
+
     // 初始化组件
     initializeComponent() {
       console.log('Video Audio to Text component initialized')
@@ -434,14 +474,14 @@ export default {
     // 处理文件
     handleFiles(files) {
       if (files.length > 8) {
-        this.$message.warning('Maximum 8 files allowed at once')
+        this.$message.warning(this.translate('audioToText.messages.maxFiles'))
         return
       }
-      
+
       // 检查文件大小 (2GB限制)
       const maxSize = 2 * 1024 * 1024 * 1024
       if (files[0].size > maxSize) {
-        this.$message.error('File size exceeds 2GB limit')
+        this.$message.error(this.translate('audioToText.messages.totalSizeLimit'))
         return
       }
       
@@ -479,7 +519,7 @@ export default {
           this.uploadSuccess = true
           this.hasFile = true
           this.fileUploaded = true
-          this.$message.success('File uploaded successfully')
+          this.$message.success(this.translate('audioToText.messages.uploadSuccess'))
         }, 500)
       }
       reader.readAsDataURL(file)
@@ -515,8 +555,8 @@ export default {
       if (this.previewUrl && this.previewUrl.startsWith('blob:')) {
         URL.revokeObjectURL(this.previewUrl)
       }
-      
-      this.$message.info('File removed')
+
+      this.$message.info(this.translate('audioToText.messages.fileRemoved'))
     },
     
     // 加载示例
@@ -574,7 +614,7 @@ export default {
         this.uploadSuccess = true
         this.hasFile = true
         this.fileUploaded = true
-        this.$message.success('Sample loaded successfully')
+        this.$message.success(this.translate('audioToText.messages.sampleLoaded'))
       }, 500)
     },
     
@@ -611,11 +651,11 @@ export default {
     
     // 检查语言冲突
     checkLanguageConflict() {
-      if (this.enableTranslation && 
-          this.languageSelect !== 'auto' && 
+      if (this.enableTranslation &&
+          this.languageSelect !== 'auto' &&
           this.languageSelect === this.translationLanguage) {
-        this.$message.warning('Source language and translation language cannot be the same')
-        
+        this.$message.warning(this.translate('audioToText.messages.languageConflict'))
+
         // 自动切换到其他语言
         if (this.languageSelect !== 'en') {
           this.translationLanguage = 'en'
@@ -636,17 +676,17 @@ export default {
     
     // 重置为需要重新处理状态
     resetToReprocess() {
-      this.buttonText = 'Retranscribe'
+      this.buttonTextKey = 'audioToText.actions.retry'
       this.processingComplete = false
       this.transcriptionText = ''
     },
-    
+
     // 重置处理状态
     resetProcessingState() {
       this.processing = false
       this.processingComplete = false
       this.processPercent = 0
-      this.buttonText = 'Start Transcription'
+      this.buttonTextKey = 'audioToText.actions.start'
       this.transcriptionText = ''
       this.wordCount = 0
       this.charCount = 0
@@ -655,43 +695,44 @@ export default {
     // 开始转录
     startTranscription() {
       if (!this.fileUploaded && !this.filePreview) {
-        this.$message.warning('Please upload a file first')
+        this.$message.warning(this.translate('audioToText.messages.uploadRequired'))
         return
       }
-      
+
       this.processing = true
       this.processPercent = 0
       this.transcriptionText = ''
-      
+
       // 更新处理状态文本
-      if (this.enableTranslation) {
-        this.processDetailsText = 'Analyzing audio • Recognizing speech • Translating text'
-      } else {
-        this.processDetailsText = 'Analyzing audio • Recognizing speech • Generating text'
-      }
-      
+      this.processDetailsKey = this.enableTranslation
+        ? 'audioToText.processing.detailsTranslate'
+        : 'audioToText.processing.detailsGenerate'
+      this.processStatusKey = 'audioToText.processing.statusAnalyzing'
+
       // 模拟处理进度
       const interval = setInterval(() => {
         this.processPercent += Math.random() * 15
-        
+
         // 更新状态文本
         if (this.processPercent < 30) {
-          this.processStatusText = 'Analyzing audio...'
+          this.processStatusKey = 'audioToText.processing.statusAnalyzing'
         } else if (this.processPercent < 60) {
-          this.processStatusText = 'Recognizing speech...'
+          this.processStatusKey = 'audioToText.processing.statusRecognizing'
         } else if (this.processPercent < 90) {
-          this.processStatusText = this.enableTranslation ? 'Translating text...' : 'Generating text...'
+          this.processStatusKey = this.enableTranslation
+            ? 'audioToText.processing.statusTranslating'
+            : 'audioToText.processing.statusGenerating'
         }
-        
+
         if (this.processPercent >= 100) {
           this.processPercent = 100
           clearInterval(interval)
-          
+
           setTimeout(() => {
             this.processing = false
             this.processingComplete = true
             this.generateTranscriptionResult()
-            this.$message.success('Transcription completed successfully!')
+            this.$message.success(this.translate('audioToText.messages.processingComplete'))
           }, 500)
         }
       }, 200)
@@ -749,28 +790,28 @@ We hope you find the transcription helpful for your needs.`
       this.charCount = plainText.length
       
       // 设置检测到的语言
-      const languageMap = {
-        'auto': 'English (Auto-detected)',
-        'en': 'English',
-        'zh': 'Chinese',
-        'es': 'Spanish',
-        'fr': 'French',
-        'de': 'German',
-        'ja': 'Japanese',
-        'ko': 'Korean',
-        'ar': 'Arabic',
-        'ru': 'Russian',
-        'pt': 'Portuguese'
+      const languageCodeMap = {
+        auto: 'auto',
+        en: 'en',
+        zh: 'zh',
+        es: 'es',
+        fr: 'fr',
+        de: 'de',
+        ja: 'ja',
+        ko: 'ko',
+        ar: 'ar',
+        ru: 'ru',
+        pt: 'pt'
       }
-      this.detectedLanguage = languageMap[this.languageSelect] || 'English'
+      this.detectedLanguageCode = languageCodeMap[this.languageSelect] || 'en'
     },
     
     // 复制到剪贴板
     copyToClipboard() {
       navigator.clipboard.writeText(this.transcriptionText).then(() => {
-        this.$message.success('Text copied to clipboard')
+        this.$message.success(this.translate('audioToText.messages.copySuccess'))
       }).catch(() => {
-        this.$message.error('Failed to copy text')
+        this.$message.error(this.translate('audioToText.messages.copyFailed'))
       })
     },
     
@@ -782,8 +823,8 @@ We hope you find the transcription helpful for your needs.`
       link.href = URL.createObjectURL(blob)
       link.download = fileName
       link.click()
-      
-      this.$message.success('Download started')
+
+      this.$message.success(this.translate('audioToText.messages.downloadStarted'))
     }
   }
 }
@@ -863,5 +904,26 @@ We hope you find the transcription helpful for your needs.`
   50% {
     transform: scaleY(1);
   }
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.language-label {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.language-select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  font-size: 12px;
+  color: #1e293b;
 }
 </style>

@@ -306,6 +306,12 @@
     "processing": {
       "inProgress": "正在转写...",
       "details": "处理音频 • 识别语音 • 生成文本",
+      "detailsGenerate": "分析音频 • 识别语音 • 生成文本",
+      "detailsTranslate": "分析音频 • 识别语音 • 翻译文本",
+      "statusAnalyzing": "正在分析音频...",
+      "statusRecognizing": "正在识别语音...",
+      "statusTranslating": "正在翻译文本...",
+      "statusGenerating": "正在生成文本...",
       "translatePrefix": "翻译为 ",
       "completeTitle": "转写完成！",
       "completeSubtitle": "文本已准备好下载"
@@ -314,9 +320,26 @@
       "totalSizeLimit": "文件总大小超过 2GB 限制",
       "languageConflict": "源语言与翻译语言不能相同",
       "uploadRequired": "请先上传文件或选择示例",
+      "maxFiles": "一次最多只能上传 8 个文件",
+      "uploadSuccess": "文件上传成功",
+      "fileRemoved": "已移除文件",
+      "sampleLoaded": "示例加载成功",
+      "processingComplete": "转写完成！",
+      "copySuccess": "已复制到剪贴板",
+      "copyFailed": "复制失败",
+      "downloadStarted": "开始下载",
       "downloading": "正在下载"
     },
+    "result": {
+      "title": "转写结果",
+      "copy": "复制文本",
+      "saveAs": "保存为 {format}",
+      "words": "词数：{count}",
+      "characters": "字符：{count}",
+      "language": "语言：{language}"
+    },
     "languageNames": {
+      "auto": "英语（自动检测）",
       "en": "英语",
       "zh": "中文（简体）",
       "zhTw": "中文（繁体）",
@@ -432,75 +455,97 @@
   },
   "noiseReducer": {
     "header": {
-      "title": "智能降噪",
-      "subtitle": "利用 AI 消除视频中的背景噪声，让声音更清晰，适用于播客、旁白与配音。"
+      "title": "音频智能降噪",
+      "subtitle": "利用 AI 去除视频中的背景噪声、嗡嗡声与杂音，让声音更加清晰自然。"
     },
     "upload": {
-      "title": "上传素材",
-      "instructions": "点击、拖拽或粘贴文件上传",
-      "hint": "一次最多可上传 8 个文件",
+      "title": "上传视频",
+      "drop": "将视频拖拽到此处",
+      "browse": "或点击浏览",
       "button": "选择文件",
-      "supported": "支持格式：.mp4、.mov、.m4v、.3gp、.avi",
-      "noFile": "未选择文件"
+      "supported": "支持格式：.mp4、.mov、.m4v、.3gp、.avi（最多 8 个文件，单个不超过 2GB）"
     },
     "samples": {
       "title": "快速示例",
       "podcast": {
         "label": "播客",
-        "title": "播客示例"
+        "title": "播客示例",
+        "canvas": "播客示例"
       },
       "meeting": {
         "label": "会议",
-        "title": "会议示例"
+        "title": "会议示例",
+        "canvas": "会议示例"
       },
       "outdoor": {
         "label": "户外",
-        "title": "户外示例"
+        "title": "户外示例",
+        "canvas": "户外示例"
       },
       "traffic": {
         "label": "交通",
-        "title": "交通示例"
+        "title": "交通示例",
+        "canvas": "交通示例"
       }
     },
     "actions": {
       "reduce": "开始降噪",
       "processing": "处理中...",
-      "preview": "下载 5 秒预览视频",
-      "previewSubtitle": "免费",
+      "previewTitle": "预览（5 秒）",
+      "previewSubtitle": "快速体验降噪效果",
       "downloadFull": "下载完整视频",
-      "downloadFullSubtitle": "您是专业会员"
+      "downloadFullSubtitle": "完整降噪后的视频"
     },
     "processing": {
-      "inProgress": "正在处理音频...",
-      "details": "分析频率 • 去除噪声 • 提升清晰度",
+      "status": "正在处理视频...",
+      "inProgress": "正在处理视频...",
+      "details": "分析音频 • 去除噪声 • 优化音质",
       "completeTitle": "降噪完成！",
-      "completeSubtitle": "干净音频已准备就绪",
-      "previewBadge": "5 秒预览",
-      "placeholderProcessing": "处理中...",
-      "placeholderPending": "等待处理",
-      "placeholderWaitHint": "请稍候",
-      "placeholderStartHint": "点击开始降噪"
+      "completeSubtitle": "视频已准备好下载",
+      "previewBadge": "预览"
+    },
+    "controls": {
+      "play": "播放",
+      "pause": "暂停",
+      "restart": "重新开始",
+      "muted": "静音",
+      "sound": "打开声音"
     },
     "comparison": {
       "title": "音频对比",
       "original": "原始",
+      "originalInfo": "含背景噪声",
       "processed": "处理后",
-      "defaultFileName": "test_video copy 2.mp4",
-      "ready": "等待处理"
+      "processedInfo": "已降噪",
+      "vs": "对比"
+    },
+    "placeholders": {
+      "pendingTitle": "等待处理",
+      "startHint": "点击开始降噪",
+      "ready": "可以开始处理",
+      "uploadTitle": "等待上传",
+      "uploadHint": "上传视频即可开始",
+      "uploadFirst": "请先上传视频",
+      "processingTitle": "处理中...",
+      "waitHint": "请稍候"
     },
     "messages": {
-      "invalidFile": "请上传视频文件！",
+      "invalidFile": "请上传有效的视频文件",
       "exceedLimit": "一次最多只能上传 8 个文件",
+      "sizeLimit": "文件大小超过 2GB 限制",
+      "uploadSuccess": "视频上传成功",
+      "fileRemoved": "已移除文件",
       "sampleLoaded": {
         "podcast": "已加载播客示例",
         "meeting": "已加载会议示例",
         "outdoor": "已加载户外示例",
-        "traffic": "已加载交通示例"
+        "traffic": "已加载交通示例",
+        "generic": "示例加载成功"
       },
       "uploadRequired": "请先上传文件",
       "processingComplete": "降噪完成！",
-      "downloadPreview": "正在下载 5 秒预览视频...",
-      "downloadFull": "正在下载完整视频..."
+      "downloadPreview": "正在下载 5 秒预览...",
+      "downloadStarted": "开始下载"
     }
   },
   "adGenerator": {
