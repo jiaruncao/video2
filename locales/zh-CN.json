@@ -32,6 +32,110 @@
     "bloggerMonitor": "博主监控",
     "thumbnailGenerator": "缩略图生成器"
   },
+  "videoDeduplication": {
+    "header": {
+      "title": "批量视频去重",
+      "subtitle": "批量处理多个视频，去除重复片段并应用智能特效，打造独特内容。"
+    },
+    "upload": {
+      "title": "上传视频",
+      "drop": "将视频拖放到此处",
+      "browse": "或点击选择（支持多文件）",
+      "button": "选择文件",
+      "filesSelected": "已选择 {count} 个文件",
+      "clear": "清空全部",
+      "supported": "支持：.mp4、.mov、.m4v、.3gp、.avi、.mkv、.webm（单个文件最大 500MB）"
+    },
+    "actions": {
+      "start": "开始处理",
+      "processing": "处理中...",
+      "downloadAll": "下载全部结果"
+    },
+    "processing": {
+      "status": "正在处理 {file}...",
+      "details": "正在处理 {current}/{total} 个视频",
+      "completeTitle": "处理完成！",
+      "completeSubtitle": "所有视频已处理完成",
+      "placeholder": "..."
+    },
+    "processingMode": {
+      "title": "处理模式",
+      "smart": {
+        "title": "智能模式",
+        "desc": "自动优化"
+      },
+      "custom": {
+        "title": "自定义模式",
+        "desc": "手动设置"
+      },
+      "basic": "基础去重",
+      "effects": "特效选择"
+    },
+    "options": {
+      "basic": {
+        "removeduplicates": "去除重复",
+        "mirrorflip": "镜像翻转",
+        "randomshift": "随机平移",
+        "modifymd5": "修改 MD5",
+        "smartextract": "智能提取",
+        "smartcolor": "智能调色",
+        "sharpening": "锐化增强",
+        "randomspeed": "随机变速",
+        "trimheadtail": "裁剪片头片尾",
+        "randommirror": "随机镜像"
+      },
+      "effects": {
+        "scanline": "扫描线",
+        "spotlight": "聚光灯",
+        "fade": "淡入淡出",
+        "booklet": "画册效果",
+        "dissolve": "溶解",
+        "split": "分屏",
+        "product": "商品展示",
+        "film": "电影胶片",
+        "drama": "戏剧效果"
+      },
+      "zoom": {
+        "title": "画面缩放",
+        "stretch": "拉伸",
+        "compress": "压缩",
+        "dynamic": "动态缩放"
+      }
+    },
+    "results": {
+      "title": "处理结果",
+      "statistics": {
+        "total": "视频总数：",
+        "processed": "已处理：",
+        "effects": "特效数量：",
+        "success": "成功率："
+      },
+      "download": "下载",
+      "processedName": "processed_{name}",
+      "badgeSeparator": "、"
+    },
+    "messages": {
+      "invalidFile": "{name} 不是有效的视频文件",
+      "fileTooLarge": "{name} 超过 500MB 限制",
+      "filesAdded": "成功添加 {count} 个文件",
+      "uploadFirst": "请先上传视频",
+      "allCleared": "已清空所有文件",
+      "processingComplete": "所有视频处理成功！",
+      "prepareDownload": "正在准备下载全部处理结果..."
+    },
+    "effects": {
+      "smartMode": "智能模式",
+      "default": "默认"
+    },
+    "fileSize": {
+      "units": {
+        "bytes": "字节",
+        "kb": "KB",
+        "mb": "MB",
+        "gb": "GB"
+      }
+    }
+  },
   "videoEnhancer": {
     "header": {
       "title": "视频与图像增强",
