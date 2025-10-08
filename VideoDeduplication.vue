@@ -2,7 +2,7 @@
   <div class="video-deduplication-page">
     <!-- 侧边栏 -->
     <aside class="sidebar">
-      <div class="logo">MediaEnhance Pro</div>
+      <div class="logo">{{ translate('app.brand') }}</div>
       <nav class="nav-menu">
         <div
           v-for="(item, index) in menuItems"
@@ -11,15 +11,15 @@
           @click="handleMenuClick(index)"
         >
           <span class="nav-icon">{{ item.icon }}</span>
-          <span>{{ item.label }}</span>
+          <span>{{ translate(item.labelKey) }}</span>
         </div>
       </nav>
       <div class="user-info">
         <div class="nav-item user-account">
           <span class="nav-icon">👤</span>
           <div class="user-details">
-            <div class="user-name">User Account</div>
-            <div class="user-plan">Pro Member</div>
+            <div class="user-name">{{ translate('app.user.account') }}</div>
+            <div class="user-plan">{{ translate('app.user.proMember') }}</div>
           </div>
         </div>
       </div>
@@ -30,9 +30,19 @@
       <div class="content-wrapper">
         <!-- 标题区域 -->
         <div class="header">
-          <h1 class="header-title">Video Batch Deduplication</h1>
+          <div class="language-switcher">
+            <label :for="`${$options.name}-locale`" class="language-label">
+              {{ translate('language.label') }}
+            </label>
+            <select :id="`${$options.name}-locale`" v-model="locale" class="language-select">
+              <option v-for="code in availableLocales" :key="code" :value="code">
+                {{ translate(`language.options.${code}`) }}
+              </option>
+            </select>
+          </div>
+          <h1 class="header-title">{{ translate('videoDeduplication.header.title') }}</h1>
           <p class="header-subtitle">
-            Batch process multiple videos to remove duplicates and apply smart effects for unique content creation.
+            {{ translate('videoDeduplication.header.subtitle') }}
           </p>
         </div>
 
@@ -44,7 +54,7 @@
             <div class="upload-container">
               <h3 class="section-title">
                 <span class="section-icon">📁</span>
-                Upload Videos
+                {{ translate('videoDeduplication.upload.title') }}
               </h3>
               <div
                 :class="['upload-area', { 'has-file': hasFiles, 'dragover': isDragover }]"
@@ -56,10 +66,10 @@
                 <!-- 上传内容 -->
                 <div v-if="!hasFiles" class="upload-content">
                   <div class="upload-icon">📹</div>
-                  <div class="upload-title">Drop your videos here</div>
-                  <div class="upload-subtitle">or click to browse (Multiple files supported)</div>
+                  <div class="upload-title">{{ translate('videoDeduplication.upload.drop') }}</div>
+                  <div class="upload-subtitle">{{ translate('videoDeduplication.upload.browse') }}</div>
                   <el-button type="primary" size="small" class="upload-btn-small" @click.stop="triggerFileInput">
-                    Choose Files
+                    {{ translate('videoDeduplication.upload.button') }}
                   </el-button>
                   <input
                     ref="fileInput"
@@ -74,8 +84,8 @@
                 <!-- 文件列表 -->
                 <div v-else class="files-list">
                   <div class="files-header">
-                    <span class="files-count">{{ uploadedFiles.length }} files selected</span>
-                    <el-button type="text" size="mini" @click.stop="clearAllFiles">Clear all</el-button>
+                    <span class="files-count">{{ translateWithParams('videoDeduplication.upload.filesSelected', { count: uploadedFiles.length }) }}</span>
+                    <el-button type="text" size="mini" @click.stop="clearAllFiles">{{ translate('videoDeduplication.upload.clear') }}</el-button>
                   </div>
                   <div class="files-scroll">
                     <div v-for="(file, index) in uploadedFiles" :key="file.id" class="file-item">
@@ -98,7 +108,7 @@
                 </div>
               </div>
               <div class="supported-formats">
-                Supported: .mp4, .mov, .m4v, .3gp, .avi, .mkv, .webm (Max 500MB each)
+                {{ translate('videoDeduplication.upload.supported') }}
               </div>
             </div>
 
@@ -113,7 +123,7 @@
                 :loading="processing"
               >
                 <span v-if="!processing" class="btn-icon">🚀</span>
-                {{ processing ? 'Processing...' : buttonText }}
+                {{ translate(processing ? 'videoDeduplication.actions.processing' : 'videoDeduplication.actions.start') }}
               </el-button>
               
               <el-button
@@ -123,14 +133,14 @@
                 @click="downloadResults"
               >
                 <span class="btn-icon">⬇️</span>
-                Download All Results
+                {{ translate('videoDeduplication.actions.downloadAll') }}
               </el-button>
 
               <!-- 处理进度 -->
               <div v-if="processing" class="process-info">
                 <div class="process-status">
                   <span class="status-icon">⏳</span>
-                  <span class="status-text">Processing {{ currentProcessingFile }}...</span>
+                  <span class="status-text">{{ translateWithParams('videoDeduplication.processing.status', { file: getProcessingFileName() }) }}</span>
                   <span class="status-percent">{{ processPercent }}%</span>
                 </div>
                 <el-progress
@@ -140,15 +150,15 @@
                   color="#6366f1"
                 />
                 <div class="process-details">
-                  <small>Processing {{ processedCount }}/{{ uploadedFiles.length }} videos</small>
+                  <small>{{ translateWithParams('videoDeduplication.processing.details', { current: processedCount, total: uploadedFiles.length }) }}</small>
                 </div>
               </div>
 
               <!-- 完成状态 -->
               <div v-if="processingComplete && !processing" class="process-complete">
                 <div class="complete-icon">✅</div>
-                <div class="complete-text">Processing Complete!</div>
-                <div class="complete-subtitle">All videos have been processed</div>
+                <div class="complete-text">{{ translate('videoDeduplication.processing.completeTitle') }}</div>
+                <div class="complete-subtitle">{{ translate('videoDeduplication.processing.completeSubtitle') }}</div>
               </div>
             </div>
           </div>
@@ -159,7 +169,7 @@
             <div class="settings-container">
               <h3 class="section-title">
                 <span class="section-icon">⚙️</span>
-                Processing Mode
+                {{ translate('videoDeduplication.processingMode.title') }}
               </h3>
 
               <!-- 模式选择 -->
@@ -169,8 +179,8 @@
                     <el-radio label="smart">
                       <div class="mode-card" :class="{ selected: processingMode === 'smart' }">
                         <div class="mode-card-icon">🧠</div>
-                        <div class="mode-card-title">Smart Mode</div>
-                        <div class="mode-card-desc">Automatic optimization</div>
+                        <div class="mode-card-title">{{ translate('videoDeduplication.processingMode.smart.title') }}</div>
+                        <div class="mode-card-desc">{{ translate('videoDeduplication.processingMode.smart.desc') }}</div>
                       </div>
                     </el-radio>
                   </label>
@@ -178,8 +188,8 @@
                     <el-radio label="custom">
                       <div class="mode-card" :class="{ selected: processingMode === 'custom' }">
                         <div class="mode-card-icon">⚡</div>
-                        <div class="mode-card-title">Custom Mode</div>
-                        <div class="mode-card-desc">Manual settings</div>
+                        <div class="mode-card-title">{{ translate('videoDeduplication.processingMode.custom.title') }}</div>
+                        <div class="mode-card-desc">{{ translate('videoDeduplication.processingMode.custom.desc') }}</div>
                       </div>
                     </el-radio>
                   </label>
@@ -195,14 +205,14 @@
                       <template slot="title">
                         <div class="collapsible-title">
                           <span>🔧</span>
-                          <span>Basic Deduplication</span>
+                          <span>{{ translate('videoDeduplication.processingMode.basic') }}</span>
                         </div>
                       </template>
                       <div class="checkbox-group">
                         <el-checkbox-group v-model="basicOptions">
                           <div v-for="option in basicDedupOptions" :key="option.value" class="checkbox-item">
                             <el-checkbox :label="option.value">
-                              {{ option.label }}
+                              {{ translate(option.labelKey) }}
                             </el-checkbox>
                           </div>
                         </el-checkbox-group>
@@ -214,7 +224,7 @@
                       <template slot="title">
                         <div class="collapsible-title">
                           <span>✨</span>
-                          <span>Special Effects</span>
+                          <span>{{ translate('videoDeduplication.processingMode.effects') }}</span>
                         </div>
                       </template>
                       <div class="effect-grid">
@@ -225,7 +235,7 @@
                           @click="selectEffect(effect.value)"
                         >
                           <span class="effect-icon">{{ effect.icon }}</span>
-                          <span>{{ effect.label }}</span>
+                          <span>{{ translate(effect.labelKey) }}</span>
                         </button>
                       </div>
                     </el-collapse-item>
@@ -238,7 +248,7 @@
             <div class="settings-container zoom-settings">
               <h3 class="section-title">
                 <span class="section-icon">🔍</span>
-                Zoom Settings
+                {{ translate('videoDeduplication.options.zoom.title') }}
               </h3>
               <div class="zoom-options">
                 <button
@@ -248,7 +258,7 @@
                   @click="selectZoom(zoom.value)"
                 >
                   <span class="zoom-icon">{{ zoom.icon }}</span>
-                  <span>{{ zoom.label }}</span>
+                  <span>{{ translate(zoom.labelKey) }}</span>
                 </button>
               </div>
             </div>
@@ -258,22 +268,22 @@
         <!-- 结果预览区域 -->
         <div v-if="processingComplete" class="results-section">
           <div class="results-header">
-            <h2 class="results-title">Processing Results</h2>
+            <h2 class="results-title">{{ translate('videoDeduplication.results.title') }}</h2>
             <div class="results-stats">
               <div class="stat-item">
-                <span class="stat-label">Total Videos:</span>
+                <span class="stat-label">{{ translate('videoDeduplication.results.statistics.total') }}</span>
                 <span class="stat-value">{{ statistics.totalVideos }}</span>
               </div>
               <div class="stat-item">
-                <span class="stat-label">Processed:</span>
+                <span class="stat-label">{{ translate('videoDeduplication.results.statistics.processed') }}</span>
                 <span class="stat-value">{{ statistics.processedVideos }}</span>
               </div>
               <div class="stat-item">
-                <span class="stat-label">Effects Applied:</span>
+                <span class="stat-label">{{ translate('videoDeduplication.results.statistics.effects') }}</span>
                 <span class="stat-value">{{ statistics.effectsCount }}</span>
               </div>
               <div class="stat-item">
-                <span class="stat-label">Success Rate:</span>
+                <span class="stat-label">{{ translate('videoDeduplication.results.statistics.success') }}</span>
                 <span class="stat-value">{{ statistics.successRate }}%</span>
               </div>
             </div>
@@ -283,12 +293,12 @@
             <div v-for="(result, index) in processedResults" :key="result.id" class="result-item">
               <div class="result-preview">
                 <video :src="result.url" class="result-video" controls></video>
-                <div class="result-badge">{{ result.effects.join(', ') }}</div>
+                <div class="result-badge">{{ formatEffects(result.effects) }}</div>
               </div>
               <div class="result-info">
                 <div class="result-name">{{ result.name }}</div>
                 <el-button size="mini" @click="downloadSingle(result)">
-                  Download
+                  {{ translate('videoDeduplication.results.download') }}
                 </el-button>
               </div>
             </div>
@@ -300,18 +310,23 @@
 </template>
 
 <script>
+import { supportedLocales, translate as translateText } from './i18n'
+
 export default {
   name: 'VideoDeduplication',
   data() {
     return {
+      locale: 'en-US',
+      availableLocales: supportedLocales,
+
       // 菜单项
       menuItems: [
-        { icon: '📊', label: 'Dashboard', active: false },
-        { icon: '🎬', label: 'Video Dedup', active: true },
-        { icon: '✨', label: 'Video Enhancer', active: false },
-        { icon: '📝', label: 'Speech to Text', active: false },
-        { icon: '📁', label: 'My Projects', active: false },
-        { icon: '⚙️', label: 'Settings', active: false }
+        { icon: '📊', labelKey: 'menu.dashboard', active: false },
+        { icon: '🎬', labelKey: 'menu.videoDeduplication', active: true },
+        { icon: '✨', labelKey: 'menu.videoEnhancer', active: false },
+        { icon: '📝', labelKey: 'menu.audioToText', active: false },
+        { icon: '📁', labelKey: 'menu.projects', active: false },
+        { icon: '⚙️', labelKey: 'menu.settings', active: false }
       ],
       
       // 上传状态
@@ -328,45 +343,44 @@ export default {
       // 基础去重选项
       basicOptions: [],
       basicDedupOptions: [
-        { value: 'removeduplicates', label: 'Remove Duplicates' },
-        { value: 'mirrorflip', label: 'Mirror Flip' },
-        { value: 'randomshift', label: 'Random Shift' },
-        { value: 'modifymd5', label: 'Modify MD5' },
-        { value: 'smartextract', label: 'Smart Extract' },
-        { value: 'smartcolor', label: 'Smart Color' },
-        { value: 'sharpening', label: 'Sharpening' },
-        { value: 'randomspeed', label: 'Random Speed' },
-        { value: 'trimheadtail', label: 'Trim Head/Tail' },
-        { value: 'randommirror', label: 'Random Mirror' }
+        { value: 'removeduplicates', labelKey: 'videoDeduplication.options.basic.removeduplicates' },
+        { value: 'mirrorflip', labelKey: 'videoDeduplication.options.basic.mirrorflip' },
+        { value: 'randomshift', labelKey: 'videoDeduplication.options.basic.randomshift' },
+        { value: 'modifymd5', labelKey: 'videoDeduplication.options.basic.modifymd5' },
+        { value: 'smartextract', labelKey: 'videoDeduplication.options.basic.smartextract' },
+        { value: 'smartcolor', labelKey: 'videoDeduplication.options.basic.smartcolor' },
+        { value: 'sharpening', labelKey: 'videoDeduplication.options.basic.sharpening' },
+        { value: 'randomspeed', labelKey: 'videoDeduplication.options.basic.randomspeed' },
+        { value: 'trimheadtail', labelKey: 'videoDeduplication.options.basic.trimheadtail' },
+        { value: 'randommirror', labelKey: 'videoDeduplication.options.basic.randommirror' }
       ],
       
       // 特效选项
       selectedEffect: null,
       specialEffects: [
-        { value: 'scanline', icon: '📺', label: 'Scanline' },
-        { value: 'spotlight', icon: '💡', label: 'Spotlight' },
-        { value: 'fade', icon: '🌅', label: 'Fade' },
-        { value: 'booklet', icon: '📖', label: 'Booklet' },
-        { value: 'dissolve', icon: '✨', label: 'Dissolve' },
-        { value: 'split', icon: '📱', label: 'Split Screen' },
-        { value: 'product', icon: '🛍️', label: 'Product' },
-        { value: 'film', icon: '🎬', label: 'Film' },
-        { value: 'drama', icon: '🎭', label: 'Drama' }
+        { value: 'scanline', icon: '📺', labelKey: 'videoDeduplication.options.effects.scanline' },
+        { value: 'spotlight', icon: '💡', labelKey: 'videoDeduplication.options.effects.spotlight' },
+        { value: 'fade', icon: '🌅', labelKey: 'videoDeduplication.options.effects.fade' },
+        { value: 'booklet', icon: '📖', labelKey: 'videoDeduplication.options.effects.booklet' },
+        { value: 'dissolve', icon: '✨', labelKey: 'videoDeduplication.options.effects.dissolve' },
+        { value: 'split', icon: '📱', labelKey: 'videoDeduplication.options.effects.split' },
+        { value: 'product', icon: '🛍️', labelKey: 'videoDeduplication.options.effects.product' },
+        { value: 'film', icon: '🎬', labelKey: 'videoDeduplication.options.effects.film' },
+        { value: 'drama', icon: '🎭', labelKey: 'videoDeduplication.options.effects.drama' }
       ],
       
       // Zoom选项
       selectedZoom: null,
       zoomOptions: [
-        { value: 'stretch', icon: '↔️', label: 'Stretch' },
-        { value: 'compress', icon: '↕️', label: 'Compress' },
-        { value: 'dynamic', icon: '🔄', label: 'Dynamic' }
+        { value: 'stretch', icon: '↔️', labelKey: 'videoDeduplication.options.zoom.stretch' },
+        { value: 'compress', icon: '↕️', labelKey: 'videoDeduplication.options.zoom.compress' },
+        { value: 'dynamic', icon: '🔄', labelKey: 'videoDeduplication.options.zoom.dynamic' }
       ],
       
       // 处理状态
       processing: false,
       processingComplete: false,
       processPercent: 0,
-      buttonText: 'Start Processing',
       currentProcessingFile: '',
       processedCount: 0,
       
@@ -461,14 +475,18 @@ export default {
         const fileType = file.type || 'video/mp4'
         
         if (!validTypes.some(type => fileType.includes(type.split('/')[1]))) {
-          this.$message.error(`${file.name} is not a valid video file`)
+          this.$message.error(
+            this.translateWithParams('videoDeduplication.messages.invalidFile', { name: file.name })
+          )
           return
         }
         
         // 检查文件大小 (500MB限制)
         const maxSize = 500 * 1024 * 1024
         if (file.size > maxSize) {
-          this.$message.error(`${file.name} exceeds 500MB limit`)
+          this.$message.error(
+            this.translateWithParams('videoDeduplication.messages.fileTooLarge', { name: file.name })
+          )
           return
         }
         
@@ -502,7 +520,9 @@ export default {
         this.currentFile = this.uploadedFiles[0]
       }
       
-      this.$message.success(`${files.length} file(s) added successfully`)
+      this.$message.success(
+        this.translateWithParams('videoDeduplication.messages.filesAdded', { count: files.length })
+      )
     },
     
     // 移除单个文件
@@ -546,16 +566,20 @@ export default {
         this.$refs.fileInput.value = ''
       }
       
-      this.$message.info('All files cleared')
+      this.$message.info(this.translate('videoDeduplication.messages.allCleared'))
     },
     
     // 格式化文件大小
     formatFileSize(bytes) {
-      if (bytes === 0) return '0 Bytes'
+      if (bytes === 0) {
+        return `0 ${this.translate('videoDeduplication.fileSize.units.bytes')}`
+      }
       const k = 1024
-      const sizes = ['Bytes', 'KB', 'MB', 'GB']
-      const i = Math.floor(Math.log(bytes) / Math.log(k))
-      return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i]
+      const unitKeys = ['bytes', 'kb', 'mb', 'gb']
+      const i = Math.min(Math.floor(Math.log(bytes) / Math.log(k)), unitKeys.length - 1)
+      const size = Math.round((bytes / Math.pow(k, i)) * 100) / 100
+      const unit = this.translate(`videoDeduplication.fileSize.units.${unitKeys[i]}`)
+      return `${size} ${unit}`
     },
     
     // 处理模式更改
@@ -582,7 +606,7 @@ export default {
     // 开始处理
     startProcessing() {
       if (this.uploadedFiles.length === 0) {
-        this.$message.warning('Please upload videos first')
+        this.$message.warning(this.translate('videoDeduplication.messages.uploadFirst'))
         return
       }
       
@@ -610,7 +634,7 @@ export default {
               // 添加处理结果
               this.processedResults.push({
                 id: file.id,
-                name: `processed_${file.name}`,
+                name: this.translateWithParams('videoDeduplication.results.processedName', { name: file.name }),
                 url: file.url, // 实际应用中应该是处理后的URL
                 effects: this.getAppliedEffects()
               })
@@ -633,23 +657,27 @@ export default {
     
     // 获取应用的效果
     getAppliedEffects() {
-      const effects = []
-      
       if (this.processingMode === 'smart') {
-        effects.push('Smart Mode')
-      } else {
-        if (this.basicOptions.length > 0) {
-          effects.push(...this.basicOptions.slice(0, 2))
-        }
-        if (this.selectedEffect) {
-          effects.push(this.selectedEffect)
-        }
-        if (this.selectedZoom) {
-          effects.push(this.selectedZoom)
-        }
+        return [this.translate('videoDeduplication.effects.smartMode')]
       }
-      
-      return effects.length > 0 ? effects : ['Default']
+
+      const effects = []
+
+      if (this.basicOptions.length > 0) {
+        this.basicOptions.slice(0, 2).forEach(option => {
+          effects.push(this.translate(`videoDeduplication.options.basic.${option}`))
+        })
+      }
+
+      if (this.selectedEffect) {
+        effects.push(this.translate(`videoDeduplication.options.effects.${this.selectedEffect}`))
+      }
+
+      if (this.selectedZoom) {
+        effects.push(this.translate(`videoDeduplication.options.zoom.${this.selectedZoom}`))
+      }
+
+      return effects.length > 0 ? effects : [this.translate('videoDeduplication.effects.default')]
     },
     
     // 完成处理
@@ -659,19 +687,24 @@ export default {
       this.processPercent = 100
       
       // 更新统计数据
+      const effectsCount =
+        this.processingMode === 'smart'
+          ? 1
+          : this.basicOptions.length + (this.selectedEffect ? 1 : 0) + (this.selectedZoom ? 1 : 0)
+
       this.statistics = {
         totalVideos: this.uploadedFiles.length,
         processedVideos: this.processedResults.length,
-        effectsCount: this.selectedEffect ? 1 : 0 + this.basicOptions.length,
+        effectsCount,
         successRate: 100
       }
-      
-      this.$message.success('All videos processed successfully!')
+
+      this.$message.success(this.translate('videoDeduplication.messages.processingComplete'))
     },
     
     // 下载所有结果
     downloadResults() {
-      this.$message.info('Preparing download for all processed videos...')
+      this.$message.info(this.translate('videoDeduplication.messages.prepareDownload'))
       
       // 实际应用中，这里应该打包所有文件并下载
       this.processedResults.forEach((result, index) => {
@@ -687,6 +720,26 @@ export default {
       link.href = result.url
       link.download = result.name
       link.click()
+    },
+
+    getProcessingFileName() {
+      return this.currentProcessingFile || this.translate('videoDeduplication.processing.placeholder')
+    },
+
+    formatEffects(effects) {
+      return (effects || []).join(this.translate('videoDeduplication.results.badgeSeparator'))
+    },
+
+    translate(key) {
+      return translateText(this.locale, key)
+    },
+
+    translateWithParams(key, params = {}) {
+      let text = this.translate(key)
+      Object.keys(params || {}).forEach(param => {
+        text = text.replace(new RegExp(`{${param}}`, 'g'), params[param])
+      })
+      return text
     }
   }
 }

@@ -32,6 +32,110 @@
     "bloggerMonitor": "Blogger Monitor",
     "thumbnailGenerator": "Thumbnail Generator"
   },
+  "videoDeduplication": {
+    "header": {
+      "title": "Video Batch Deduplication",
+      "subtitle": "Batch process multiple videos to remove duplicates and apply smart effects for unique content creation."
+    },
+    "upload": {
+      "title": "Upload Videos",
+      "drop": "Drop your videos here",
+      "browse": "or click to browse (Multiple files supported)",
+      "button": "Choose Files",
+      "filesSelected": "{count} file(s) selected",
+      "clear": "Clear all",
+      "supported": "Supported: .mp4, .mov, .m4v, .3gp, .avi, .mkv, .webm (Max 500MB each)"
+    },
+    "actions": {
+      "start": "Start Processing",
+      "processing": "Processing...",
+      "downloadAll": "Download All Results"
+    },
+    "processing": {
+      "status": "Processing {file}...",
+      "details": "Processing {current}/{total} videos",
+      "completeTitle": "Processing Complete!",
+      "completeSubtitle": "All videos have been processed",
+      "placeholder": "..."
+    },
+    "processingMode": {
+      "title": "Processing Mode",
+      "smart": {
+        "title": "Smart Mode",
+        "desc": "Automatic optimization"
+      },
+      "custom": {
+        "title": "Custom Mode",
+        "desc": "Manual settings"
+      },
+      "basic": "Basic Deduplication",
+      "effects": "Special Effects"
+    },
+    "options": {
+      "basic": {
+        "removeduplicates": "Remove Duplicates",
+        "mirrorflip": "Mirror Flip",
+        "randomshift": "Random Shift",
+        "modifymd5": "Modify MD5",
+        "smartextract": "Smart Extract",
+        "smartcolor": "Smart Color",
+        "sharpening": "Sharpening",
+        "randomspeed": "Random Speed",
+        "trimheadtail": "Trim Head/Tail",
+        "randommirror": "Random Mirror"
+      },
+      "effects": {
+        "scanline": "Scanline",
+        "spotlight": "Spotlight",
+        "fade": "Fade",
+        "booklet": "Booklet",
+        "dissolve": "Dissolve",
+        "split": "Split Screen",
+        "product": "Product",
+        "film": "Film",
+        "drama": "Drama"
+      },
+      "zoom": {
+        "title": "Zoom Settings",
+        "stretch": "Stretch",
+        "compress": "Compress",
+        "dynamic": "Dynamic"
+      }
+    },
+    "results": {
+      "title": "Processing Results",
+      "statistics": {
+        "total": "Total Videos:",
+        "processed": "Processed:",
+        "effects": "Effects Applied:",
+        "success": "Success Rate:"
+      },
+      "download": "Download",
+      "processedName": "processed_{name}",
+      "badgeSeparator": ", "
+    },
+    "messages": {
+      "invalidFile": "{name} is not a valid video file",
+      "fileTooLarge": "{name} exceeds 500MB limit",
+      "filesAdded": "{count} file(s) added successfully",
+      "uploadFirst": "Please upload videos first",
+      "allCleared": "All files cleared",
+      "processingComplete": "All videos processed successfully!",
+      "prepareDownload": "Preparing download for all processed videos..."
+    },
+    "effects": {
+      "smartMode": "Smart Mode",
+      "default": "Default"
+    },
+    "fileSize": {
+      "units": {
+        "bytes": "Bytes",
+        "kb": "KB",
+        "mb": "MB",
+        "gb": "GB"
+      }
+    }
+  },
   "videoEnhancer": {
     "header": {
       "title": "Video & Image Enhancer",
